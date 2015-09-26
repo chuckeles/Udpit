@@ -27,6 +27,7 @@
       this.errorLabel = new System.Windows.Forms.Label();
       this.errorCheckbox = new System.Windows.Forms.CheckBox();
       this.destinationBox = new System.Windows.Forms.TextBox();
+      this.fragmentLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // destinationLabel
@@ -41,7 +42,7 @@
       // errorLabel
       // 
       this.errorLabel.AutoSize = true;
-      this.errorLabel.Location = new System.Drawing.Point(12, 45);
+      this.errorLabel.Location = new System.Drawing.Point(12, 111);
       this.errorLabel.Name = "errorLabel";
       this.errorLabel.Size = new System.Drawing.Size(54, 13);
       this.errorLabel.TabIndex = 2;
@@ -50,7 +51,7 @@
       // errorCheckbox
       // 
       this.errorCheckbox.AutoSize = true;
-      this.errorCheckbox.Location = new System.Drawing.Point(76, 45);
+      this.errorCheckbox.Location = new System.Drawing.Point(76, 111);
       this.errorCheckbox.Name = "errorCheckbox";
       this.errorCheckbox.Size = new System.Drawing.Size(15, 14);
       this.errorCheckbox.TabIndex = 3;
@@ -63,11 +64,21 @@
       this.destinationBox.Size = new System.Drawing.Size(116, 20);
       this.destinationBox.TabIndex = 4;
       // 
+      // fragmentLabel
+      // 
+      this.fragmentLabel.AutoSize = true;
+      this.fragmentLabel.Location = new System.Drawing.Point(12, 63);
+      this.fragmentLabel.Name = "fragmentLabel";
+      this.fragmentLabel.Size = new System.Drawing.Size(47, 13);
+      this.fragmentLabel.TabIndex = 5;
+      this.fragmentLabel.Text = "max size";
+      // 
       // OptionsForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(204, 71);
+      this.ClientSize = new System.Drawing.Size(204, 137);
+      this.Controls.Add(this.fragmentLabel);
       this.Controls.Add(this.destinationBox);
       this.Controls.Add(this.errorCheckbox);
       this.Controls.Add(this.errorLabel);
@@ -89,5 +100,6 @@
     private System.Windows.Forms.Label errorLabel;
     private System.Windows.Forms.CheckBox errorCheckbox;
     private System.Windows.Forms.TextBox destinationBox;
+    private System.Windows.Forms.Label fragmentLabel;
   }
 }
