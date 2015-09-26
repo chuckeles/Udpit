@@ -28,6 +28,8 @@
       this.errorCheckbox = new System.Windows.Forms.CheckBox();
       this.destinationBox = new System.Windows.Forms.TextBox();
       this.fragmentLabel = new System.Windows.Forms.Label();
+      this.fragmentBox = new System.Windows.Forms.NumericUpDown();
+      ((System.ComponentModel.ISupportInitialize)(this.fragmentBox)).BeginInit();
       this.SuspendLayout();
       // 
       // destinationLabel
@@ -73,11 +75,19 @@
       this.fragmentLabel.TabIndex = 5;
       this.fragmentLabel.Text = "max size";
       // 
+      // fragmentBox
+      // 
+      this.fragmentBox.Location = new System.Drawing.Point(76, 38);
+      this.fragmentBox.Name = "fragmentBox";
+      this.fragmentBox.Size = new System.Drawing.Size(116, 20);
+      this.fragmentBox.TabIndex = 6;
+      // 
       // OptionsForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(204, 137);
+      this.Controls.Add(this.fragmentBox);
       this.Controls.Add(this.fragmentLabel);
       this.Controls.Add(this.destinationBox);
       this.Controls.Add(this.errorCheckbox);
@@ -89,6 +99,7 @@
       this.Name = "OptionsForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "options";
+      ((System.ComponentModel.ISupportInitialize)(this.fragmentBox)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -101,5 +112,6 @@
     private System.Windows.Forms.CheckBox errorCheckbox;
     private System.Windows.Forms.TextBox destinationBox;
     private System.Windows.Forms.Label fragmentLabel;
+    private System.Windows.Forms.NumericUpDown fragmentBox;
   }
 }
