@@ -31,6 +31,7 @@
       this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.settingsButton = new System.Windows.Forms.ToolStripButton();
+      this.aboutButton = new System.Windows.Forms.ToolStripButton();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -74,7 +75,8 @@
       this.toolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileButton,
-            this.settingsButton});
+            this.settingsButton,
+            this.aboutButton});
       this.toolbar.Location = new System.Drawing.Point(0, 0);
       this.toolbar.Name = "toolbar";
       this.toolbar.Size = new System.Drawing.Size(284, 25);
@@ -114,6 +116,13 @@
       this.settingsButton.Size = new System.Drawing.Size(52, 22);
       this.settingsButton.Text = "settings";
       // 
+      // aboutButton
+      // 
+      this.aboutButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.aboutButton.Name = "aboutButton";
+      this.aboutButton.Size = new System.Drawing.Size(42, 22);
+      this.aboutButton.Text = "about";
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,5 +152,6 @@
     private System.Windows.Forms.ToolStripMenuItem exitButton;
     private System.Windows.Forms.ToolStripMenuItem restartButton;
     private System.Windows.Forms.ToolStripButton settingsButton;
+    private System.Windows.Forms.ToolStripButton aboutButton;
   }
 }
