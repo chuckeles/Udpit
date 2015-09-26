@@ -24,6 +24,8 @@
     /// </summary>
     private void InitializeComponent() {
       this.messageBox = new System.Windows.Forms.TextBox();
+      this.inputBox = new System.Windows.Forms.TextBox();
+      this.sendButton = new System.Windows.Forms.Button();
       this.SuspendLayout();
       // 
       // messageBox
@@ -35,14 +37,35 @@
       this.messageBox.Multiline = true;
       this.messageBox.Name = "messageBox";
       this.messageBox.ReadOnly = true;
-      this.messageBox.Size = new System.Drawing.Size(260, 199);
+      this.messageBox.Size = new System.Drawing.Size(260, 209);
       this.messageBox.TabIndex = 0;
+      // 
+      // inputBox
+      // 
+      this.inputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.inputBox.Location = new System.Drawing.Point(12, 229);
+      this.inputBox.Name = "inputBox";
+      this.inputBox.Size = new System.Drawing.Size(202, 20);
+      this.inputBox.TabIndex = 1;
+      // 
+      // sendButton
+      // 
+      this.sendButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.sendButton.Location = new System.Drawing.Point(220, 227);
+      this.sendButton.Name = "sendButton";
+      this.sendButton.Size = new System.Drawing.Size(52, 23);
+      this.sendButton.TabIndex = 2;
+      this.sendButton.Text = "send";
+      this.sendButton.UseVisualStyleBackColor = true;
       // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(284, 261);
+      this.Controls.Add(this.sendButton);
+      this.Controls.Add(this.inputBox);
       this.Controls.Add(this.messageBox);
       this.MinimumSize = new System.Drawing.Size(300, 300);
       this.Name = "MainForm";
@@ -55,5 +78,7 @@
     #endregion
 
     private System.Windows.Forms.TextBox messageBox;
+    private System.Windows.Forms.TextBox inputBox;
+    private System.Windows.Forms.Button sendButton;
   }
 }
