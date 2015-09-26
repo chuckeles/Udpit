@@ -24,9 +24,9 @@
     /// </summary>
     private void InitializeComponent() {
       this.destinationLabel = new System.Windows.Forms.Label();
-      this.destinationBox = new System.Windows.Forms.MaskedTextBox();
       this.errorLabel = new System.Windows.Forms.Label();
       this.errorCheckbox = new System.Windows.Forms.CheckBox();
+      this.destinationBox = new System.Windows.Forms.TextBox();
       this.SuspendLayout();
       // 
       // destinationLabel
@@ -37,13 +37,6 @@
       this.destinationLabel.Size = new System.Drawing.Size(58, 13);
       this.destinationLabel.TabIndex = 0;
       this.destinationLabel.Text = "destination";
-      // 
-      // destinationBox
-      // 
-      this.destinationBox.Location = new System.Drawing.Point(76, 12);
-      this.destinationBox.Name = "destinationBox";
-      this.destinationBox.Size = new System.Drawing.Size(116, 20);
-      this.destinationBox.TabIndex = 1;
       // 
       // errorLabel
       // 
@@ -63,14 +56,21 @@
       this.errorCheckbox.TabIndex = 3;
       this.errorCheckbox.UseVisualStyleBackColor = true;
       // 
+      // destinationBox
+      // 
+      this.destinationBox.Location = new System.Drawing.Point(76, 12);
+      this.destinationBox.Name = "destinationBox";
+      this.destinationBox.Size = new System.Drawing.Size(116, 20);
+      this.destinationBox.TabIndex = 4;
+      // 
       // OptionsForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(204, 71);
+      this.Controls.Add(this.destinationBox);
       this.Controls.Add(this.errorCheckbox);
       this.Controls.Add(this.errorLabel);
-      this.Controls.Add(this.destinationBox);
       this.Controls.Add(this.destinationLabel);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
       this.MaximizeBox = false;
@@ -86,8 +86,8 @@
     #endregion
 
     private System.Windows.Forms.Label destinationLabel;
-    private System.Windows.Forms.MaskedTextBox destinationBox;
     private System.Windows.Forms.Label errorLabel;
     private System.Windows.Forms.CheckBox errorCheckbox;
+    private System.Windows.Forms.TextBox destinationBox;
   }
 }
