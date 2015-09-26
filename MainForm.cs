@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Udpit {
+
+  /// <summary>
+  ///   The main windows form for the application.
+  /// </summary>
   public partial class MainForm : Form {
+
     public MainForm() {
       InitializeComponent();
     }
+
+    /// <summary>
+    /// Exits the application.
+    /// </summary>
+    private void ExitApplication(object sender, System.EventArgs e) {
+      Application.Exit();
+    }
   }
+
 }
