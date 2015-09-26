@@ -101,6 +101,7 @@
       this.optionsButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
       this.optionsButton.Size = new System.Drawing.Size(157, 22);
       this.optionsButton.Text = "options";
+      this.optionsButton.Click += new System.EventHandler(this.ShowOptions);
       // 
       // aboutButton
       // 

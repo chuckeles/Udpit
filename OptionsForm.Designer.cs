@@ -1,5 +1,5 @@
 ﻿namespace Udpit {
-  partial class SettingsForm {
+  partial class OptionsForm {
     /// <summary>
     /// Required designer variable.
     /// </summary>
@@ -25,7 +25,7 @@
     private void InitializeComponent() {
       this.SuspendLayout();
       // 
-      // SettingsForm
+      // OptionsForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -33,9 +33,9 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "SettingsForm";
+      this.Name = "OptionsForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-      this.Text = "settings";
+      this.Text = "options";
       this.ResumeLayout(false);
 
     }

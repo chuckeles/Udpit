@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Udpit {
-  public partial class SettingsForm : Form {
-    public SettingsForm() {
+  public partial class OptionsForm : Form {
+    public OptionsForm() {
       InitializeComponent();
     }
   }

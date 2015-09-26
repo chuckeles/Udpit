@@ -27,12 +27,21 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Shows the about form.
+    ///   Shows the about form.
     /// </summary>
     private void ShowAbout(object sender, EventArgs e) {
       var about = new AboutForm();
       about.Show(this);
     }
+
+    /// <summary>
+    ///   Shows the options form.
+    /// </summary>
+    private void ShowOptions(object sender, EventArgs e) {
+      var options = new OptionsForm();
+      options.Show(this);
+    }
+
   }
 
 }
