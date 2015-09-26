@@ -70,6 +70,7 @@
       // 
       // toolbar
       // 
+      this.toolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileButton});
       this.toolbar.Location = new System.Drawing.Point(0, 0);
@@ -92,6 +93,7 @@
       // restartButton
       // 
       this.restartButton.Name = "restartButton";
+      this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
       this.restartButton.Size = new System.Drawing.Size(152, 22);
       this.restartButton.Text = "restart";
       this.restartButton.Click += new System.EventHandler(this.RestartApplication);
