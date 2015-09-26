@@ -28,11 +28,11 @@
       this.sendButton = new System.Windows.Forms.Button();
       this.toolbar = new System.Windows.Forms.ToolStrip();
       this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
-      this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
-      this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.optionsButton = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
       this.fileSeparator = new System.Windows.Forms.ToolStripSeparator();
+      this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -95,22 +95,6 @@
       this.fileButton.Size = new System.Drawing.Size(36, 22);
       this.fileButton.Text = "file";
       // 
-      // restartButton
-      // 
-      this.restartButton.Name = "restartButton";
-      this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-      this.restartButton.Size = new System.Drawing.Size(157, 22);
-      this.restartButton.Text = "restart";
-      this.restartButton.Click += new System.EventHandler(this.RestartApplication);
-      // 
-      // exitButton
-      // 
-      this.exitButton.Name = "exitButton";
-      this.exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-      this.exitButton.Size = new System.Drawing.Size(157, 22);
-      this.exitButton.Text = "exit";
-      this.exitButton.Click += new System.EventHandler(this.ExitApplication);
-      // 
       // optionsButton
       // 
       this.optionsButton.Name = "optionsButton";
@@ -131,6 +115,22 @@
       this.fileSeparator.Name = "fileSeparator";
       this.fileSeparator.Size = new System.Drawing.Size(154, 6);
       // 
+      // restartButton
+      // 
+      this.restartButton.Name = "restartButton";
+      this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+      this.restartButton.Size = new System.Drawing.Size(157, 22);
+      this.restartButton.Text = "restart";
+      this.restartButton.Click += new System.EventHandler(this.RestartApplication);
+      // 
+      // exitButton
+      // 
+      this.exitButton.Name = "exitButton";
+      this.exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+      this.exitButton.Size = new System.Drawing.Size(157, 22);
+      this.exitButton.Text = "exit";
+      this.exitButton.Click += new System.EventHandler(this.ExitApplication);
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +145,7 @@
       this.MinimizeBox = false;
       this.MinimumSize = new System.Drawing.Size(300, 300);
       this.Name = "MainForm";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "udpit";
       this.toolbar.ResumeLayout(false);
       this.toolbar.PerformLayout();
