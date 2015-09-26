@@ -94,6 +94,7 @@
       this.applicationButton.Name = "applicationButton";
       this.applicationButton.Size = new System.Drawing.Size(79, 22);
       this.applicationButton.Text = "application";
+      this.applicationButton.ToolTipText = "main application menu";
       // 
       // optionsButton
       // 
@@ -101,6 +102,7 @@
       this.optionsButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
       this.optionsButton.Size = new System.Drawing.Size(157, 22);
       this.optionsButton.Text = "options";
+      this.optionsButton.ToolTipText = "application options";
       this.optionsButton.Click += new System.EventHandler(this.ShowOptions);
       // 
       // aboutButton
@@ -109,6 +111,7 @@
       this.aboutButton.ShortcutKeys = System.Windows.Forms.Keys.F1;
       this.aboutButton.Size = new System.Drawing.Size(157, 22);
       this.aboutButton.Text = "about";
+      this.aboutButton.ToolTipText = "about the application";
       this.aboutButton.Click += new System.EventHandler(this.ShowAbout);
       // 
       // fileSeparator
@@ -122,6 +125,7 @@
       this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
       this.restartButton.Size = new System.Drawing.Size(157, 22);
       this.restartButton.Text = "restart";
+      this.restartButton.ToolTipText = "restart the application";
       this.restartButton.Click += new System.EventHandler(this.RestartApplication);
       // 
       // exitButton
@@ -130,6 +134,7 @@
       this.exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
       this.exitButton.Size = new System.Drawing.Size(157, 22);
       this.exitButton.Text = "exit";
+      this.exitButton.ToolTipText = "exit the application";
       this.exitButton.Click += new System.EventHandler(this.ExitApplication);
       // 
       // MainForm
