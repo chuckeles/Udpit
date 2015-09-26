@@ -32,6 +32,7 @@
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.optionsButton = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.fileSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -84,9 +85,10 @@
       // fileButton
       // 
       this.fileButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.restartButton,
             this.optionsButton,
             this.aboutButton,
+            this.fileSeparator,
+            this.restartButton,
             this.exitButton});
       this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.fileButton.Name = "fileButton";
@@ -97,7 +99,7 @@
       // 
       this.restartButton.Name = "restartButton";
       this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-      this.restartButton.Size = new System.Drawing.Size(152, 22);
+      this.restartButton.Size = new System.Drawing.Size(157, 22);
       this.restartButton.Text = "restart";
       this.restartButton.Click += new System.EventHandler(this.RestartApplication);
       // 
@@ -105,21 +107,28 @@
       // 
       this.exitButton.Name = "exitButton";
       this.exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-      this.exitButton.Size = new System.Drawing.Size(152, 22);
+      this.exitButton.Size = new System.Drawing.Size(157, 22);
       this.exitButton.Text = "exit";
       this.exitButton.Click += new System.EventHandler(this.ExitApplication);
       // 
       // optionsButton
       // 
       this.optionsButton.Name = "optionsButton";
-      this.optionsButton.Size = new System.Drawing.Size(152, 22);
+      this.optionsButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+      this.optionsButton.Size = new System.Drawing.Size(157, 22);
       this.optionsButton.Text = "options";
       // 
       // aboutButton
       // 
       this.aboutButton.Name = "aboutButton";
-      this.aboutButton.Size = new System.Drawing.Size(152, 22);
+      this.aboutButton.ShortcutKeys = System.Windows.Forms.Keys.F1;
+      this.aboutButton.Size = new System.Drawing.Size(157, 22);
       this.aboutButton.Text = "about";
+      // 
+      // fileSeparator
+      // 
+      this.fileSeparator.Name = "fileSeparator";
+      this.fileSeparator.Size = new System.Drawing.Size(154, 6);
       // 
       // MainForm
       // 
@@ -151,5 +160,6 @@
     private System.Windows.Forms.ToolStripMenuItem restartButton;
     private System.Windows.Forms.ToolStripMenuItem optionsButton;
     private System.Windows.Forms.ToolStripMenuItem aboutButton;
+    private System.Windows.Forms.ToolStripSeparator fileSeparator;
   }
 }
