@@ -44,7 +44,7 @@
       // errorLabel
       // 
       this.errorLabel.AutoSize = true;
-      this.errorLabel.Location = new System.Drawing.Point(12, 111);
+      this.errorLabel.Location = new System.Drawing.Point(12, 75);
       this.errorLabel.Name = "errorLabel";
       this.errorLabel.Size = new System.Drawing.Size(54, 13);
       this.errorLabel.TabIndex = 2;
@@ -53,7 +53,7 @@
       // errorCheckbox
       // 
       this.errorCheckbox.AutoSize = true;
-      this.errorCheckbox.Location = new System.Drawing.Point(76, 111);
+      this.errorCheckbox.Location = new System.Drawing.Point(76, 75);
       this.errorCheckbox.Name = "errorCheckbox";
       this.errorCheckbox.Size = new System.Drawing.Size(15, 14);
       this.errorCheckbox.TabIndex = 3;
@@ -69,7 +69,7 @@
       // fragmentLabel
       // 
       this.fragmentLabel.AutoSize = true;
-      this.fragmentLabel.Location = new System.Drawing.Point(12, 63);
+      this.fragmentLabel.Location = new System.Drawing.Point(12, 45);
       this.fragmentLabel.Name = "fragmentLabel";
       this.fragmentLabel.Size = new System.Drawing.Size(47, 13);
       this.fragmentLabel.TabIndex = 5;
@@ -77,7 +77,7 @@
       // 
       // fragmentBox
       // 
-      this.fragmentBox.Location = new System.Drawing.Point(76, 38);
+      this.fragmentBox.Location = new System.Drawing.Point(76, 43);
       this.fragmentBox.Name = "fragmentBox";
       this.fragmentBox.Size = new System.Drawing.Size(116, 20);
       this.fragmentBox.TabIndex = 6;
@@ -86,7 +86,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(204, 137);
+      this.ClientSize = new System.Drawing.Size(204, 101);
       this.Controls.Add(this.fragmentBox);
       this.Controls.Add(this.fragmentLabel);
       this.Controls.Add(this.destinationBox);
