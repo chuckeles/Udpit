@@ -28,6 +28,7 @@
       this.sendButton = new System.Windows.Forms.Button();
       this.toolbar = new System.Windows.Forms.ToolStrip();
       this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
+      this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
@@ -81,11 +82,19 @@
       // 
       this.fileButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
       this.fileButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.restartButton,
             this.exitButton});
       this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.fileButton.Name = "fileButton";
       this.fileButton.Size = new System.Drawing.Size(36, 22);
       this.fileButton.Text = "file";
+      // 
+      // restartButton
+      // 
+      this.restartButton.Name = "restartButton";
+      this.restartButton.Size = new System.Drawing.Size(152, 22);
+      this.restartButton.Text = "restart";
+      this.restartButton.Click += new System.EventHandler(this.RestartApplication);
       // 
       // exitButton
       // 
@@ -122,5 +131,6 @@
     private System.Windows.Forms.ToolStrip toolbar;
     private System.Windows.Forms.ToolStripDropDownButton fileButton;
     private System.Windows.Forms.ToolStripMenuItem exitButton;
+    private System.Windows.Forms.ToolStripMenuItem restartButton;
   }
 }

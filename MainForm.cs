@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Udpit {
 
@@ -12,11 +13,19 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Exits the application.
+    ///   Exits the application.
     /// </summary>
-    private void ExitApplication(object sender, System.EventArgs e) {
+    private void ExitApplication(object sender, EventArgs e) {
       Application.Exit();
     }
+
+    /// <summary>
+    ///   Restarts the application.
+    /// </summary>
+    private void RestartApplication(object sender, EventArgs e) {
+      Application.Restart();
+    }
+
   }
 
 }
