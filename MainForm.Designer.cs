@@ -139,6 +139,9 @@
       this.Controls.Add(this.sendButton);
       this.Controls.Add(this.inputBox);
       this.Controls.Add(this.messageBox);
+      this.MaximizeBox = false;
+      this.MaximumSize = new System.Drawing.Size(500, 500);
+      this.MinimizeBox = false;
       this.MinimumSize = new System.Drawing.Size(300, 300);
       this.Name = "MainForm";
       this.Text = "udpit";
