@@ -42,13 +42,13 @@
       // 
       this.destinationBox.Location = new System.Drawing.Point(76, 12);
       this.destinationBox.Name = "destinationBox";
-      this.destinationBox.Size = new System.Drawing.Size(120, 20);
+      this.destinationBox.Size = new System.Drawing.Size(116, 20);
       this.destinationBox.TabIndex = 1;
       // 
       // errorLabel
       // 
       this.errorLabel.AutoSize = true;
-      this.errorLabel.Location = new System.Drawing.Point(12, 41);
+      this.errorLabel.Location = new System.Drawing.Point(12, 45);
       this.errorLabel.Name = "errorLabel";
       this.errorLabel.Size = new System.Drawing.Size(54, 13);
       this.errorLabel.TabIndex = 2;
@@ -57,7 +57,7 @@
       // errorCheckbox
       // 
       this.errorCheckbox.AutoSize = true;
-      this.errorCheckbox.Location = new System.Drawing.Point(76, 41);
+      this.errorCheckbox.Location = new System.Drawing.Point(76, 45);
       this.errorCheckbox.Name = "errorCheckbox";
       this.errorCheckbox.Size = new System.Drawing.Size(15, 14);
       this.errorCheckbox.TabIndex = 3;
@@ -67,7 +67,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(284, 161);
+      this.ClientSize = new System.Drawing.Size(204, 71);
       this.Controls.Add(this.errorCheckbox);
       this.Controls.Add(this.errorLabel);
       this.Controls.Add(this.destinationBox);
