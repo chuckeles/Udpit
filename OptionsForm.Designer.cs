@@ -26,6 +26,7 @@
       this.destinationLabel = new System.Windows.Forms.Label();
       this.destinationBox = new System.Windows.Forms.MaskedTextBox();
       this.errorLabel = new System.Windows.Forms.Label();
+      this.errorCheckbox = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // destinationLabel
@@ -41,7 +42,7 @@
       // 
       this.destinationBox.Location = new System.Drawing.Point(76, 12);
       this.destinationBox.Name = "destinationBox";
-      this.destinationBox.Size = new System.Drawing.Size(100, 20);
+      this.destinationBox.Size = new System.Drawing.Size(120, 20);
       this.destinationBox.TabIndex = 1;
       // 
       // errorLabel
@@ -53,11 +54,21 @@
       this.errorLabel.TabIndex = 2;
       this.errorLabel.Text = "send error";
       // 
+      // errorCheckbox
+      // 
+      this.errorCheckbox.AutoSize = true;
+      this.errorCheckbox.Location = new System.Drawing.Point(76, 41);
+      this.errorCheckbox.Name = "errorCheckbox";
+      this.errorCheckbox.Size = new System.Drawing.Size(15, 14);
+      this.errorCheckbox.TabIndex = 3;
+      this.errorCheckbox.UseVisualStyleBackColor = true;
+      // 
       // OptionsForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(284, 161);
+      this.Controls.Add(this.errorCheckbox);
       this.Controls.Add(this.errorLabel);
       this.Controls.Add(this.destinationBox);
       this.Controls.Add(this.destinationLabel);
@@ -77,5 +88,6 @@
     private System.Windows.Forms.Label destinationLabel;
     private System.Windows.Forms.MaskedTextBox destinationBox;
     private System.Windows.Forms.Label errorLabel;
+    private System.Windows.Forms.CheckBox errorCheckbox;
   }
 }
