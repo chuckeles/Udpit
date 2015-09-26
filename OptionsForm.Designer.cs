@@ -25,6 +25,7 @@
     private void InitializeComponent() {
       this.destinationLabel = new System.Windows.Forms.Label();
       this.destinationBox = new System.Windows.Forms.MaskedTextBox();
+      this.errorLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // destinationLabel
@@ -43,11 +44,21 @@
       this.destinationBox.Size = new System.Drawing.Size(100, 20);
       this.destinationBox.TabIndex = 1;
       // 
+      // errorLabel
+      // 
+      this.errorLabel.AutoSize = true;
+      this.errorLabel.Location = new System.Drawing.Point(12, 41);
+      this.errorLabel.Name = "errorLabel";
+      this.errorLabel.Size = new System.Drawing.Size(54, 13);
+      this.errorLabel.TabIndex = 2;
+      this.errorLabel.Text = "send error";
+      // 
       // OptionsForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(284, 161);
+      this.Controls.Add(this.errorLabel);
       this.Controls.Add(this.destinationBox);
       this.Controls.Add(this.destinationLabel);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -65,5 +76,6 @@
 
     private System.Windows.Forms.Label destinationLabel;
     private System.Windows.Forms.MaskedTextBox destinationBox;
+    private System.Windows.Forms.Label errorLabel;
   }
 }
