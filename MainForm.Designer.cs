@@ -33,12 +33,14 @@
       this.messageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.messageBox.Enabled = false;
       this.messageBox.Location = new System.Drawing.Point(12, 12);
       this.messageBox.Multiline = true;
       this.messageBox.Name = "messageBox";
       this.messageBox.ReadOnly = true;
       this.messageBox.Size = new System.Drawing.Size(260, 209);
-      this.messageBox.TabIndex = 0;
+      this.messageBox.TabIndex = 2;
+      this.messageBox.TabStop = false;
       // 
       // inputBox
       // 
@@ -47,7 +49,7 @@
       this.inputBox.Location = new System.Drawing.Point(12, 229);
       this.inputBox.Name = "inputBox";
       this.inputBox.Size = new System.Drawing.Size(202, 20);
-      this.inputBox.TabIndex = 1;
+      this.inputBox.TabIndex = 0;
       // 
       // sendButton
       // 
@@ -55,7 +57,7 @@
       this.sendButton.Location = new System.Drawing.Point(220, 227);
       this.sendButton.Name = "sendButton";
       this.sendButton.Size = new System.Drawing.Size(52, 23);
-      this.sendButton.TabIndex = 2;
+      this.sendButton.TabIndex = 1;
       this.sendButton.Text = "send";
       this.sendButton.UseVisualStyleBackColor = true;
       // 
