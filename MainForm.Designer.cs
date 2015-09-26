@@ -27,6 +27,9 @@
       this.inputBox = new System.Windows.Forms.TextBox();
       this.sendButton = new System.Windows.Forms.Button();
       this.toolbar = new System.Windows.Forms.ToolStrip();
+      this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
+      this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
       // messageBox
@@ -66,11 +69,29 @@
       // 
       // toolbar
       // 
+      this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileButton});
       this.toolbar.Location = new System.Drawing.Point(0, 0);
       this.toolbar.Name = "toolbar";
       this.toolbar.Size = new System.Drawing.Size(284, 25);
       this.toolbar.TabIndex = 3;
       this.toolbar.Text = "toolbar";
+      // 
+      // fileButton
+      // 
+      this.fileButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+      this.fileButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitButton});
+      this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.fileButton.Name = "fileButton";
+      this.fileButton.Size = new System.Drawing.Size(36, 22);
+      this.fileButton.Text = "file";
+      // 
+      // exitButton
+      // 
+      this.exitButton.Name = "exitButton";
+      this.exitButton.Size = new System.Drawing.Size(152, 22);
+      this.exitButton.Text = "exit";
       // 
       // MainForm
       // 
@@ -84,6 +105,8 @@
       this.MinimumSize = new System.Drawing.Size(300, 300);
       this.Name = "MainForm";
       this.Text = "udpit";
+      this.toolbar.ResumeLayout(false);
+      this.toolbar.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -95,5 +118,7 @@
     private System.Windows.Forms.TextBox inputBox;
     private System.Windows.Forms.Button sendButton;
     private System.Windows.Forms.ToolStrip toolbar;
+    private System.Windows.Forms.ToolStripDropDownButton fileButton;
+    private System.Windows.Forms.ToolStripMenuItem exitButton;
   }
 }
