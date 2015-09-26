@@ -27,7 +27,7 @@
       this.inputBox = new System.Windows.Forms.TextBox();
       this.sendButton = new System.Windows.Forms.Button();
       this.toolbar = new System.Windows.Forms.ToolStrip();
-      this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
+      this.applicationButton = new System.Windows.Forms.ToolStripDropDownButton();
       this.optionsButton = new System.Windows.Forms.ToolStripMenuItem();
       this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
       this.fileSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -75,25 +75,25 @@
       // 
       this.toolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileButton});
+            this.applicationButton});
       this.toolbar.Location = new System.Drawing.Point(0, 0);
       this.toolbar.Name = "toolbar";
       this.toolbar.Size = new System.Drawing.Size(284, 25);
       this.toolbar.TabIndex = 3;
       this.toolbar.Text = "toolbar";
       // 
-      // fileButton
+      // applicationButton
       // 
-      this.fileButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.applicationButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsButton,
             this.aboutButton,
             this.fileSeparator,
             this.restartButton,
             this.exitButton});
-      this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.fileButton.Name = "fileButton";
-      this.fileButton.Size = new System.Drawing.Size(36, 22);
-      this.fileButton.Text = "file";
+      this.applicationButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.applicationButton.Name = "applicationButton";
+      this.applicationButton.Size = new System.Drawing.Size(79, 22);
+      this.applicationButton.Text = "application";
       // 
       // optionsButton
       // 
@@ -161,7 +161,7 @@
     private System.Windows.Forms.TextBox inputBox;
     private System.Windows.Forms.Button sendButton;
     private System.Windows.Forms.ToolStrip toolbar;
-    private System.Windows.Forms.ToolStripDropDownButton fileButton;
+    private System.Windows.Forms.ToolStripDropDownButton applicationButton;
     private System.Windows.Forms.ToolStripMenuItem exitButton;
     private System.Windows.Forms.ToolStripMenuItem restartButton;
     private System.Windows.Forms.ToolStripMenuItem optionsButton;
