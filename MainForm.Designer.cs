@@ -30,8 +30,8 @@
       this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
       this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
-      this.settingsButton = new System.Windows.Forms.ToolStripButton();
-      this.aboutButton = new System.Windows.Forms.ToolStripButton();
+      this.optionsButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -74,9 +74,7 @@
       // 
       this.toolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileButton,
-            this.settingsButton,
-            this.aboutButton});
+            this.fileButton});
       this.toolbar.Location = new System.Drawing.Point(0, 0);
       this.toolbar.Name = "toolbar";
       this.toolbar.Size = new System.Drawing.Size(284, 25);
@@ -87,6 +85,8 @@
       // 
       this.fileButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.restartButton,
+            this.optionsButton,
+            this.aboutButton,
             this.exitButton});
       this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.fileButton.Name = "fileButton";
@@ -109,18 +109,16 @@
       this.exitButton.Text = "exit";
       this.exitButton.Click += new System.EventHandler(this.ExitApplication);
       // 
-      // settingsButton
+      // optionsButton
       // 
-      this.settingsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.settingsButton.Name = "settingsButton";
-      this.settingsButton.Size = new System.Drawing.Size(52, 22);
-      this.settingsButton.Text = "settings";
+      this.optionsButton.Name = "optionsButton";
+      this.optionsButton.Size = new System.Drawing.Size(152, 22);
+      this.optionsButton.Text = "options";
       // 
       // aboutButton
       // 
-      this.aboutButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.aboutButton.Name = "aboutButton";
-      this.aboutButton.Size = new System.Drawing.Size(42, 22);
+      this.aboutButton.Size = new System.Drawing.Size(152, 22);
       this.aboutButton.Text = "about";
       // 
       // MainForm
@@ -151,7 +149,7 @@
     private System.Windows.Forms.ToolStripDropDownButton fileButton;
     private System.Windows.Forms.ToolStripMenuItem exitButton;
     private System.Windows.Forms.ToolStripMenuItem restartButton;
-    private System.Windows.Forms.ToolStripButton settingsButton;
-    private System.Windows.Forms.ToolStripButton aboutButton;
+    private System.Windows.Forms.ToolStripMenuItem optionsButton;
+    private System.Windows.Forms.ToolStripMenuItem aboutButton;
   }
 }
