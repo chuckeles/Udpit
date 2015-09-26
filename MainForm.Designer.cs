@@ -26,6 +26,7 @@
       this.messageBox = new System.Windows.Forms.TextBox();
       this.inputBox = new System.Windows.Forms.TextBox();
       this.sendButton = new System.Windows.Forms.Button();
+      this.toolbar = new System.Windows.Forms.ToolStrip();
       this.SuspendLayout();
       // 
       // messageBox
@@ -34,11 +35,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.messageBox.Enabled = false;
-      this.messageBox.Location = new System.Drawing.Point(12, 12);
+      this.messageBox.Location = new System.Drawing.Point(12, 28);
       this.messageBox.Multiline = true;
       this.messageBox.Name = "messageBox";
       this.messageBox.ReadOnly = true;
-      this.messageBox.Size = new System.Drawing.Size(260, 209);
+      this.messageBox.Size = new System.Drawing.Size(260, 193);
       this.messageBox.TabIndex = 2;
       this.messageBox.TabStop = false;
       // 
@@ -63,17 +64,26 @@
       this.sendButton.Text = "send";
       this.sendButton.UseVisualStyleBackColor = true;
       // 
+      // toolbar
+      // 
+      this.toolbar.Location = new System.Drawing.Point(0, 0);
+      this.toolbar.Name = "toolbar";
+      this.toolbar.Size = new System.Drawing.Size(284, 25);
+      this.toolbar.TabIndex = 3;
+      this.toolbar.Text = "toolbar";
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(284, 261);
+      this.Controls.Add(this.toolbar);
       this.Controls.Add(this.sendButton);
       this.Controls.Add(this.inputBox);
       this.Controls.Add(this.messageBox);
       this.MinimumSize = new System.Drawing.Size(300, 300);
       this.Name = "MainForm";
-      this.Text = "Udpit";
+      this.Text = "udpit";
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -84,5 +94,6 @@
     private System.Windows.Forms.TextBox messageBox;
     private System.Windows.Forms.TextBox inputBox;
     private System.Windows.Forms.Button sendButton;
+    private System.Windows.Forms.ToolStrip toolbar;
   }
 }
