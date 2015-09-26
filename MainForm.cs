@@ -26,6 +26,13 @@ namespace Udpit {
       Application.Restart();
     }
 
+    /// <summary>
+    /// Shows the about form.
+    /// </summary>
+    private void ShowAbout(object sender, EventArgs e) {
+      var about = new AboutForm();
+      about.Show(this);
+    }
   }
 
 }

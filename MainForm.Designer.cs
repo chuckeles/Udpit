@@ -124,6 +124,7 @@
       this.aboutButton.ShortcutKeys = System.Windows.Forms.Keys.F1;
       this.aboutButton.Size = new System.Drawing.Size(157, 22);
       this.aboutButton.Text = "about";
+      this.aboutButton.Click += new System.EventHandler(this.ShowAbout);
       // 
       // fileSeparator
       // 
