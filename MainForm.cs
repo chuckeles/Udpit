@@ -22,8 +22,8 @@ namespace Udpit {
       Singleton = this;
 
       // create forms
-      _aboutForm = new AboutForm();
-      _optionsForm = new OptionsForm();
+      AboutForm = new AboutForm();
+      OptionsForm = new OptionsForm();
     }
 
     /// <summary>
@@ -44,32 +44,32 @@ namespace Udpit {
     ///   Shows the about form.
     /// </summary>
     private void ShowAbout(object sender, EventArgs e) {
-      if (!_aboutForm.Visible)
-        _aboutForm.Show(this);
+      if (!AboutForm.Visible)
+        AboutForm.Show(this);
     }
 
     /// <summary>
     ///   Shows the options form.
     /// </summary>
     private void ShowOptions(object sender, EventArgs e) {
-      if (!_optionsForm.Visible)
-        _optionsForm.Show(this);
+      if (!OptionsForm.Visible)
+        OptionsForm.Show(this);
     }
 
     /// <summary>
-    /// Main form singleton.
+    ///   Main form singleton.
     /// </summary>
     public static MainForm Singleton { get; private set; }
 
     /// <summary>
     ///   The about form.
     /// </summary>
-    private readonly AboutForm _aboutForm;
+    public readonly AboutForm AboutForm;
 
     /// <summary>
     ///   The options form.
     /// </summary>
-    private readonly OptionsForm _optionsForm;
+    public readonly OptionsForm OptionsForm;
 
   }
 
