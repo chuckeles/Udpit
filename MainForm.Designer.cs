@@ -51,7 +51,7 @@
       this.messageBox.Size = new System.Drawing.Size(260, 193);
       this.messageBox.TabIndex = 2;
       this.messageBox.TabStop = false;
-      this.tooltip.SetToolTip(this.messageBox, "chatting box");
+      this.tooltip.SetToolTip(this.messageBox, "console box");
       // 
       // inputBox
       // 

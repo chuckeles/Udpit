@@ -23,12 +23,14 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      this.components = new System.ComponentModel.Container();
       this.destinationLabel = new System.Windows.Forms.Label();
       this.errorLabel = new System.Windows.Forms.Label();
       this.errorCheckbox = new System.Windows.Forms.CheckBox();
       this.destinationBox = new System.Windows.Forms.TextBox();
       this.fragmentLabel = new System.Windows.Forms.Label();
       this.fragmentBox = new System.Windows.Forms.NumericUpDown();
+      this.tooltip = new System.Windows.Forms.ToolTip(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.fragmentBox)).BeginInit();
       this.SuspendLayout();
       // 
@@ -57,6 +59,7 @@
       this.errorCheckbox.Name = "errorCheckbox";
       this.errorCheckbox.Size = new System.Drawing.Size(15, 14);
       this.errorCheckbox.TabIndex = 3;
+      this.tooltip.SetToolTip(this.errorCheckbox, "send error fragments (for testing)");
       this.errorCheckbox.UseVisualStyleBackColor = true;
       // 
       // destinationBox
@@ -65,6 +68,7 @@
       this.destinationBox.Name = "destinationBox";
       this.destinationBox.Size = new System.Drawing.Size(116, 20);
       this.destinationBox.TabIndex = 4;
+      this.tooltip.SetToolTip(this.destinationBox, "an IP address to send the messages to");
       // 
       // fragmentLabel
       // 
@@ -81,6 +85,7 @@
       this.fragmentBox.Name = "fragmentBox";
       this.fragmentBox.Size = new System.Drawing.Size(116, 20);
       this.fragmentBox.TabIndex = 6;
+      this.tooltip.SetToolTip(this.fragmentBox, "maximum size of a fragment");
       // 
       // OptionsForm
       // 
@@ -113,5 +118,6 @@
     private System.Windows.Forms.TextBox destinationBox;
     private System.Windows.Forms.Label fragmentLabel;
     private System.Windows.Forms.NumericUpDown fragmentBox;
+    private System.Windows.Forms.ToolTip tooltip;
   }
 }
