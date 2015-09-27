@@ -1,4 +1,6 @@
-﻿namespace Udpit {
+﻿using System.Net;
+
+namespace Udpit {
 
   /// <summary>
   ///   The UDP messaging system.
@@ -26,11 +28,32 @@
     }
 
     /// <summary>
+    /// Returns whether we are correctly configured and can send a message.
+    /// </summary>
+    public bool CanSend() {
+      // check name
+      if (Name == "")
+        return false;
+
+      // check destination
+      if (Destination == "")
+        return false;
+
+      // check if destination is a valid ip address
+      IPAddress ip;
+      if (!IPAddress.TryParse(Destination, out ip))
+        return false;
+
+      // all set up
+      return true;
+    }
+
+    /// <summary>
     ///   Sets up default first-time options.
     /// </summary>
     private void SetupOptions() {
       Name = "excited user";
-      Destination = "localhost";
+      Destination = "";
       MaxFragment = 128;
       SendError = false;
     }
