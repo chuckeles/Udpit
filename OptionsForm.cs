@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Udpit {
 
@@ -13,6 +14,9 @@ namespace Udpit {
 
       // hook up udper
       HookUdper();
+
+      // set up options updated event
+      SetUpdateEvent();
     }
 
     /// <summary>
@@ -34,6 +38,21 @@ namespace Udpit {
       fragmentBox.ValueChanged += (sender, args) => { udper.MaxFragment = fragmentBox.Value; };
       errorCheckbox.CheckedChanged += (sender, args) => { udper.SendError = errorCheckbox.Checked; };
     }
+
+    /// <summary>
+    ///   Sets up a master event fired when any option changes.
+    /// </summary>
+    private void SetUpdateEvent() {
+      nameBox.TextChanged += OptionsChanged;
+      destinationBox.TextChanged += OptionsChanged;
+      fragmentBox.ValueChanged += OptionsChanged;
+      errorCheckbox.CheckedChanged += OptionsChanged;
+    }
+
+    /// <summary>
+    ///   Event fired when any option changes.
+    /// </summary>
+    public event EventHandler OptionsChanged;
 
   }
 

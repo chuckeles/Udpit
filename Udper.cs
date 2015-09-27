@@ -64,7 +64,7 @@ namespace Udpit {
     public static Udper Singleton { get; private set; }
 
     /// <summary>
-    ///   The destination url.
+    ///   The destination ip.
     /// </summary>
     public string Destination;
 
