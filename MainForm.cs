@@ -100,6 +100,9 @@ namespace Udpit {
 
       // add the message box
       AddMessage(Udper.Singleton.Name, input);
+
+      // tell udper to do it's thing
+      Udper.Singleton.SendMessage(input);
     }
 
     /// <summary>

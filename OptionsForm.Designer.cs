@@ -71,7 +71,7 @@
       this.destinationBox.Location = new System.Drawing.Point(76, 47);
       this.destinationBox.Name = "destinationBox";
       this.destinationBox.Size = new System.Drawing.Size(116, 20);
-      this.destinationBox.TabIndex = 4;
+      this.destinationBox.TabIndex = 1;
       this.tooltip.SetToolTip(this.destinationBox, "an IP address to send the messages to");
       // 
       // fragmentLabel
@@ -99,7 +99,7 @@
             0});
       this.fragmentBox.Name = "fragmentBox";
       this.fragmentBox.Size = new System.Drawing.Size(116, 20);
-      this.fragmentBox.TabIndex = 6;
+      this.fragmentBox.TabIndex = 2;
       this.tooltip.SetToolTip(this.fragmentBox, "maximum size of a fragment");
       this.fragmentBox.Value = new decimal(new int[] {
             16,
@@ -112,7 +112,7 @@
       this.nameBox.Location = new System.Drawing.Point(76, 12);
       this.nameBox.Name = "nameBox";
       this.nameBox.Size = new System.Drawing.Size(116, 20);
-      this.nameBox.TabIndex = 8;
+      this.nameBox.TabIndex = 0;
       this.tooltip.SetToolTip(this.nameBox, "your name");
       // 
       // nameLabel

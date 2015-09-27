@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Udpit {
 
@@ -44,6 +46,25 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Send a message.
+    /// </summary>
+    public void SendMessage(string message) {
+      // check
+      if (!CanSend())
+        return;
+
+      // create end point
+      var endPoint = new IPEndPoint(Destination, Port);
+
+      // create client
+      var client = new UdpClient();
+
+      // send the message
+      var bytes = GetBytes(message);
+      client.Send(bytes, bytes.Length, endPoint);
+    }
+
+    /// <summary>
     /// </summary>
     public bool SetDestination(string destinationString) {
       // try to parse ip address
@@ -53,6 +74,26 @@ namespace Udpit {
         return true;
       }
       return false;
+    }
+
+    /// <summary>
+    ///   Converts string to byte array.
+    /// </summary>
+    /// <source>http://stackoverflow.com/a/10380166</source>
+    private static byte[] GetBytes(string str) {
+      var bytes = new byte[str.Length * sizeof (char)];
+      Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+      return bytes;
+    }
+
+    /// <summary>
+    ///   Converts byte array to string.
+    /// </summary>
+    /// <source>http://stackoverflow.com/a/10380166</source>
+    private static string GetString(byte[] bytes) {
+      var chars = new char[bytes.Length / sizeof (char)];
+      Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+      return new string(chars);
     }
 
     /// <summary>
@@ -89,6 +130,11 @@ namespace Udpit {
     ///   Whether to send error fragments for testing purposes.
     /// </summary>
     public bool SendError;
+
+    /// <summary>
+    ///   Communication port.
+    /// </summary>
+    private const int Port = 11002;
 
   }
 
