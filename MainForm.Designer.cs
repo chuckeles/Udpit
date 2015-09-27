@@ -1,4 +1,6 @@
-﻿namespace Udpit {
+﻿using System.Windows.Forms;
+
+namespace Udpit {
   partial class MainForm {
     /// <summary>
     /// Required designer variable.
@@ -24,7 +26,7 @@
     /// </summary>
     private void InitializeComponent() {
       this.components = new System.ComponentModel.Container();
-      this.messageBox = new System.Windows.Forms.TextBox();
+      this.messageBox = new System.Windows.Forms.RichTextBox();
       this.inputBox = new System.Windows.Forms.TextBox();
       this.sendButton = new System.Windows.Forms.Button();
       this.toolbar = new System.Windows.Forms.ToolStrip();
@@ -46,14 +48,12 @@
       this.messageBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.messageBox.Enabled = false;
       this.messageBox.Location = new System.Drawing.Point(12, 28);
-      this.messageBox.Multiline = true;
       this.messageBox.Name = "messageBox";
       this.messageBox.ReadOnly = true;
       this.messageBox.Size = new System.Drawing.Size(260, 193);
       this.messageBox.TabIndex = 2;
       this.messageBox.TabStop = false;
-      this.messageBox.Text = "\r\n\r\nconfigure the application in the options";
-      this.messageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      this.messageBox.Text = "";
       this.tooltip.SetToolTip(this.messageBox, "message box");
       // 
       // inputBox
@@ -170,7 +170,7 @@
 
     #endregion
 
-    private System.Windows.Forms.TextBox messageBox;
+    private RichTextBox messageBox;
     private System.Windows.Forms.TextBox inputBox;
     private System.Windows.Forms.Button sendButton;
     private System.Windows.Forms.ToolStrip toolbar;

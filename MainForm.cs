@@ -72,7 +72,6 @@ namespace Udpit {
     ///   Enables and initialized the message box.
     /// </summary>
     private void InitMessageBox() {
-      messageBox.TextAlign = HorizontalAlignment.Left;
       messageBox.Text = "";
       messageBox.Enabled = true;
     }
