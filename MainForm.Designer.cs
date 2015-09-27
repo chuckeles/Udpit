@@ -43,6 +43,7 @@
       this.messageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+      this.messageBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.messageBox.Enabled = false;
       this.messageBox.Location = new System.Drawing.Point(12, 28);
       this.messageBox.Multiline = true;
@@ -51,9 +52,9 @@
       this.messageBox.Size = new System.Drawing.Size(260, 193);
       this.messageBox.TabIndex = 2;
       this.messageBox.TabStop = false;
-      this.messageBox.Text = "configure the application in the options";
+      this.messageBox.Text = "\r\n\r\nconfigure the application in the options";
       this.messageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-      this.tooltip.SetToolTip(this.messageBox, "console box");
+      this.tooltip.SetToolTip(this.messageBox, "message box");
       // 
       // inputBox
       // 
