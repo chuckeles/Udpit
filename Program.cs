@@ -10,9 +10,13 @@ namespace Udpit {
     /// </summary>
     [STAThread]
     private static void Main() {
+      // create main form
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new MainForm());
+
+      // create udper
+      new Udper();
     }
 
   }

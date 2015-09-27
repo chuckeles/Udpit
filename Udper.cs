@@ -17,7 +17,7 @@
     /// <summary>
     ///   The udper singleton.
     /// </summary>
-    public Udper Singleton { get; }
+    public static Udper Singleton { get; private set; }
 
     /// <summary>
     ///   The destination url.
