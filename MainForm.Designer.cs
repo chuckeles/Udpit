@@ -51,6 +51,8 @@
       this.messageBox.Size = new System.Drawing.Size(260, 193);
       this.messageBox.TabIndex = 2;
       this.messageBox.TabStop = false;
+      this.messageBox.Text = "configure the application in the options";
+      this.messageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
       this.tooltip.SetToolTip(this.messageBox, "console box");
       // 
       // inputBox
