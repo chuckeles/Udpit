@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 
@@ -62,9 +64,26 @@ namespace Udpit {
       // create client
       var client = new UdpClient();
 
+      // bytes to send
+      System.Collections.Generic.List<byte> bytes = new List<byte>();
+
+      // add name
+      bytes.AddRange(GetBytes(Name));
+
+      // make sure it's 32 bytes for the name
+      while (bytes.Count > 32)
+        bytes.Remove(bytes.Last());
+      while (bytes.Count < 32)
+        bytes.Add(0);
+
+      // add message text
+      bytes.AddRange(GetBytes(message));
+
+      // get array
+      var data = bytes.ToArray();
+
       // send the message
-      var bytes = GetBytes(message);
-      client.Send(bytes, bytes.Length, endPoint);
+      client.Send(data, data.Length, endPoint);
     }
 
     /// <summary>
@@ -126,11 +145,14 @@ namespace Udpit {
       // listen again
       listener.BeginReceive(Receive, listener);
 
+      // get name
+      var name = GetString(data.Take(32).ToArray());
+
       // get message
-      var message = GetString(data);
+      var message = GetString(data.Skip(32).ToArray());
 
       // fire an event
-      OnMessage?.Invoke(message);
+      OnMessage?.Invoke(message, name, remotePoint.Address.ToString());
     }
 
     /// <summary>
@@ -183,6 +205,6 @@ namespace Udpit {
   /// <summary>
   ///   Delegate for incoming message.
   /// </summary>
-  public delegate void MessageData(string message);
+  public delegate void MessageData(string message, string name, string source);
 
 }

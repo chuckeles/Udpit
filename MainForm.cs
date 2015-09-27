@@ -45,7 +45,7 @@ namespace Udpit {
     /// <summary>
     ///   Adds a send message to the message box.
     /// </summary>
-    private void AddReceiveMessage(string message) {
+    private void AddReceiveMessage(string message, string name, string source) {
       messageBox.Invoke(new MethodInvoker(delegate {
         // add message
         messageBox.AppendText("received message ");
@@ -53,6 +53,19 @@ namespace Udpit {
         messageBox.AppendText(message);
         messageBox.SelectionColor = Color.Empty;
         messageBox.AppendText("\n");
+
+        // add info
+        messageBox.SelectionIndent = 16;
+        messageBox.AppendText("name: ");
+        messageBox.SelectionColor = Color.DarkViolet;
+        messageBox.AppendText(name);
+        messageBox.SelectionColor = Color.Empty;
+        messageBox.AppendText("\nsource: ");
+        messageBox.SelectionColor = Color.DarkViolet;
+        messageBox.AppendText(source);
+        messageBox.SelectionColor = Color.Empty;
+        messageBox.AppendText("\n");
+        messageBox.SelectionIndent = 0;
       }));
     }
 
@@ -96,7 +109,7 @@ namespace Udpit {
       var udper = Udper.Singleton;
 
       // hook up
-      udper.OnMessage += message => { AddReceiveMessage(message); };
+      udper.OnMessage += (message, name, source) => { AddReceiveMessage(message, name, source); };
     }
 
     /// <summary>
