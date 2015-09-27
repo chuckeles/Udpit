@@ -17,21 +17,14 @@ namespace Udpit {
       _aboutForm = new AboutForm();
       _optionsForm = new OptionsForm();
 
+      // add message box text
+      SetMessageBoxText();
+
       // hook up options changed event
       HookOptions();
 
-      // add message box text
-      SetMessageBoxText();
-    }
-
-    /// <summary>
-    /// Set up message box text when it is disabled.
-    /// </summary>
-    private void SetMessageBoxText() {
-      messageBox.Text = "";
-      messageBox.SelectionAlignment = HorizontalAlignment.Center;
-
-      messageBox.AppendText("\n\n\n\n\n\nconfigure the application in the options");
+      // hook up to incoming messages
+      HookIncomingMessage();
     }
 
     /// <summary>
@@ -47,6 +40,18 @@ namespace Udpit {
 
       // return
       return Singleton;
+    }
+
+    /// <summary>
+    ///   Adds a send message to the message box.
+    /// </summary>
+    private void AddReceiveMessage(string message) {
+      // add message
+      messageBox.AppendText("received message ");
+      messageBox.SelectionColor = Color.DarkBlue;
+      messageBox.AppendText(message);
+      messageBox.SelectionColor = Color.Empty;
+      messageBox.AppendText("\n");
     }
 
     /// <summary>
@@ -79,6 +84,17 @@ namespace Udpit {
     /// </summary>
     private void ExitApplication(object sender, EventArgs e) {
       Application.Exit();
+    }
+
+    /// <summary>
+    ///   Listen to incoming messages.
+    /// </summary>
+    private void HookIncomingMessage() {
+      // get udper
+      var udper = Udper.Singleton;
+
+      // hook up
+      udper.OnMessage += message => { AddReceiveMessage(message); };
     }
 
     /// <summary>
@@ -140,6 +156,16 @@ namespace Udpit {
 
       // add the message box
       AddSendMessage(input, udper.Name, udper.Destination.ToString());
+    }
+
+    /// <summary>
+    ///   Set up message box text when it is disabled.
+    /// </summary>
+    private void SetMessageBoxText() {
+      messageBox.Text = "";
+      messageBox.SelectionAlignment = HorizontalAlignment.Center;
+
+      messageBox.AppendText("\n\n\n\n\n\nconfigure the application in the options");
     }
 
     /// <summary>

@@ -12,6 +12,9 @@ namespace Udpit {
     private Udper() {
       // set up default options
       SetupOptions();
+
+      // start listening
+      Listen();
     }
 
     /// <summary>
@@ -97,6 +100,40 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Listens for incoming messages.
+    /// </summary>
+    private void Listen() {
+      // create listener
+      var listener = new UdpClient(Port);
+
+      // listen
+      listener.BeginReceive(Receive, listener);
+    }
+
+    /// <summary>
+    ///   Receive a message.
+    /// </summary>
+    private void Receive(IAsyncResult ar) {
+      // end point
+      var remotePoint = new IPEndPoint(IPAddress.Any, Port);
+
+      // get listener
+      var listener = ar.AsyncState as UdpClient;
+
+      // get data
+      var data = listener.EndReceive(ar, ref remotePoint);
+
+      // listen again
+      listener.BeginReceive(Receive, listener);
+
+      // get message
+      var message = GetString(data);
+
+      // fire an event
+      OnMessage?.Invoke(message);
+    }
+
+    /// <summary>
     ///   Sets up default first-time options.
     /// </summary>
     private void SetupOptions() {
@@ -132,10 +169,20 @@ namespace Udpit {
     public bool SendError;
 
     /// <summary>
+    ///   Fired when a message is received.
+    /// </summary>
+    public event MessageData OnMessage;
+
+    /// <summary>
     ///   Communication port.
     /// </summary>
     private const int Port = 11002;
 
   }
+
+  /// <summary>
+  ///   Delegate for incoming message.
+  /// </summary>
+  public delegate void MessageData(string message);
 
 }
