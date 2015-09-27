@@ -38,10 +38,8 @@ namespace Udpit {
     /// <summary>
     ///   Adds a message to the message box.
     /// </summary>
-    /// <param name="sender">Who send the message</param>
-    /// <param name="message">The message</param>
-    private void AddMessage(string sender, string message) {
-      messageBox.AppendText($"{sender} > {message}\n");
+    private void AddMessage(string message) {
+      messageBox.AppendText(message + '\n');
     }
 
     /// <summary>
@@ -94,15 +92,18 @@ namespace Udpit {
       if (!messageBox.Enabled)
         InitMessageBox();
 
+      // get udper
+      var udper = Udper.Singleton;
+
       // get input
       var input = inputBox.Text;
       inputBox.Text = "";
 
-      // add the message box
-      AddMessage(Udper.Singleton.Name, input);
-
       // tell udper to do it's thing
-      Udper.Singleton.SendMessage(input);
+      udper.SendMessage(input);
+
+      // add the message box
+      AddMessage($"sending message \"{input}\" as {udper.Name} to {udper.Destination}");
     }
 
     /// <summary>
