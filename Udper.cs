@@ -5,7 +5,7 @@
   /// </summary>
   internal class Udper {
 
-    public Udper() {
+    private Udper() {
       // set up default options
       SetupOptions();
     }
@@ -48,7 +48,7 @@
     /// <summary>
     ///   Maximum fragment size.
     /// </summary>
-    public int MaxFragment;
+    public decimal MaxFragment;
 
     /// <summary>
     ///   The user's name.

@@ -8,23 +8,23 @@ namespace Udpit {
   /// </summary>
   public partial class MainForm : Form {
 
-    public MainForm() {
+    private MainForm() {
       // initialize
       InitializeComponent();
 
       // create forms
-      AboutForm = new AboutForm();
-      OptionsForm = new OptionsForm();
+      _aboutForm = new AboutForm();
+      _optionsForm = new OptionsForm();
     }
 
     /// <summary>
-    /// Creates a new singleton.
+    ///   Creates a new singleton.
     /// </summary>
     public static MainForm Create() {
       // check singleton
       if (Singleton != null)
         return Singleton;
-      
+
       // create singleton
       Singleton = new MainForm();
 
@@ -50,16 +50,16 @@ namespace Udpit {
     ///   Shows the about form.
     /// </summary>
     private void ShowAbout(object sender, EventArgs e) {
-      if (!AboutForm.Visible)
-        AboutForm.Show(this);
+      if (!_aboutForm.Visible)
+        _aboutForm.Show(this);
     }
 
     /// <summary>
     ///   Shows the options form.
     /// </summary>
     private void ShowOptions(object sender, EventArgs e) {
-      if (!OptionsForm.Visible)
-        OptionsForm.Show(this);
+      if (!_optionsForm.Visible)
+        _optionsForm.Show(this);
     }
 
     /// <summary>
@@ -70,12 +70,12 @@ namespace Udpit {
     /// <summary>
     ///   The about form.
     /// </summary>
-    public readonly AboutForm AboutForm;
+    private readonly AboutForm _aboutForm;
 
     /// <summary>
     ///   The options form.
     /// </summary>
-    public readonly OptionsForm OptionsForm;
+    private readonly OptionsForm _optionsForm;
 
   }
 
