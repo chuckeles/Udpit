@@ -60,7 +60,6 @@
       // 
       this.inputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.inputBox.Enabled = false;
       this.inputBox.Location = new System.Drawing.Point(12, 229);
       this.inputBox.Name = "inputBox";
       this.inputBox.Size = new System.Drawing.Size(202, 20);
@@ -70,7 +69,6 @@
       // sendButton
       // 
       this.sendButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.sendButton.Enabled = false;
       this.sendButton.Location = new System.Drawing.Point(220, 227);
       this.sendButton.Name = "sendButton";
       this.sendButton.Size = new System.Drawing.Size(52, 23);

@@ -38,8 +38,8 @@ namespace Udpit {
         return false;
 
       // check ip
-      if (Destination.ToString() == "127.0.0.1")
-        return false;
+      // if (Destination.ToString() == "127.0.0.1")
+      //   return false;
 
       // all set up
       return true;
