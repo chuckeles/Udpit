@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("Udpit")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A simple UDP messanger.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Chuckeles")]
 [assembly: AssemblyProduct("Udpit")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright ©  2015 Chuckeles")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
