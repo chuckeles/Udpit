@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Udpit {
+﻿namespace Udpit {
 
   /// <summary>
   ///   The UDP messaging system.
@@ -8,15 +6,23 @@ namespace Udpit {
   internal class Udper {
 
     public Udper() {
-      // check singleton
-      if (Singleton != null)
-        return;
-
-      // set singleton
-      Singleton = this;
-
       // set up default options
       SetupOptions();
+    }
+
+    /// <summary>
+    ///   Creates new singleton.
+    /// </summary>
+    public static Udper Create() {
+      // check singleton
+      if (Singleton != null)
+        return Singleton;
+
+      // create singleton
+      Singleton = new Udper();
+
+      // return
+      return Singleton;
     }
 
     /// <summary>

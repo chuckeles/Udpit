@@ -9,21 +9,27 @@ namespace Udpit {
   public partial class MainForm : Form {
 
     public MainForm() {
-      // check singleton
-      if (Singleton != null) {
-        Dispose();
-        return;
-      }
-
       // initialize
       InitializeComponent();
-
-      // set singleton
-      Singleton = this;
 
       // create forms
       AboutForm = new AboutForm();
       OptionsForm = new OptionsForm();
+    }
+
+    /// <summary>
+    /// Creates a new singleton.
+    /// </summary>
+    public static MainForm Create() {
+      // check singleton
+      if (Singleton != null)
+        return Singleton;
+      
+      // create singleton
+      Singleton = new MainForm();
+
+      // return
+      return Singleton;
     }
 
     /// <summary>

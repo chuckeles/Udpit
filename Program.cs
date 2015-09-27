@@ -11,12 +11,12 @@ namespace Udpit {
     [STAThread]
     private static void Main() {
       // create udper
-      new Udper();
+      Udper.Create();
 
       // start application
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(new MainForm());
+      Application.Run(MainForm.Create());
     }
 
   }
