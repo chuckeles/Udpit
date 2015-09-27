@@ -35,6 +35,10 @@ namespace Udpit {
       if (Name == "")
         return false;
 
+      // check ip
+      if (Destination.ToString() == "127.0.0.1")
+        return false;
+
       // all set up
       return true;
     }
@@ -43,7 +47,12 @@ namespace Udpit {
     /// </summary>
     public bool SetDestination(string destinationString) {
       // try to parse ip address
-      return IPAddress.TryParse(destinationString, out Destination);
+      IPAddress ipAddress;
+      if (IPAddress.TryParse(destinationString, out ipAddress)) {
+        Destination = ipAddress;
+        return true;
+      }
+      return false;
     }
 
     /// <summary>
