@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Udpit {
@@ -18,6 +19,19 @@ namespace Udpit {
 
       // hook up options changed event
       HookOptions();
+
+      // add message box text
+      SetMessageBoxText();
+    }
+
+    /// <summary>
+    /// Set up message box text when it is disabled.
+    /// </summary>
+    private void SetMessageBoxText() {
+      messageBox.Text = "";
+      messageBox.SelectionAlignment = HorizontalAlignment.Center;
+
+      messageBox.AppendText("\n\n\n\n\n\nconfigure the application in the options");
     }
 
     /// <summary>
@@ -36,10 +50,28 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Adds a message to the message box.
+    ///   Adds a send message to the message box.
     /// </summary>
-    private void AddMessage(string message) {
-      messageBox.AppendText(message + '\n');
+    private void AddSendMessage(string message, string name, string destination) {
+      // add message
+      messageBox.AppendText("sending message ");
+      messageBox.SelectionColor = Color.DarkBlue;
+      messageBox.AppendText(message);
+      messageBox.SelectionColor = Color.Empty;
+      messageBox.AppendText("\n");
+
+      // add info
+      messageBox.SelectionIndent = 16;
+      messageBox.AppendText("name: ");
+      messageBox.SelectionColor = Color.DarkViolet;
+      messageBox.AppendText(name);
+      messageBox.SelectionColor = Color.Empty;
+      messageBox.AppendText("\ndestination: ");
+      messageBox.SelectionColor = Color.DarkViolet;
+      messageBox.AppendText(destination);
+      messageBox.SelectionColor = Color.Empty;
+      messageBox.AppendText("\n");
+      messageBox.SelectionIndent = 0;
     }
 
     /// <summary>
@@ -73,6 +105,7 @@ namespace Udpit {
     /// </summary>
     private void InitMessageBox() {
       messageBox.Text = "";
+      messageBox.SelectionAlignment = HorizontalAlignment.Left;
       messageBox.Enabled = true;
     }
 
@@ -98,11 +131,15 @@ namespace Udpit {
       var input = inputBox.Text;
       inputBox.Text = "";
 
+      // check input
+      if (input == "")
+        return;
+
       // tell udper to do it's thing
       udper.SendMessage(input);
 
       // add the message box
-      AddMessage($"sending message \"{input}\" as {udper.Name} to {udper.Destination}");
+      AddSendMessage(input, udper.Name, udper.Destination.ToString());
     }
 
     /// <summary>
