@@ -78,6 +78,7 @@
       this.sendButton.Text = "send";
       this.tooltip.SetToolTip(this.sendButton, "send the message");
       this.sendButton.UseVisualStyleBackColor = true;
+      this.sendButton.Click += new System.EventHandler(this.SendMessage);
       // 
       // toolbar
       // 

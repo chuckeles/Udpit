@@ -36,6 +36,15 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Adds a message to the message box.
+    /// </summary>
+    /// <param name="sender">Who send the message</param>
+    /// <param name="message">The message</param>
+    private void AddMessage(string sender, string message) {
+      messageBox.AppendText($"{sender} > {message}\n");
+    }
+
+    /// <summary>
     ///   Exits the application.
     /// </summary>
     private void ExitApplication(object sender, EventArgs e) {
@@ -43,7 +52,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Hook up on the options changed event.
+    ///   Hooks up on the options changed event.
     /// </summary>
     private void HookOptions() {
       _optionsForm.OptionsChanged += (sender, args) => {
@@ -62,10 +71,35 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Enables and initialized the message box.
+    /// </summary>
+    private void InitMessageBox() {
+      messageBox.TextAlign = HorizontalAlignment.Left;
+      messageBox.Text = "";
+      messageBox.Enabled = true;
+    }
+
+    /// <summary>
     ///   Restarts the application.
     /// </summary>
     private void RestartApplication(object sender, EventArgs e) {
       Application.Restart();
+    }
+
+    /// <summary>
+    ///   Sends an input message.
+    /// </summary>
+    private void SendMessage(object sender, EventArgs e) {
+      // check message box
+      if (!messageBox.Enabled)
+        InitMessageBox();
+
+      // get input
+      var input = inputBox.Text;
+      inputBox.Text = "";
+
+      // add the message box
+      AddMessage(Udper.Singleton.Name, input);
     }
 
     /// <summary>
