@@ -23,6 +23,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      this.components = new System.ComponentModel.Container();
       this.messageBox = new System.Windows.Forms.TextBox();
       this.inputBox = new System.Windows.Forms.TextBox();
       this.sendButton = new System.Windows.Forms.Button();
@@ -33,6 +34,7 @@
       this.fileSeparator = new System.Windows.Forms.ToolStripSeparator();
       this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.tooltip = new System.Windows.Forms.ToolTip(this.components);
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -49,6 +51,7 @@
       this.messageBox.Size = new System.Drawing.Size(260, 193);
       this.messageBox.TabIndex = 2;
       this.messageBox.TabStop = false;
+      this.tooltip.SetToolTip(this.messageBox, "chatting box");
       // 
       // inputBox
       // 
@@ -59,6 +62,7 @@
       this.inputBox.Name = "inputBox";
       this.inputBox.Size = new System.Drawing.Size(202, 20);
       this.inputBox.TabIndex = 0;
+      this.tooltip.SetToolTip(this.inputBox, "a message to send");
       // 
       // sendButton
       // 
@@ -69,6 +73,7 @@
       this.sendButton.Size = new System.Drawing.Size(52, 23);
       this.sendButton.TabIndex = 1;
       this.sendButton.Text = "send";
+      this.tooltip.SetToolTip(this.sendButton, "send the message");
       this.sendButton.UseVisualStyleBackColor = true;
       // 
       // toolbar
@@ -172,5 +177,6 @@
     private System.Windows.Forms.ToolStripMenuItem optionsButton;
     private System.Windows.Forms.ToolStripMenuItem aboutButton;
     private System.Windows.Forms.ToolStripSeparator fileSeparator;
+    private System.Windows.Forms.ToolTip tooltip;
   }
 }
