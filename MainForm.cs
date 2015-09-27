@@ -9,7 +9,21 @@ namespace Udpit {
   public partial class MainForm : Form {
 
     public MainForm() {
+      // check singleton
+      if (Singleton != null) {
+        Dispose();
+        return;
+      }
+
+      // initialize
       InitializeComponent();
+
+      // set singleton
+      Singleton = this;
+
+      // create forms
+      _aboutForm = new AboutForm();
+      _optionsForm = new OptionsForm();
     }
 
     /// <summary>
@@ -30,17 +44,32 @@ namespace Udpit {
     ///   Shows the about form.
     /// </summary>
     private void ShowAbout(object sender, EventArgs e) {
-      var about = new AboutForm();
-      about.Show(this);
+      if (!_aboutForm.Visible)
+        _aboutForm.Show(this);
     }
 
     /// <summary>
     ///   Shows the options form.
     /// </summary>
     private void ShowOptions(object sender, EventArgs e) {
-      var options = new OptionsForm();
-      options.Show(this);
+      if (!_optionsForm.Visible)
+        _optionsForm.Show(this);
     }
+
+    /// <summary>
+    /// Main form singleton.
+    /// </summary>
+    public static MainForm Singleton { get; private set; }
+
+    /// <summary>
+    ///   The about form.
+    /// </summary>
+    private readonly AboutForm _aboutForm;
+
+    /// <summary>
+    ///   The options form.
+    /// </summary>
+    private readonly OptionsForm _optionsForm;
 
   }
 
