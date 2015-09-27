@@ -87,10 +87,25 @@
       // fragmentBox
       // 
       this.fragmentBox.Location = new System.Drawing.Point(76, 82);
+      this.fragmentBox.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+      this.fragmentBox.Minimum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
       this.fragmentBox.Name = "fragmentBox";
       this.fragmentBox.Size = new System.Drawing.Size(116, 20);
       this.fragmentBox.TabIndex = 6;
       this.tooltip.SetToolTip(this.fragmentBox, "maximum size of a fragment");
+      this.fragmentBox.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
       // 
       // nameBox
       // 
