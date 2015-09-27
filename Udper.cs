@@ -23,37 +23,10 @@ namespace Udpit {
     ///   Sets up default first-time options.
     /// </summary>
     private void SetupOptions() {
-      // get the options form
-      var optionsForm = MainForm.Singleton.OptionsForm;
-
-      // set default name
       Name = "excited user";
-      optionsForm.NameBox.Text = Name;
-
-      // hook up the name input
-      optionsForm.NameBox.TextChanged += (sender, args) => { Name = optionsForm.NameBox.Text; };
-
-      // set default destination
       Destination = "localhost";
-      optionsForm.DestinationBox.Text = Destination;
-
-      // hook up the destination input
-      optionsForm.DestinationBox.TextChanged += (sender, args) => { Destination = optionsForm.DestinationBox.Text; };
-
-      // set default fragment
       MaxFragment = 128;
-      optionsForm.FragmentBox.Text = MaxFragment.ToString();
-
-      // hook up the name input
-      optionsForm.FragmentBox.TextChanged +=
-        (sender, args) => { MaxFragment = Convert.ToInt32(optionsForm.FragmentBox.Text); };
-
-      // set default error
       SendError = false;
-      optionsForm.ErrorCheckbox.Checked = SendError;
-
-      // hook up the name input
-      optionsForm.ErrorCheckbox.CheckedChanged += (sender, args) => { SendError = optionsForm.ErrorCheckbox.Checked; };
     }
 
     /// <summary>

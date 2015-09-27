@@ -26,14 +26,14 @@
       this.components = new System.ComponentModel.Container();
       this.destinationLabel = new System.Windows.Forms.Label();
       this.errorLabel = new System.Windows.Forms.Label();
-      this.ErrorCheckbox = new System.Windows.Forms.CheckBox();
-      this.DestinationBox = new System.Windows.Forms.TextBox();
+      this.errorCheckbox = new System.Windows.Forms.CheckBox();
+      this.destinationBox = new System.Windows.Forms.TextBox();
       this.fragmentLabel = new System.Windows.Forms.Label();
-      this.FragmentBox = new System.Windows.Forms.NumericUpDown();
+      this.fragmentBox = new System.Windows.Forms.NumericUpDown();
       this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-      this.NameBox = new System.Windows.Forms.TextBox();
+      this.nameBox = new System.Windows.Forms.TextBox();
       this.nameLabel = new System.Windows.Forms.Label();
-      ((System.ComponentModel.ISupportInitialize)(this.FragmentBox)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.fragmentBox)).BeginInit();
       this.SuspendLayout();
       // 
       // destinationLabel
@@ -56,23 +56,23 @@
       this.errorLabel.Text = "send error";
       this.tooltip.SetToolTip(this.errorLabel, "send error fragments (for testing)");
       // 
-      // ErrorCheckbox
+      // errorCheckbox
       // 
-      this.ErrorCheckbox.AutoSize = true;
-      this.ErrorCheckbox.Location = new System.Drawing.Point(76, 117);
-      this.ErrorCheckbox.Name = "ErrorCheckbox";
-      this.ErrorCheckbox.Size = new System.Drawing.Size(15, 14);
-      this.ErrorCheckbox.TabIndex = 3;
-      this.tooltip.SetToolTip(this.ErrorCheckbox, "send error fragments (for testing)");
-      this.ErrorCheckbox.UseVisualStyleBackColor = true;
+      this.errorCheckbox.AutoSize = true;
+      this.errorCheckbox.Location = new System.Drawing.Point(76, 117);
+      this.errorCheckbox.Name = "errorCheckbox";
+      this.errorCheckbox.Size = new System.Drawing.Size(15, 14);
+      this.errorCheckbox.TabIndex = 3;
+      this.tooltip.SetToolTip(this.errorCheckbox, "send error fragments (for testing)");
+      this.errorCheckbox.UseVisualStyleBackColor = true;
       // 
-      // DestinationBox
+      // destinationBox
       // 
-      this.DestinationBox.Location = new System.Drawing.Point(76, 47);
-      this.DestinationBox.Name = "DestinationBox";
-      this.DestinationBox.Size = new System.Drawing.Size(116, 20);
-      this.DestinationBox.TabIndex = 4;
-      this.tooltip.SetToolTip(this.DestinationBox, "an IP address to send the messages to");
+      this.destinationBox.Location = new System.Drawing.Point(76, 47);
+      this.destinationBox.Name = "destinationBox";
+      this.destinationBox.Size = new System.Drawing.Size(116, 20);
+      this.destinationBox.TabIndex = 4;
+      this.tooltip.SetToolTip(this.destinationBox, "an IP address to send the messages to");
       // 
       // fragmentLabel
       // 
@@ -84,21 +84,21 @@
       this.fragmentLabel.Text = "max size";
       this.tooltip.SetToolTip(this.fragmentLabel, "maximum size of a fragment");
       // 
-      // FragmentBox
+      // fragmentBox
       // 
-      this.FragmentBox.Location = new System.Drawing.Point(76, 82);
-      this.FragmentBox.Name = "FragmentBox";
-      this.FragmentBox.Size = new System.Drawing.Size(116, 20);
-      this.FragmentBox.TabIndex = 6;
-      this.tooltip.SetToolTip(this.FragmentBox, "maximum size of a fragment");
+      this.fragmentBox.Location = new System.Drawing.Point(76, 82);
+      this.fragmentBox.Name = "fragmentBox";
+      this.fragmentBox.Size = new System.Drawing.Size(116, 20);
+      this.fragmentBox.TabIndex = 6;
+      this.tooltip.SetToolTip(this.fragmentBox, "maximum size of a fragment");
       // 
-      // NameBox
+      // nameBox
       // 
-      this.NameBox.Location = new System.Drawing.Point(76, 12);
-      this.NameBox.Name = "NameBox";
-      this.NameBox.Size = new System.Drawing.Size(116, 20);
-      this.NameBox.TabIndex = 8;
-      this.tooltip.SetToolTip(this.NameBox, "your name");
+      this.nameBox.Location = new System.Drawing.Point(76, 12);
+      this.nameBox.Name = "nameBox";
+      this.nameBox.Size = new System.Drawing.Size(116, 20);
+      this.nameBox.TabIndex = 8;
+      this.tooltip.SetToolTip(this.nameBox, "your name");
       // 
       // nameLabel
       // 
@@ -115,12 +115,12 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(204, 143);
-      this.Controls.Add(this.NameBox);
+      this.Controls.Add(this.nameBox);
       this.Controls.Add(this.nameLabel);
-      this.Controls.Add(this.FragmentBox);
+      this.Controls.Add(this.fragmentBox);
       this.Controls.Add(this.fragmentLabel);
-      this.Controls.Add(this.DestinationBox);
-      this.Controls.Add(this.ErrorCheckbox);
+      this.Controls.Add(this.destinationBox);
+      this.Controls.Add(this.errorCheckbox);
       this.Controls.Add(this.errorLabel);
       this.Controls.Add(this.destinationLabel);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -129,7 +129,7 @@
       this.Name = "OptionsForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "options";
-      ((System.ComponentModel.ISupportInitialize)(this.FragmentBox)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.fragmentBox)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -142,9 +142,9 @@
     private System.Windows.Forms.Label fragmentLabel;
     private System.Windows.Forms.ToolTip tooltip;
     private System.Windows.Forms.Label nameLabel;
-    public System.Windows.Forms.TextBox NameBox;
-    public System.Windows.Forms.TextBox DestinationBox;
-    public System.Windows.Forms.NumericUpDown FragmentBox;
-    public System.Windows.Forms.CheckBox ErrorCheckbox;
+    private System.Windows.Forms.TextBox nameBox;
+    private System.Windows.Forms.TextBox destinationBox;
+    private System.Windows.Forms.NumericUpDown fragmentBox;
+    private System.Windows.Forms.CheckBox errorCheckbox;
   }
 }
