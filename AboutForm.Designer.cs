@@ -53,6 +53,7 @@
       this.Name = "AboutForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "about";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
       this.ResumeLayout(false);
 
     }

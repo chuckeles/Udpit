@@ -28,20 +28,11 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Returns whether we are correctly configured and can send a message.
+    ///   Returns whether we are correctly configured and can send a message.
     /// </summary>
     public bool CanSend() {
       // check name
       if (Name == "")
-        return false;
-
-      // check destination
-      if (Destination == "")
-        return false;
-
-      // check if destination is a valid ip address
-      IPAddress ip;
-      if (!IPAddress.TryParse(Destination, out ip))
         return false;
 
       // all set up
@@ -49,11 +40,18 @@ namespace Udpit {
     }
 
     /// <summary>
+    /// </summary>
+    public bool SetDestination(string destinationString) {
+      // try to parse ip address
+      return IPAddress.TryParse(destinationString, out Destination);
+    }
+
+    /// <summary>
     ///   Sets up default first-time options.
     /// </summary>
     private void SetupOptions() {
       Name = "excited user";
-      Destination = "";
+      Destination = new IPAddress(new byte[] {127, 0, 0, 1});
       MaxFragment = 128;
       SendError = false;
     }
@@ -66,7 +64,7 @@ namespace Udpit {
     /// <summary>
     ///   The destination ip.
     /// </summary>
-    public string Destination;
+    public IPAddress Destination;
 
     /// <summary>
     ///   Maximum fragment size.

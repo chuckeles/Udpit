@@ -11,6 +11,17 @@ namespace Udpit {
       InitializeComponent();
     }
 
+    /// <summary>
+    ///   Hide the form instead of closing it.
+    /// </summary>
+    private void OnClose(object sender, FormClosingEventArgs e) {
+      if (e.CloseReason != CloseReason.UserClosing)
+        return;
+
+      e.Cancel = true;
+      Hide();
+    }
+
   }
 
 }

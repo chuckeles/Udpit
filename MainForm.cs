@@ -106,24 +106,16 @@ namespace Udpit {
     ///   Shows the about form.
     /// </summary>
     private void ShowAbout(object sender, EventArgs e) {
-      if (!_aboutForm.Visible) {
-        if (_aboutForm != null)
-          _aboutForm = new AboutForm();
-
+      if (!_aboutForm.Visible)
         _aboutForm.Show(this);
-      }
     }
 
     /// <summary>
     ///   Shows the options form.
     /// </summary>
     private void ShowOptions(object sender, EventArgs e) {
-      if (!_optionsForm.Visible) {
-        if (_optionsForm != null)
-          _optionsForm = new OptionsForm();
-
+      if (!_optionsForm.Visible)
         _optionsForm.Show(this);
-      }
     }
 
     /// <summary>
@@ -134,12 +126,12 @@ namespace Udpit {
     /// <summary>
     ///   The about form.
     /// </summary>
-    private AboutForm _aboutForm;
+    private readonly AboutForm _aboutForm;
 
     /// <summary>
     ///   The options form.
     /// </summary>
-    private OptionsForm _optionsForm;
+    private readonly OptionsForm _optionsForm;
 
   }
 

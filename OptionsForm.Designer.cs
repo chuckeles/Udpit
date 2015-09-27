@@ -144,6 +144,7 @@
       this.Name = "OptionsForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "options";
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
       ((System.ComponentModel.ISupportInitialize)(this.fragmentBox)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
