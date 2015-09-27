@@ -46,12 +46,14 @@ namespace Udpit {
     ///   Adds a send message to the message box.
     /// </summary>
     private void AddReceiveMessage(string message) {
-      // add message
-      messageBox.AppendText("received message ");
-      messageBox.SelectionColor = Color.DarkBlue;
-      messageBox.AppendText(message);
-      messageBox.SelectionColor = Color.Empty;
-      messageBox.AppendText("\n");
+      messageBox.Invoke(new MethodInvoker(delegate {
+        // add message
+        messageBox.AppendText("received message ");
+        messageBox.SelectionColor = Color.DarkBlue;
+        messageBox.AppendText(message);
+        messageBox.SelectionColor = Color.Empty;
+        messageBox.AppendText("\n");
+      }));
     }
 
     /// <summary>
