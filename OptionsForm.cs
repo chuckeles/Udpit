@@ -43,10 +43,10 @@ namespace Udpit {
     ///   Sets up a master event fired when any option changes.
     /// </summary>
     private void SetUpdateEvent() {
-      nameBox.TextChanged += OptionsChanged;
-      destinationBox.TextChanged += OptionsChanged;
-      fragmentBox.ValueChanged += OptionsChanged;
-      errorCheckbox.CheckedChanged += OptionsChanged;
+      nameBox.TextChanged += (sender, args) => { OptionsChanged?.Invoke(sender, args); };
+      destinationBox.TextChanged += (sender, args) => { OptionsChanged?.Invoke(sender, args); };
+      fragmentBox.ValueChanged += (sender, args) => { OptionsChanged?.Invoke(sender, args); };
+      errorCheckbox.CheckedChanged += (sender, args) => { OptionsChanged?.Invoke(sender, args); };
     }
 
     /// <summary>

@@ -15,6 +15,9 @@ namespace Udpit {
       // create forms
       _aboutForm = new AboutForm();
       _optionsForm = new OptionsForm();
+
+      // hook up options changed event
+      HookOptions();
     }
 
     /// <summary>
@@ -37,6 +40,25 @@ namespace Udpit {
     /// </summary>
     private void ExitApplication(object sender, EventArgs e) {
       Application.Exit();
+    }
+
+    /// <summary>
+    ///   Hook up on the options changed event.
+    /// </summary>
+    private void HookOptions() {
+      _optionsForm.OptionsChanged += (sender, args) => {
+        // check the udper
+        if (Udper.Singleton.CanSend()) {
+          // enable sending
+          inputBox.Enabled = true;
+          sendButton.Enabled = true;
+        }
+        else {
+          // disable sending
+          inputBox.Enabled = false;
+          sendButton.Enabled = false;
+        }
+      };
     }
 
     /// <summary>
