@@ -23,6 +23,9 @@ namespace Udpit {
       // hook up options changed event
       HookOptions();
 
+      // hook up to outgoing messages
+      HookOutgoingMessage();
+
       // hook up to incoming messages
       HookIncomingMessage();
     }
@@ -109,7 +112,7 @@ namespace Udpit {
       var udper = Udper.Singleton;
 
       // hook up
-      udper.OnMessage += (message, name, source) => { AddReceiveMessage(message, name, source); };
+      udper.OnMessageReceive += AddReceiveMessage;
     }
 
     /// <summary>
@@ -129,6 +132,17 @@ namespace Udpit {
           sendButton.Enabled = false;
         }
       };
+    }
+
+    /// <summary>
+    ///   Listen to outgoing messages.
+    /// </summary>
+    private void HookOutgoingMessage() {
+      // get udper
+      var udper = Udper.Singleton;
+
+      // hook up
+      udper.OnMessageReceive += AddSendMessage;
     }
 
     /// <summary>
@@ -168,9 +182,6 @@ namespace Udpit {
 
       // tell udper to do it's thing
       udper.SendMessage(input);
-
-      // add the message box
-      AddSendMessage(input, udper.Name, udper.Destination.ToString());
     }
 
     /// <summary>

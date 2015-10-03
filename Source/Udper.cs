@@ -84,6 +84,9 @@ namespace Udpit {
 
       // send the message
       client.Send(data, data.Length, endPoint);
+
+      // fire an event
+      OnMessageSend?.Invoke(message, Name, endPoint.Address.ToString());
     }
 
     /// <summary>
@@ -153,7 +156,7 @@ namespace Udpit {
       var message = GetString(data.Skip(32).ToArray());
 
       // fire an event
-      OnMessage?.Invoke(message, name, remotePoint.Address.ToString());
+      OnMessageReceive?.Invoke(message, name, remotePoint.Address.ToString());
     }
 
     /// <summary>
@@ -194,7 +197,12 @@ namespace Udpit {
     /// <summary>
     ///   Fired when a message is received.
     /// </summary>
-    public event MessageData OnMessage;
+    public event MessageData OnMessageReceive;
+
+    /// <summary>
+    ///   Fired when a message is sent.
+    /// </summary>
+    public event MessageData OnMessageSend;
 
     /// <summary>
     ///   Communication port.
