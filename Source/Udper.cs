@@ -42,9 +42,7 @@ namespace Udpit {
       if (Name == "")
         return false;
 
-      // check ip
-      // if (Destination.ToString() == "127.0.0.1")
-      //   return false;
+      // TODO: Check the IP address
 
       // all set up
       return true;
