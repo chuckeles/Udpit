@@ -43,11 +43,15 @@ namespace Udpit {
     ///   Hide the form instead of closing it.
     /// </summary>
     private void OnClose(object sender, FormClosingEventArgs e) {
+      // prevent closing
       if (e.CloseReason != CloseReason.UserClosing)
         return;
 
       e.Cancel = true;
       Hide();
+
+      // get the destination
+      destinationBox.Text = Udper.Singleton.Destination.ToString();
     }
 
     /// <summary>
