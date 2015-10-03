@@ -142,7 +142,7 @@ namespace Udpit {
       var udper = Udper.Singleton;
 
       // hook up
-      udper.OnMessageReceive += AddSendMessage;
+      udper.OnMessageSend += AddSendMessage;
     }
 
     /// <summary>

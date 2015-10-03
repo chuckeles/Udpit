@@ -197,12 +197,12 @@ namespace Udpit {
     /// <summary>
     ///   Fired when a message is received.
     /// </summary>
-    public event MessageData OnMessageReceive;
+    public event MessageReceiveData OnMessageReceive;
 
     /// <summary>
     ///   Fired when a message is sent.
     /// </summary>
-    public event MessageData OnMessageSend;
+    public event MessageSendData OnMessageSend;
 
     /// <summary>
     ///   Communication port.
@@ -214,6 +214,11 @@ namespace Udpit {
   /// <summary>
   ///   Delegate for incoming message.
   /// </summary>
-  public delegate void MessageData(string message, string name, string source);
+  public delegate void MessageReceiveData(string message, string name, string source);
+
+  /// <summary>
+  ///   Delegate for outgoing message.
+  /// </summary>
+  public delegate void MessageSendData(string message, string name, string source);
 
 }
