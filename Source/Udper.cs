@@ -65,7 +65,7 @@ namespace Udpit {
       var client = new UdpClient();
 
       // bytes to send
-      System.Collections.Generic.List<byte> bytes = new List<byte>();
+      var bytes = new List<byte>();
 
       // add name
       bytes.AddRange(GetBytes(Name));
@@ -87,6 +87,7 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Set a destination IP.
     /// </summary>
     public bool SetDestination(string destinationString) {
       // try to parse ip address
