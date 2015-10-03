@@ -68,7 +68,7 @@ namespace Udpit {
       var bytes = new List<byte>();
 
       // add name
-      bytes.AddRange(GetBytes(Name));
+      bytes.AddRange(ByteUtility.GetBytes(Name));
 
       // make sure it's 32 bytes for the name
       while (bytes.Count > 32)
@@ -77,7 +77,7 @@ namespace Udpit {
         bytes.Add(0);
 
       // add message text
-      bytes.AddRange(GetBytes(message));
+      bytes.AddRange(ByteUtility.GetBytes(message));
 
       // get array
       var data = bytes.ToArray();
@@ -100,26 +100,6 @@ namespace Udpit {
         return true;
       }
       return false;
-    }
-
-    /// <summary>
-    ///   Converts string to byte array.
-    /// </summary>
-    /// <source>http://stackoverflow.com/a/10380166</source>
-    private static byte[] GetBytes(string str) {
-      var bytes = new byte[str.Length * sizeof (char)];
-      Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-      return bytes;
-    }
-
-    /// <summary>
-    ///   Converts byte array to string.
-    /// </summary>
-    /// <source>http://stackoverflow.com/a/10380166</source>
-    private static string GetString(byte[] bytes) {
-      var chars = new char[bytes.Length / sizeof (char)];
-      Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
-      return new string(chars);
     }
 
     /// <summary>
@@ -150,10 +130,10 @@ namespace Udpit {
       listener.BeginReceive(Receive, listener);
 
       // get name
-      var name = GetString(data.Take(32).ToArray());
+      var name = ByteUtility.GetString(data.Take(32).ToArray());
 
       // get message
-      var message = GetString(data.Skip(32).ToArray());
+      var message = ByteUtility.GetString(data.Skip(32).ToArray());
 
       // fire an event
       OnMessageReceive?.Invoke(message, name, remotePoint.Address.ToString());
