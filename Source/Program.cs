@@ -10,9 +10,6 @@ namespace Udpit {
     /// </summary>
     [STAThread]
     private static void Main() {
-      // create udper
-      Udper.Create();
-
       // start application
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Udpit {
@@ -19,15 +18,6 @@ namespace Udpit {
 
       // add message box text
       SetMessageBoxText();
-
-      // hook up options changed event
-      HookOptions();
-
-      // hook up to outgoing messages
-      HookOutgoingMessage();
-
-      // hook up to incoming messages
-      HookIncomingMessage();
     }
 
     /// <summary>
@@ -46,103 +36,10 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Adds a send message to the message box.
-    /// </summary>
-    private void AddReceiveMessage(string message, string name, string source) {
-      messageBox.Invoke(new MethodInvoker(delegate {
-        // add message
-        messageBox.AppendText("received message ");
-        messageBox.SelectionColor = Color.DarkBlue;
-        messageBox.AppendText(message);
-        messageBox.SelectionColor = Color.Empty;
-        messageBox.AppendText("\n");
-
-        // add info
-        messageBox.SelectionIndent = 16;
-        messageBox.AppendText("name: ");
-        messageBox.SelectionColor = Color.DarkViolet;
-        messageBox.AppendText(name);
-        messageBox.SelectionColor = Color.Empty;
-        messageBox.AppendText("\nsource: ");
-        messageBox.SelectionColor = Color.DarkViolet;
-        messageBox.AppendText(source);
-        messageBox.SelectionColor = Color.Empty;
-        messageBox.AppendText("\n");
-        messageBox.SelectionIndent = 0;
-      }));
-    }
-
-    /// <summary>
-    ///   Adds a send message to the message box.
-    /// </summary>
-    private void AddSendMessage(string message, string name, string destination) {
-      // add message
-      messageBox.AppendText("sending message ");
-      messageBox.SelectionColor = Color.DarkBlue;
-      messageBox.AppendText(message);
-      messageBox.SelectionColor = Color.Empty;
-      messageBox.AppendText("\n");
-
-      // add info
-      messageBox.SelectionIndent = 16;
-      messageBox.AppendText("name: ");
-      messageBox.SelectionColor = Color.DarkViolet;
-      messageBox.AppendText(name);
-      messageBox.SelectionColor = Color.Empty;
-      messageBox.AppendText("\ndestination: ");
-      messageBox.SelectionColor = Color.DarkViolet;
-      messageBox.AppendText(destination);
-      messageBox.SelectionColor = Color.Empty;
-      messageBox.AppendText("\n");
-      messageBox.SelectionIndent = 0;
-    }
-
-    /// <summary>
     ///   Exits the application.
     /// </summary>
     private void ExitApplication(object sender, EventArgs e) {
       Application.Exit();
-    }
-
-    /// <summary>
-    ///   Listen to incoming messages.
-    /// </summary>
-    private void HookIncomingMessage() {
-      // get udper
-      var udper = Udper.Singleton;
-
-      // hook up
-      udper.OnMessageReceive += AddReceiveMessage;
-    }
-
-    /// <summary>
-    ///   Hooks up on the options changed event.
-    /// </summary>
-    private void HookOptions() {
-      _optionsForm.OptionsChanged += (sender, args) => {
-        // check the udper
-        if (Udper.Singleton.CanSend()) {
-          // enable sending
-          inputBox.Enabled = true;
-          sendButton.Enabled = true;
-        }
-        else {
-          // disable sending
-          inputBox.Enabled = false;
-          sendButton.Enabled = false;
-        }
-      };
-    }
-
-    /// <summary>
-    ///   Listen to outgoing messages.
-    /// </summary>
-    private void HookOutgoingMessage() {
-      // get udper
-      var udper = Udper.Singleton;
-
-      // hook up
-      udper.OnMessageSend += AddSendMessage;
     }
 
     /// <summary>
@@ -159,29 +56,6 @@ namespace Udpit {
     /// </summary>
     private void RestartApplication(object sender, EventArgs e) {
       Application.Restart();
-    }
-
-    /// <summary>
-    ///   Sends an input message.
-    /// </summary>
-    private void SendMessage(object sender, EventArgs e) {
-      // check message box
-      if (!messageBox.Enabled)
-        InitMessageBox();
-
-      // get udper
-      var udper = Udper.Singleton;
-
-      // get input
-      var input = inputBox.Text;
-      inputBox.Text = "";
-
-      // check input
-      if (input == "")
-        return;
-
-      // tell udper to do it's thing
-      udper.SendMessage(input);
     }
 
     /// <summary>
