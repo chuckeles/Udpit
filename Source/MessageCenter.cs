@@ -27,9 +27,9 @@ namespace Udpit {
     public MessageCenter Singleton { get; private set; }
 
     /// <summary>
-    ///   The list of messages in progress.
+    ///   The dictionary of messages in progress keyed by the id.
     /// </summary>
-    private List<Message> _messages = new List<Message>();
+    private Dictionary<byte[], Message> _messages = new Dictionary<byte[], Message>();
 
   }
 
