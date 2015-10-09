@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Udpit {
@@ -8,10 +9,34 @@ namespace Udpit {
   /// </summary>
   internal class Message {
 
+    public Message(ushort fragmentCount) {
+      // set fragment count
+      FragmentCount = fragmentCount;
+
+      // generate an id
+      Id[0] = (byte) DateTime.Now.Second;
+      Id[1] = (byte) DateTime.Now.Minute;
+    }
+
     /// <summary>
     ///   Number of fragments.
     /// </summary>
-    private ushort _fragmentCount;
+    public ushort FragmentCount { get; }
+
+    /// <summary>
+    ///   Message id.
+    /// </summary>
+    public byte[] Id { get; } = new byte[2];
+
+    /// <summary>
+    ///   Remote's ip and port.
+    /// </summary>
+    public IPEndPoint RemoteEndPoint { get; set; }
+
+    /// <summary>
+    ///   Remote's name.
+    /// </summary>
+    public string RemoteName { get; set; }
 
     /// <summary>
     ///   The sorted list of fragments.
@@ -21,21 +46,6 @@ namespace Udpit {
     ///   In the destination this is a list of received and checked fragments.
     /// </remarks>
     private List<byte[]> _fragmentList = new List<byte[]>();
-
-    /// <summary>
-    ///   Message id.
-    /// </summary>
-    private byte[] _id = new byte[2];
-
-    /// <summary>
-    ///   Remote's ip and port.
-    /// </summary>
-    private IPEndPoint _remoteEndPoint;
-
-    /// <summary>
-    ///   Remote's name.
-    /// </summary>
-    private string _remoteName;
 
   }
 
