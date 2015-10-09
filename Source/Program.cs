@@ -13,7 +13,7 @@ namespace Udpit {
       // start application
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-      Application.Run(MainForm.Create());
+      Application.Run(new MainForm());
     }
 
   }

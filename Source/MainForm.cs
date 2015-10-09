@@ -8,23 +8,8 @@ namespace Udpit {
   /// </summary>
   public partial class MainForm : Form {
 
-    private MainForm() {
+    public MainForm() {
       InitializeComponent();
-    }
-
-    /// <summary>
-    ///   Creates a new singleton.
-    /// </summary>
-    public static MainForm Create() {
-      // check singleton
-      if (Singleton != null)
-        return Singleton;
-
-      // create singleton
-      Singleton = new MainForm();
-
-      // return
-      return Singleton;
     }
 
     /// <summary>
@@ -40,11 +25,6 @@ namespace Udpit {
     private void RestartApplication(object sender, EventArgs e) {
       Application.Restart();
     }
-
-    /// <summary>
-    ///   Main form singleton.
-    /// </summary>
-    public static MainForm Singleton { get; private set; }
 
   }
 
