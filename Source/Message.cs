@@ -24,6 +24,15 @@ namespace Udpit {
     public ushort FragmentCount { get; }
 
     /// <summary>
+    ///   The sorted list of fragments.
+    /// </summary>
+    /// <remarks>
+    ///   In the source this is a list of all fragments.
+    ///   In the destination this is a list of received and checked fragments.
+    /// </remarks>
+    public SortedList<ushort, byte[]> FragmentList { get; } = new SortedList<ushort, byte[]>();
+
+    /// <summary>
     ///   Message id.
     /// </summary>
     public byte[] Id { get; } = new byte[2];
@@ -37,15 +46,6 @@ namespace Udpit {
     ///   Remote's name.
     /// </summary>
     public string RemoteName { get; set; }
-
-    /// <summary>
-    ///   The sorted list of fragments.
-    /// </summary>
-    /// <remarks>
-    ///   In the source this is a list of all fragments.
-    ///   In the destination this is a list of received and checked fragments.
-    /// </remarks>
-    private List<byte[]> _fragmentList = new List<byte[]>();
 
   }
 
