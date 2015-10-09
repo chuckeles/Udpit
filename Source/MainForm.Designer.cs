@@ -50,28 +50,27 @@ namespace Udpit {
       this.applicationButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.restartButton,
             this.exitButton});
-      this.applicationButton.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.applicationButton.Name = "applicationButton";
       this.applicationButton.Size = new System.Drawing.Size(81, 22);
       this.applicationButton.Text = "Application";
-      this.applicationButton.ToolTipText = "main application menu";
+      this.applicationButton.ToolTipText = "Application menu";
       // 
       // restartButton
       // 
       this.restartButton.Name = "restartButton";
       this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-      this.restartButton.Size = new System.Drawing.Size(159, 22);
+      this.restartButton.Size = new System.Drawing.Size(152, 22);
       this.restartButton.Text = "Restart";
-      this.restartButton.ToolTipText = "restart the application";
+      this.restartButton.ToolTipText = "Restart the application";
       this.restartButton.Click += new System.EventHandler(this.RestartApplication);
       // 
       // exitButton
       // 
       this.exitButton.Name = "exitButton";
       this.exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-      this.exitButton.Size = new System.Drawing.Size(159, 22);
+      this.exitButton.Size = new System.Drawing.Size(152, 22);
       this.exitButton.Text = "Exit";
-      this.exitButton.ToolTipText = "exit the application";
+      this.exitButton.ToolTipText = "Exit the application";
       this.exitButton.Click += new System.EventHandler(this.ExitApplication);
       // 
       // MainForm
