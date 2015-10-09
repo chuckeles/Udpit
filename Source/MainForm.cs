@@ -43,15 +43,6 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Enables and initialized the message box.
-    /// </summary>
-    private void InitMessageBox() {
-      messageBox.Text = "";
-      messageBox.SelectionAlignment = HorizontalAlignment.Left;
-      messageBox.Enabled = true;
-    }
-
-    /// <summary>
     ///   Restarts the application.
     /// </summary>
     private void RestartApplication(object sender, EventArgs e) {
@@ -65,7 +56,7 @@ namespace Udpit {
       messageBox.Text = "";
       messageBox.SelectionAlignment = HorizontalAlignment.Center;
 
-      messageBox.AppendText("\n\n\n\n\n\nconfigure the application in the options");
+      messageBox.AppendText("\n\n\n\n\n\nConfigure the application in the options");
     }
 
     /// <summary>
