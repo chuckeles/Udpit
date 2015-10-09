@@ -41,9 +41,9 @@
       this.destinationLabel.AutoSize = true;
       this.destinationLabel.Location = new System.Drawing.Point(12, 50);
       this.destinationLabel.Name = "destinationLabel";
-      this.destinationLabel.Size = new System.Drawing.Size(58, 13);
+      this.destinationLabel.Size = new System.Drawing.Size(60, 13);
       this.destinationLabel.TabIndex = 0;
-      this.destinationLabel.Text = "destination";
+      this.destinationLabel.Text = "Destination";
       this.tooltip.SetToolTip(this.destinationLabel, "an IP address to send the messages to");
       // 
       // errorLabel
@@ -51,9 +51,9 @@
       this.errorLabel.AutoSize = true;
       this.errorLabel.Location = new System.Drawing.Point(12, 116);
       this.errorLabel.Name = "errorLabel";
-      this.errorLabel.Size = new System.Drawing.Size(54, 13);
+      this.errorLabel.Size = new System.Drawing.Size(57, 13);
       this.errorLabel.TabIndex = 2;
-      this.errorLabel.Text = "send error";
+      this.errorLabel.Text = "Send Error";
       this.tooltip.SetToolTip(this.errorLabel, "send error fragments (for testing)");
       // 
       // errorCheckbox
@@ -79,9 +79,9 @@
       this.fragmentLabel.AutoSize = true;
       this.fragmentLabel.Location = new System.Drawing.Point(12, 84);
       this.fragmentLabel.Name = "fragmentLabel";
-      this.fragmentLabel.Size = new System.Drawing.Size(47, 13);
+      this.fragmentLabel.Size = new System.Drawing.Size(50, 13);
       this.fragmentLabel.TabIndex = 5;
-      this.fragmentLabel.Text = "max size";
+      this.fragmentLabel.Text = "Max Size";
       this.tooltip.SetToolTip(this.fragmentLabel, "maximum size of a fragment");
       // 
       // fragmentBox
@@ -120,9 +120,9 @@
       this.nameLabel.AutoSize = true;
       this.nameLabel.Location = new System.Drawing.Point(12, 15);
       this.nameLabel.Name = "nameLabel";
-      this.nameLabel.Size = new System.Drawing.Size(33, 13);
+      this.nameLabel.Size = new System.Drawing.Size(35, 13);
       this.nameLabel.TabIndex = 7;
-      this.nameLabel.Text = "name";
+      this.nameLabel.Text = "Name";
       this.tooltip.SetToolTip(this.nameLabel, "your name");
       // 
       // OptionsForm
@@ -143,7 +143,7 @@
       this.MinimizeBox = false;
       this.Name = "OptionsForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-      this.Text = "options";
+      this.Text = "Options";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
       ((System.ComponentModel.ISupportInitialize)(this.fragmentBox)).EndInit();
       this.ResumeLayout(false);

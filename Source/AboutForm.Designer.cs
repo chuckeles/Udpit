@@ -52,7 +52,7 @@
       this.MinimizeBox = false;
       this.Name = "AboutForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-      this.Text = "about";
+      this.Text = "About";
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
       this.ResumeLayout(false);
 
