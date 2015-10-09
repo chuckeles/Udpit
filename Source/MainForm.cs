@@ -9,15 +9,7 @@ namespace Udpit {
   public partial class MainForm : Form {
 
     private MainForm() {
-      // initialize
       InitializeComponent();
-
-      // create forms
-      _aboutForm = new AboutForm();
-      _optionsForm = new OptionsForm();
-
-      // add message box text
-      SetMessageBoxText();
     }
 
     /// <summary>
@@ -50,45 +42,9 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Set up message box text when it is disabled.
-    /// </summary>
-    private void SetMessageBoxText() {
-      messageBox.Text = "";
-      messageBox.SelectionAlignment = HorizontalAlignment.Center;
-
-      messageBox.AppendText("\n\n\n\n\n\nConfigure the application in the options");
-    }
-
-    /// <summary>
-    ///   Shows the about form.
-    /// </summary>
-    private void ShowAbout(object sender, EventArgs e) {
-      if (!_aboutForm.Visible)
-        _aboutForm.Show(this);
-    }
-
-    /// <summary>
-    ///   Shows the options form.
-    /// </summary>
-    private void ShowOptions(object sender, EventArgs e) {
-      if (!_optionsForm.Visible)
-        _optionsForm.Show(this);
-    }
-
-    /// <summary>
     ///   Main form singleton.
     /// </summary>
     public static MainForm Singleton { get; private set; }
-
-    /// <summary>
-    ///   The about form.
-    /// </summary>
-    private readonly AboutForm _aboutForm;
-
-    /// <summary>
-    ///   The options form.
-    /// </summary>
-    private readonly OptionsForm _optionsForm;
 
   }
 
