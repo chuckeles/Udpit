@@ -9,6 +9,13 @@ namespace Udpit {
 
     private MessageCenter() {}
 
+    /// <summary>
+    ///   Add a new message which is in progress.
+    /// </summary>
+    public void AddMessage(Message message) {
+      _messages.Add(message.Id, message);
+    }
+
     public MessageCenter Create() {
       // check existing instance
       if (Singleton != null)
@@ -29,7 +36,7 @@ namespace Udpit {
     /// <summary>
     ///   The dictionary of messages in progress keyed by the id.
     /// </summary>
-    private Dictionary<byte[], Message> _messages = new Dictionary<byte[], Message>();
+    private readonly Dictionary<byte[], Message> _messages = new Dictionary<byte[], Message>();
 
   }
 
