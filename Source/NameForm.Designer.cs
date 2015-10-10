@@ -23,17 +23,20 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      this.components = new System.ComponentModel.Container();
       this.cancelButton = new System.Windows.Forms.Button();
       this.saveButton = new System.Windows.Forms.Button();
       this.nameBox = new System.Windows.Forms.TextBox();
       this.nameLabel = new System.Windows.Forms.Label();
+      this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+      ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
       this.SuspendLayout();
       // 
       // cancelButton
       // 
       this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.cancelButton.Location = new System.Drawing.Point(197, 123);
+      this.cancelButton.Location = new System.Drawing.Point(165, 73);
       this.cancelButton.Name = "cancelButton";
       this.cancelButton.Size = new System.Drawing.Size(75, 26);
       this.cancelButton.TabIndex = 1;
@@ -43,37 +46,45 @@
       // saveButton
       // 
       this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.saveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-      this.saveButton.Location = new System.Drawing.Point(116, 123);
+      this.saveButton.Location = new System.Drawing.Point(63, 73);
       this.saveButton.Name = "saveButton";
-      this.saveButton.Size = new System.Drawing.Size(75, 26);
+      this.saveButton.Size = new System.Drawing.Size(96, 26);
       this.saveButton.TabIndex = 0;
       this.saveButton.Text = "Save";
       this.saveButton.UseVisualStyleBackColor = true;
+      this.saveButton.Click += new System.EventHandler(this.SaveName);
       // 
       // nameBox
       // 
       this.nameBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.nameBox.Location = new System.Drawing.Point(53, 12);
+      this.nameBox.Location = new System.Drawing.Point(63, 29);
       this.nameBox.Name = "nameBox";
-      this.nameBox.Size = new System.Drawing.Size(219, 20);
+      this.nameBox.Size = new System.Drawing.Size(177, 20);
       this.nameBox.TabIndex = 2;
+      this.nameBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateName);
       // 
       // nameLabel
       // 
       this.nameLabel.AutoSize = true;
-      this.nameLabel.Location = new System.Drawing.Point(12, 15);
+      this.nameLabel.Location = new System.Drawing.Point(22, 32);
       this.nameLabel.Name = "nameLabel";
       this.nameLabel.Size = new System.Drawing.Size(35, 13);
       this.nameLabel.TabIndex = 3;
       this.nameLabel.Text = "Name";
       // 
+      // errorProvider
+      // 
+      this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+      this.errorProvider.ContainerControl = this;
+      // 
       // NameForm
       // 
+      this.AcceptButton = this.saveButton;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(284, 161);
+      this.CancelButton = this.cancelButton;
+      this.ClientSize = new System.Drawing.Size(284, 111);
       this.Controls.Add(this.nameLabel);
       this.Controls.Add(this.nameBox);
       this.Controls.Add(this.saveButton);
@@ -84,6 +95,7 @@
       this.Name = "NameForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Name";
+      ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -95,5 +107,6 @@
     private System.Windows.Forms.Button saveButton;
     private System.Windows.Forms.TextBox nameBox;
     private System.Windows.Forms.Label nameLabel;
+    private System.Windows.Forms.ErrorProvider errorProvider;
   }
 }

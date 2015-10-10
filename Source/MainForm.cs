@@ -30,8 +30,9 @@ namespace Udpit {
     /// Shows the name modal dialog.
     /// </summary>
     private void ShowNameForm(object sender, EventArgs e) {
-      // show the dialog
-      var result = new NameForm().ShowDialog(this);
+      var dialog = new NameForm();
+      dialog.ShowDialog(this);
+      dialog.Dispose();
     }
   }
 

@@ -8,7 +8,7 @@
     /// <summary>
     ///   User's name.
     /// </summary>
-    public static string Name { get; set; }
+    public static string Name { get; set; } = "Newbie";
 
   }
 
