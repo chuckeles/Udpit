@@ -10,13 +10,9 @@ namespace Udpit {
     private MessageCenter() {}
 
     /// <summary>
-    ///   Add a new message which is in progress.
+    ///   Create a singleton instance.
     /// </summary>
-    public void AddMessage(Message message) {
-      _messages.Add(message.Id, message);
-    }
-
-    public MessageCenter Create() {
+    public static MessageCenter Create() {
       // check existing instance
       if (Singleton != null)
         return Singleton;
@@ -31,7 +27,7 @@ namespace Udpit {
     /// <summary>
     ///   The singleton instance.
     /// </summary>
-    public MessageCenter Singleton { get; private set; }
+    public static MessageCenter Singleton { get; private set; }
 
     /// <summary>
     ///   The dictionary of messages in progress keyed by the id.

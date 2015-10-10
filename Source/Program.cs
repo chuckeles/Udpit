@@ -10,6 +10,9 @@ namespace Udpit {
     /// </summary>
     [STAThread]
     private static void Main() {
+      // create the message center
+      MessageCenter.Create();
+
       // start application
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
