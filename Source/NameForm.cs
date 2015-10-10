@@ -23,7 +23,7 @@ namespace Udpit {
       // check if the name is empty
       if (nameBox.Text == "") {
         // show an error
-        errorProvider.SetError(nameBox, "Name is empty");
+        errorProvider.SetError(nameBox, "The name is empty");
       }
       else {
         // the name is fine

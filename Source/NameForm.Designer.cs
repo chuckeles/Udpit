@@ -24,6 +24,7 @@
     /// </summary>
     private void InitializeComponent() {
       this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NameForm));
       this.cancelButton = new System.Windows.Forms.Button();
       this.saveButton = new System.Windows.Forms.Button();
       this.nameBox = new System.Windows.Forms.TextBox();
@@ -58,7 +59,7 @@
       // 
       this.nameBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.nameBox.Location = new System.Drawing.Point(63, 29);
+      this.nameBox.Location = new System.Drawing.Point(63, 21);
       this.nameBox.Name = "nameBox";
       this.nameBox.Size = new System.Drawing.Size(177, 20);
       this.nameBox.TabIndex = 2;
@@ -67,7 +68,7 @@
       // nameLabel
       // 
       this.nameLabel.AutoSize = true;
-      this.nameLabel.Location = new System.Drawing.Point(22, 32);
+      this.nameLabel.Location = new System.Drawing.Point(22, 24);
       this.nameLabel.Name = "nameLabel";
       this.nameLabel.Size = new System.Drawing.Size(35, 13);
       this.nameLabel.TabIndex = 3;
@@ -77,6 +78,7 @@
       // 
       this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
       this.errorProvider.ContainerControl = this;
+      this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
       // 
       // NameForm
       // 
