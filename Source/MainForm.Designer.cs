@@ -33,7 +33,6 @@ namespace Udpit {
       this.optionsButton = new System.Windows.Forms.ToolStripDropDownButton();
       this.nameButton = new System.Windows.Forms.ToolStripMenuItem();
       this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-      this.newMessageButton = new System.Windows.Forms.Button();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -93,22 +92,11 @@ namespace Udpit {
       this.nameButton.Text = "Name";
       this.nameButton.Click += new System.EventHandler(this.ShowNameForm);
       // 
-      // newMessageButton
-      // 
-      this.newMessageButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.newMessageButton.Location = new System.Drawing.Point(12, 423);
-      this.newMessageButton.Name = "newMessageButton";
-      this.newMessageButton.Size = new System.Drawing.Size(360, 26);
-      this.newMessageButton.TabIndex = 0;
-      this.newMessageButton.Text = "New Message";
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(384, 461);
-      this.Controls.Add(this.newMessageButton);
       this.Controls.Add(this.toolbar);
       this.MaximizeBox = false;
       this.MaximumSize = new System.Drawing.Size(600, 800);
@@ -131,7 +119,6 @@ namespace Udpit {
     private System.Windows.Forms.ToolStripMenuItem exitButton;
     private System.Windows.Forms.ToolStripMenuItem restartButton;
     private System.Windows.Forms.ToolTip tooltip;
-    private Button newMessageButton;
     private ToolStripDropDownButton optionsButton;
     private ToolStripMenuItem nameButton;
   }
