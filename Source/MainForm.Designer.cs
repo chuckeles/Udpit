@@ -30,10 +30,10 @@ namespace Udpit {
       this.applicationButton = new System.Windows.Forms.ToolStripDropDownButton();
       this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
-      this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-      this.newMessageButton = new System.Windows.Forms.Button();
       this.optionsButton = new System.Windows.Forms.ToolStripDropDownButton();
       this.nameButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+      this.newMessageButton = new System.Windows.Forms.Button();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -63,7 +63,7 @@ namespace Udpit {
       // 
       this.restartButton.Name = "restartButton";
       this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-      this.restartButton.Size = new System.Drawing.Size(152, 22);
+      this.restartButton.Size = new System.Drawing.Size(151, 22);
       this.restartButton.Text = "Restart";
       this.restartButton.ToolTipText = "Restart the application";
       this.restartButton.Click += new System.EventHandler(this.RestartApplication);
@@ -72,20 +72,10 @@ namespace Udpit {
       // 
       this.exitButton.Name = "exitButton";
       this.exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-      this.exitButton.Size = new System.Drawing.Size(152, 22);
+      this.exitButton.Size = new System.Drawing.Size(151, 22);
       this.exitButton.Text = "Exit";
       this.exitButton.ToolTipText = "Exit the application";
       this.exitButton.Click += new System.EventHandler(this.ExitApplication);
-      // 
-      // newMessageButton
-      // 
-      this.newMessageButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.newMessageButton.Location = new System.Drawing.Point(12, 423);
-      this.newMessageButton.Name = "newMessageButton";
-      this.newMessageButton.Size = new System.Drawing.Size(360, 26);
-      this.newMessageButton.TabIndex = 0;
-      this.newMessageButton.Text = "New Message";
       // 
       // optionsButton
       // 
@@ -99,8 +89,19 @@ namespace Udpit {
       // nameButton
       // 
       this.nameButton.Name = "nameButton";
-      this.nameButton.Size = new System.Drawing.Size(152, 22);
+      this.nameButton.Size = new System.Drawing.Size(106, 22);
       this.nameButton.Text = "Name";
+      this.nameButton.Click += new System.EventHandler(this.ShowNameForm);
+      // 
+      // newMessageButton
+      // 
+      this.newMessageButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.newMessageButton.Location = new System.Drawing.Point(12, 423);
+      this.newMessageButton.Name = "newMessageButton";
+      this.newMessageButton.Size = new System.Drawing.Size(360, 26);
+      this.newMessageButton.TabIndex = 0;
+      this.newMessageButton.Text = "New Message";
       // 
       // MainForm
       // 
@@ -114,6 +115,7 @@ namespace Udpit {
       this.MinimizeBox = false;
       this.MinimumSize = new System.Drawing.Size(300, 300);
       this.Name = "MainForm";
+      this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Udpit";
       this.toolbar.ResumeLayout(false);
