@@ -32,6 +32,8 @@ namespace Udpit {
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.tooltip = new System.Windows.Forms.ToolTip(this.components);
       this.newMessageButton = new System.Windows.Forms.Button();
+      this.optionsButton = new System.Windows.Forms.ToolStripDropDownButton();
+      this.nameButton = new System.Windows.Forms.ToolStripMenuItem();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -39,7 +41,8 @@ namespace Udpit {
       // 
       this.toolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.applicationButton});
+            this.applicationButton,
+            this.optionsButton});
       this.toolbar.Location = new System.Drawing.Point(0, 0);
       this.toolbar.Name = "toolbar";
       this.toolbar.Size = new System.Drawing.Size(384, 25);
@@ -84,6 +87,21 @@ namespace Udpit {
       this.newMessageButton.TabIndex = 0;
       this.newMessageButton.Text = "New Message";
       // 
+      // optionsButton
+      // 
+      this.optionsButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nameButton});
+      this.optionsButton.Name = "optionsButton";
+      this.optionsButton.Size = new System.Drawing.Size(62, 22);
+      this.optionsButton.Text = "Options";
+      this.optionsButton.ToolTipText = "Messaging Options";
+      // 
+      // nameButton
+      // 
+      this.nameButton.Name = "nameButton";
+      this.nameButton.Size = new System.Drawing.Size(152, 22);
+      this.nameButton.Text = "Name";
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,5 +130,7 @@ namespace Udpit {
     private System.Windows.Forms.ToolStripMenuItem restartButton;
     private System.Windows.Forms.ToolTip tooltip;
     private Button newMessageButton;
+    private ToolStripDropDownButton optionsButton;
+    private ToolStripMenuItem nameButton;
   }
 }
