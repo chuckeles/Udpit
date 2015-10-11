@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Udpit {
@@ -17,6 +18,20 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Save the name to the options.
+    /// </summary>
+    private void SaveName(object sender, EventArgs e) {
+      // check the name
+      if (nameBox.Text != "") {
+        // save
+        Options.Name = nameBox.Text;
+
+        // set dialog result
+        DialogResult = DialogResult.OK;
+      }
+    }
+
+    /// <summary>
     ///   Validates the name box and shows an error if it is empty.
     /// </summary>
     private void ValidateName(object sender, CancelEventArgs e) {
@@ -31,19 +46,6 @@ namespace Udpit {
       }
     }
 
-    /// <summary>
-    /// Save the name to the options.
-    /// </summary>
-    private void SaveName(object sender, System.EventArgs e) {
-      // check the name
-      if (nameBox.Text != "") {
-        // save
-        Options.Name = nameBox.Text;
-
-        // set dialog result
-        DialogResult = DialogResult.OK;
-      }
-    }
   }
 
 }

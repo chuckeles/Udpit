@@ -8,7 +8,6 @@ namespace Udpit {
     /// <summary>
     ///   The main entry point for the application.
     /// </summary>
-    [STAThread]
     private static void Main() {
       // create the message center
       MessageCenter.Create();
