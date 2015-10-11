@@ -27,11 +27,10 @@ namespace Udpit {
     private void InitializeComponent() {
       this.toolbar = new System.Windows.Forms.ToolStrip();
       this.applicationButton = new System.Windows.Forms.ToolStripDropDownButton();
-      this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
-      this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.optionsButton = new System.Windows.Forms.ToolStripMenuItem();
       this.applicationSeparator = new System.Windows.Forms.ToolStripSeparator();
-      this.nameButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.restartButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.messageButton = new System.Windows.Forms.ToolStripDropDownButton();
       this.newMessageButton = new System.Windows.Forms.ToolStripMenuItem();
       this.inProgressButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +62,19 @@ namespace Udpit {
       this.applicationButton.Text = "Application";
       this.applicationButton.ToolTipText = "Application menu";
       // 
+      // optionsButton
+      // 
+      this.optionsButton.Name = "optionsButton";
+      this.optionsButton.Size = new System.Drawing.Size(152, 22);
+      this.optionsButton.Text = "Options";
+      this.optionsButton.ToolTipText = "Show the options";
+      this.optionsButton.Click += new System.EventHandler(this.ShowOptionsForm);
+      // 
+      // applicationSeparator
+      // 
+      this.applicationSeparator.Name = "applicationSeparator";
+      this.applicationSeparator.Size = new System.Drawing.Size(149, 6);
+      // 
       // restartButton
       // 
       this.restartButton.Name = "restartButton";
@@ -81,28 +93,6 @@ namespace Udpit {
       this.exitButton.ToolTipText = "Exit the application";
       this.exitButton.Click += new System.EventHandler(this.ExitApplication);
       // 
-      // optionsButton
-      // 
-      this.optionsButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nameButton});
-      this.optionsButton.Name = "optionsButton";
-      this.optionsButton.Size = new System.Drawing.Size(152, 22);
-      this.optionsButton.Text = "Options";
-      this.optionsButton.ToolTipText = "Application options";
-      // 
-      // applicationSeparator
-      // 
-      this.applicationSeparator.Name = "applicationSeparator";
-      this.applicationSeparator.Size = new System.Drawing.Size(149, 6);
-      // 
-      // nameButton
-      // 
-      this.nameButton.Name = "nameButton";
-      this.nameButton.Size = new System.Drawing.Size(152, 22);
-      this.nameButton.Text = "Name";
-      this.nameButton.ToolTipText = "Change the name";
-      this.nameButton.Click += new System.EventHandler(this.ShowNameForm);
-      // 
       // messageButton
       // 
       this.messageButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -118,21 +108,21 @@ namespace Udpit {
       // 
       this.newMessageButton.Name = "newMessageButton";
       this.newMessageButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.newMessageButton.Size = new System.Drawing.Size(152, 22);
+      this.newMessageButton.Size = new System.Drawing.Size(141, 22);
       this.newMessageButton.Text = "New";
       this.newMessageButton.ToolTipText = "Create a new message";
       // 
       // inProgressButton
       // 
       this.inProgressButton.Name = "inProgressButton";
-      this.inProgressButton.Size = new System.Drawing.Size(152, 22);
+      this.inProgressButton.Size = new System.Drawing.Size(141, 22);
       this.inProgressButton.Text = "In Progress";
       this.inProgressButton.ToolTipText = "Show messages in progress";
       // 
       // archiveButton
       // 
       this.archiveButton.Name = "archiveButton";
-      this.archiveButton.Size = new System.Drawing.Size(152, 22);
+      this.archiveButton.Size = new System.Drawing.Size(141, 22);
       this.archiveButton.Text = "Archive";
       this.archiveButton.ToolTipText = "Show the archive";
       // 
@@ -164,7 +154,6 @@ namespace Udpit {
     private System.Windows.Forms.ToolStripMenuItem restartButton;
     private ToolStripMenuItem optionsButton;
     private ToolStripSeparator applicationSeparator;
-    private ToolStripMenuItem nameButton;
     private ToolStripDropDownButton messageButton;
     private ToolStripMenuItem newMessageButton;
     private ToolStripMenuItem inProgressButton;

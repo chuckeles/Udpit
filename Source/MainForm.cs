@@ -27,13 +27,14 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Shows the name modal dialog.
+    ///   Shows the options modal dialog.
     /// </summary>
-    private void ShowNameForm(object sender, EventArgs e) {
-      var dialog = new NameForm();
+    private void ShowOptionsForm(object sender, EventArgs e) {
+      var dialog = new OptionsForm();
       dialog.ShowDialog(this);
       dialog.Dispose();
     }
+
   }
 
 }

@@ -1,5 +1,5 @@
 ﻿namespace Udpit {
-  partial class NameForm {
+  partial class OptionsForm {
     /// <summary>
     /// Required designer variable.
     /// </summary>
@@ -24,7 +24,7 @@
     /// </summary>
     private void InitializeComponent() {
       this.components = new System.ComponentModel.Container();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NameForm));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
       this.cancelButton = new System.Windows.Forms.Button();
       this.saveButton = new System.Windows.Forms.Button();
       this.nameBox = new System.Windows.Forms.TextBox();
@@ -80,7 +80,7 @@
       this.errorProvider.ContainerControl = this;
       this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
       // 
-      // NameForm
+      // OptionsForm
       // 
       this.AcceptButton = this.saveButton;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,9 +94,9 @@
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;
-      this.Name = "NameForm";
+      this.Name = "OptionsForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Name";
+      this.Text = "Options";
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();

@@ -6,9 +6,9 @@ namespace Udpit {
   /// <summary>
   ///   Allows to set the name.
   /// </summary>
-  public partial class NameForm : Form {
+  public partial class OptionsForm : Form {
 
-    public NameForm() {
+    public OptionsForm() {
       // initialize
       InitializeComponent();
 
