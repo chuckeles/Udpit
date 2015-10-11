@@ -18,6 +18,15 @@ namespace Udpit {
       Id[1] = (byte) DateTime.Now.Minute;
     }
 
+    public Message(ushort fragmentCount, byte[] id) {
+      // set fragment count
+      FragmentCount = fragmentCount;
+
+      // set the id
+      Id[0] = id[0];
+      Id[1] = id[1];
+    }
+
     /// <summary>
     ///   Number of fragments.
     /// </summary>
