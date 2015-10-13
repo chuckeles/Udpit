@@ -39,7 +39,7 @@ namespace Udpit {
     ///   In the source this is a list of all fragments.
     ///   In the destination this is a list of received and checked fragments.
     /// </remarks>
-    public SortedList<ushort, byte[]> FragmentList { get; } = new SortedList<ushort, byte[]>();
+    public SortedList<ushort, byte[]> FragmentList { get; set; } = new SortedList<ushort, byte[]>();
 
     /// <summary>
     ///   Message id.

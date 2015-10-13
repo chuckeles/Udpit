@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Fragmenter.cs" />
     <Compile Include="Source\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

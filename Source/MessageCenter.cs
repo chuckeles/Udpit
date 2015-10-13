@@ -62,9 +62,10 @@ namespace Udpit {
     /// </summary>
     /// <param name="remoteEndPoint">Where to send the message</param>
     /// <param name="messageString">String to send</param>
-    /// <param name="maxFragmentSize">Maximum size of one fragment</param>
+    /// <param name="maxFragmentSize">Maximum size of one fragment in bytes</param>
     public void CreateMessage(IPEndPoint remoteEndPoint, string messageString, ushort maxFragmentSize) {
-      throw new NotImplementedException();
+      // ask for a fragmented message
+      var message = Fragmenter.CreateMessage(remoteEndPoint, messageString, maxFragmentSize);
     }
 
     /// <summary>
