@@ -18,13 +18,15 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Save the name to the options.
+    ///   Save the options.
     /// </summary>
-    private void SaveName(object sender, EventArgs e) {
-      // check the name
-      if (nameBox.Text != "") {
+    private void Save(object sender, EventArgs e) {
+      // check the options
+      if (nameBox.Text != "" && sendPortBox.Value != receivePortBox.Value) {
         // save
         Options.Name = nameBox.Text;
+        Options.SendPort = (int) sendPortBox.Value;
+        Options.ReceivePort = (int) receivePortBox.Value;
 
         // set dialog result
         DialogResult = DialogResult.OK;
@@ -46,6 +48,35 @@ namespace Udpit {
       }
     }
 
+    /// <summary>
+    ///   Validates the send port box and shows an error.
+    /// </summary>
+    private void ValidateSendPort(object sender, CancelEventArgs e) {
+      // check against the other port
+      if (sendPortBox.Value == receivePortBox.Value) {
+        // show an error
+        errorProvider.SetError(sendPortBox, "The ports can't be the same");
+      }
+      else {
+        // the port is fine
+        errorProvider.SetError(sendPortBox, "");
+      }
+    }
+
+    /// <summary>
+    ///   Validates the receive port box and shows an error.
+    /// </summary>
+    private void ValidateReceivePort(object sender, CancelEventArgs e) {
+      // check against the other port
+      if (receivePortBox.Value == sendPortBox.Value) {
+        // show an error
+        errorProvider.SetError(receivePortBox, "The ports can't be the same");
+      }
+      else {
+        // the port is fine
+        errorProvider.SetError(receivePortBox, "");
+      }
+    }
   }
 
 }

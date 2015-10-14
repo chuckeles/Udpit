@@ -13,12 +13,12 @@
     /// <summary>
     ///   Port on which to listen for data.
     /// </summary>
-    public static int ReceivePort { get; set; } = 10695;
+    public static int ReceivePort { get; set; } = 50695;
 
     /// <summary>
     ///   Port on which to send data.
     /// </summary>
-    public static int SendPort { get; set; } = 10694;
+    public static int SendPort { get; set; } = 50694;
 
   }
 
