@@ -68,7 +68,9 @@ namespace Udpit {
       var message = Fragmenter.CreateMessage(remoteEndPoint, messageString, maxFragmentSize);
 
       // add it to the dictionary
-      _messages.Add(message.Id, message);
+      lock (_messages) {
+        _messages.Add(message.Id, message);
+      }
 
       // begin transmission
       Sender.Singleton.TransmitMessage(message);

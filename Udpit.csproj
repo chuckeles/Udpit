@@ -64,15 +64,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Fragmenter.cs" />
+    <Compile Include="Source\Fragment\Fragmenter.cs" />
+    <Compile Include="Source\Fragment\FragmentType.cs" />
     <Compile Include="Source\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\Message.cs" />
+    <Compile Include="Source\Message\Message.cs" />
     <Compile Include="Source\MessageCenter.cs" />
+    <Compile Include="Source\Message\MessageOrigin.cs" />
+    <Compile Include="Source\Message\MessageStatus.cs" />
     <Compile Include="Source\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +130,7 @@
   <ItemGroup>
     <Content Include="Assets\Error.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

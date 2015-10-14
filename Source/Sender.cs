@@ -73,8 +73,15 @@ namespace Udpit {
       // fire the event
       OnMessageSendingStart?.Invoke(message);
 
+      // update message status
+      lock (message) {
+        message.Status = MessageStatus.Handshaking;
+      }
+
       // send the fragment
-      _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+      lock (_udpClient) {
+        _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+      }
     }
 
     /// <summary>
