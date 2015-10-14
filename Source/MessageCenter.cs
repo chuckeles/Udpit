@@ -58,7 +58,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Create a new message that needs to be send.
+    ///   Create a new message that needs to be send. Called by the UI.
     /// </summary>
     /// <param name="remoteEndPoint">Where to send the message</param>
     /// <param name="messageString">String to send</param>
@@ -66,6 +66,12 @@ namespace Udpit {
     public void CreateMessage(IPEndPoint remoteEndPoint, string messageString, ushort maxFragmentSize) {
       // ask for a fragmented message
       var message = Fragmenter.CreateMessage(remoteEndPoint, messageString, maxFragmentSize);
+
+      // add it to the dictionary
+      _messages.Add(message.Id, message);
+
+      // begin transmission
+      Sender.Singleton.TransmitMessage(message);
     }
 
     /// <summary>

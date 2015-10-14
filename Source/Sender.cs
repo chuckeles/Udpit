@@ -1,4 +1,7 @@
-﻿namespace Udpit {
+﻿using System.Net.Sockets;
+using System.Threading.Tasks;
+
+namespace Udpit {
 
   /// <summary>
   ///   Sends messages. Lets others know via events.
@@ -50,9 +53,39 @@
     }
 
     /// <summary>
+    ///   Begin the transmission procedure.
+    /// </summary>
+    public void TransmitMessage(Message message) {
+      // create a task
+      Task.Run(() => {
+        // initialize handshake
+        SendPrepareFragment(message);
+      });
+    }
+
+    /// <summary>
+    ///   Sends a prepare fragment for a message.
+    /// </summary>
+    private void SendPrepareFragment(Message message) {
+      // ask for a prepare fragment
+      var fragment = Fragmenter.GetPrepareFragment(message);
+
+      // fire the event
+      OnMessageSendingStart?.Invoke(message);
+
+      // send the fragment
+      _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+    }
+
+    /// <summary>
     ///   The singleton instance.
     /// </summary>
     public static Sender Singleton { get; private set; }
+
+    /// <summary>
+    ///   The UDP client that is used to send data.
+    /// </summary>
+    private readonly UdpClient _udpClient = new UdpClient(Options.SendPort);
 
   }
 

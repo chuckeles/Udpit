@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -54,6 +55,29 @@ namespace Udpit {
 
       // return the message
       return message;
+    }
+
+    /// <summary>
+    /// Make a prepare fragment.
+    /// </summary>
+    public static byte[] GetPrepareFragment(Message message) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.Prepare);
+
+      // add the id
+      data.AddRange(message.Id);
+
+      // add fragment count
+      data.AddRange(BitConverter.GetBytes(message.FragmentCount));
+
+      // add name
+      data.AddRange(Encoding.ASCII.GetBytes(Options.Name));
+      
+      // return data
+      return data.ToArray();
     }
 
   }
