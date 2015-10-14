@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Udpit {
+﻿namespace Udpit {
 
   /// <summary>
   ///   Sends messages. Lets others know via events.
@@ -39,7 +37,7 @@ namespace Udpit {
     /// <summary>
     ///   Creates the singleton instance.
     /// </summary>
-    public Sender Create() {
+    public static Sender Create() {
       // check instance
       if (Singleton != null)
         return Singleton;
@@ -49,13 +47,6 @@ namespace Udpit {
 
       // return it
       return Singleton;
-    }
-
-    /// <summary>
-    ///   Transmit a message to its destination.
-    /// </summary>
-    public void SendMessage(Message message) {
-      throw new NotImplementedException();
     }
 
     /// <summary>

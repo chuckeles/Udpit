@@ -9,7 +9,9 @@ namespace Udpit {
     ///   The main entry point for the application.
     /// </summary>
     private static void Main() {
-      // create the message center
+      // create the singletons
+      Receiver.Create();
+      Sender.Create();
       MessageCenter.Create();
 
       // start application
