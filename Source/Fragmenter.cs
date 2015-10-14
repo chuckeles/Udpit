@@ -20,9 +20,6 @@ namespace Udpit {
       // convert message string to bytes
       var messageStringBytes = Encoding.ASCII.GetBytes(messageString);
 
-      // header for a data fragment is 5 bytes, subtract that
-      maxFragmentSize -= 5;
-
       // create a sorted list of fragments
       var fragmentList = new SortedList<ushort, byte[]>();
 
