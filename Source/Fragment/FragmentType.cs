@@ -1,9 +1,9 @@
 ﻿namespace Udpit {
 
   /// <summary>
-  /// Type of fragment.
+  ///   Type of fragment.
   /// </summary>
-  enum FragmentType {
+  internal enum FragmentType {
 
     Prepare = 0,
     Prepared = 1,

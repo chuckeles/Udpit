@@ -58,7 +58,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Make a prepare fragment.
+    ///   Make a prepare fragment.
     /// </summary>
     public static byte[] GetPrepareFragment(Message message) {
       // the resulting array of bytes
@@ -75,7 +75,7 @@ namespace Udpit {
 
       // add name
       data.AddRange(Encoding.ASCII.GetBytes(Options.Name));
-      
+
       // return data
       return data.ToArray();
     }

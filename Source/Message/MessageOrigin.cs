@@ -6,12 +6,12 @@
   internal enum MessageOrigin {
 
     /// <summary>
-    /// The message was created locally.
+    ///   The message was created locally.
     /// </summary>
     Local,
 
     /// <summary>
-    /// The message was received from a remote.
+    ///   The message was received from a remote.
     /// </summary>
     Remote
 
