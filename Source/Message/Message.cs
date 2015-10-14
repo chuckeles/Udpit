@@ -9,18 +9,24 @@ namespace Udpit {
   /// </summary>
   internal class Message {
 
-    public Message(ushort fragmentCount) {
+    public Message(ushort fragmentCount, MessageOrigin origin = MessageOrigin.Local) {
       // set fragment count
       FragmentCount = fragmentCount;
+
+      // set origin
+      Origin = origin;
 
       // generate an id
       Id[0] = (byte) DateTime.Now.Second;
       Id[1] = (byte) DateTime.Now.Minute;
     }
 
-    public Message(ushort fragmentCount, byte[] id) {
+    public Message(ushort fragmentCount, byte[] id, MessageOrigin origin = MessageOrigin.Remote) {
       // set fragment count
       FragmentCount = fragmentCount;
+
+      // set origin
+      Origin = origin;
 
       // set the id
       Id[0] = id[0];
@@ -47,6 +53,11 @@ namespace Udpit {
     public byte[] Id { get; } = new byte[2];
 
     /// <summary>
+    ///   The origin of the message.
+    /// </summary>
+    public MessageOrigin Origin { get; }
+
+    /// <summary>
     ///   Remote's ip and port.
     /// </summary>
     public IPEndPoint RemoteEndPoint { get; set; }
@@ -55,6 +66,11 @@ namespace Udpit {
     ///   Remote's name.
     /// </summary>
     public string RemoteName { get; set; }
+
+    /// <summary>
+    ///   The current status of the message.
+    /// </summary>
+    public MessageStatus Status = MessageStatus.Created;
 
   }
 
