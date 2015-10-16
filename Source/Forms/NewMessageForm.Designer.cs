@@ -44,7 +44,7 @@
       this.destinationAddressLabel.Location = new System.Drawing.Point(50, 15);
       this.destinationAddressLabel.Name = "destinationAddressLabel";
       this.destinationAddressLabel.Size = new System.Drawing.Size(100, 13);
-      this.destinationAddressLabel.TabIndex = 0;
+      this.destinationAddressLabel.TabIndex = 8;
       this.destinationAddressLabel.Text = "Destination address";
       // 
       // destinationPortLabel
@@ -53,7 +53,7 @@
       this.destinationPortLabel.Location = new System.Drawing.Point(69, 40);
       this.destinationPortLabel.Name = "destinationPortLabel";
       this.destinationPortLabel.Size = new System.Drawing.Size(81, 13);
-      this.destinationPortLabel.TabIndex = 0;
+      this.destinationPortLabel.TabIndex = 9;
       this.destinationPortLabel.Text = "Destination port";
       // 
       // maxSizeLabel
@@ -62,7 +62,7 @@
       this.maxSizeLabel.Location = new System.Drawing.Point(34, 66);
       this.maxSizeLabel.Name = "maxSizeLabel";
       this.maxSizeLabel.Size = new System.Drawing.Size(116, 13);
-      this.maxSizeLabel.TabIndex = 0;
+      this.maxSizeLabel.TabIndex = 10;
       this.maxSizeLabel.Text = "Maximum fragment size";
       // 
       // destinationPortBox
@@ -80,7 +80,7 @@
             0});
       this.destinationPortBox.Name = "destinationPortBox";
       this.destinationPortBox.Size = new System.Drawing.Size(150, 20);
-      this.destinationPortBox.TabIndex = 2;
+      this.destinationPortBox.TabIndex = 1;
       this.destinationPortBox.Value = new decimal(new int[] {
             50695,
             0,
@@ -127,7 +127,7 @@
       this.cancelButton.Location = new System.Drawing.Point(237, 326);
       this.cancelButton.Name = "cancelButton";
       this.cancelButton.Size = new System.Drawing.Size(69, 23);
-      this.cancelButton.TabIndex = 4;
+      this.cancelButton.TabIndex = 5;
       this.cancelButton.Text = "Cancel";
       this.cancelButton.UseVisualStyleBackColor = true;
       // 
@@ -147,7 +147,7 @@
       this.fileButton.Location = new System.Drawing.Point(12, 282);
       this.fileButton.Name = "fileButton";
       this.fileButton.Size = new System.Drawing.Size(75, 23);
-      this.fileButton.TabIndex = 5;
+      this.fileButton.TabIndex = 6;
       this.fileButton.Text = "Choose File";
       this.fileButton.UseVisualStyleBackColor = true;
       // 
@@ -157,7 +157,7 @@
       this.removeFileButton.Location = new System.Drawing.Point(93, 282);
       this.removeFileButton.Name = "removeFileButton";
       this.removeFileButton.Size = new System.Drawing.Size(57, 23);
-      this.removeFileButton.TabIndex = 5;
+      this.removeFileButton.TabIndex = 7;
       this.removeFileButton.Text = "Remove";
       this.removeFileButton.UseVisualStyleBackColor = true;
       // 
@@ -166,7 +166,7 @@
       this.destinationAddressBox.Location = new System.Drawing.Point(156, 12);
       this.destinationAddressBox.Name = "destinationAddressBox";
       this.destinationAddressBox.Size = new System.Drawing.Size(150, 20);
-      this.destinationAddressBox.TabIndex = 6;
+      this.destinationAddressBox.TabIndex = 0;
       // 
       // NewMessageForm
       // 
