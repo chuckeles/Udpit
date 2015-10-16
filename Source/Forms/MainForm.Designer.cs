@@ -33,8 +33,10 @@ namespace Udpit {
       this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this.messageButton = new System.Windows.Forms.ToolStripDropDownButton();
       this.newMessageButton = new System.Windows.Forms.ToolStripMenuItem();
-      this.inProgressButton = new System.Windows.Forms.ToolStripMenuItem();
-      this.archiveButton = new System.Windows.Forms.ToolStripMenuItem();
+      this.messageList = new System.Windows.Forms.ListView();
+      this.idColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.stateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.fromColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -65,7 +67,7 @@ namespace Udpit {
       // optionsButton
       // 
       this.optionsButton.Name = "optionsButton";
-      this.optionsButton.Size = new System.Drawing.Size(152, 22);
+      this.optionsButton.Size = new System.Drawing.Size(151, 22);
       this.optionsButton.Text = "Options";
       this.optionsButton.ToolTipText = "Show the options";
       this.optionsButton.Click += new System.EventHandler(this.ShowOptionsForm);
@@ -73,13 +75,13 @@ namespace Udpit {
       // applicationSeparator
       // 
       this.applicationSeparator.Name = "applicationSeparator";
-      this.applicationSeparator.Size = new System.Drawing.Size(149, 6);
+      this.applicationSeparator.Size = new System.Drawing.Size(148, 6);
       // 
       // restartButton
       // 
       this.restartButton.Name = "restartButton";
       this.restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-      this.restartButton.Size = new System.Drawing.Size(152, 22);
+      this.restartButton.Size = new System.Drawing.Size(151, 22);
       this.restartButton.Text = "Restart";
       this.restartButton.ToolTipText = "Restart the application";
       this.restartButton.Click += new System.EventHandler(this.RestartApplication);
@@ -88,7 +90,7 @@ namespace Udpit {
       // 
       this.exitButton.Name = "exitButton";
       this.exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-      this.exitButton.Size = new System.Drawing.Size(152, 22);
+      this.exitButton.Size = new System.Drawing.Size(151, 22);
       this.exitButton.Text = "Exit";
       this.exitButton.ToolTipText = "Exit the application";
       this.exitButton.Click += new System.EventHandler(this.ExitApplication);
@@ -96,9 +98,7 @@ namespace Udpit {
       // messageButton
       // 
       this.messageButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newMessageButton,
-            this.inProgressButton,
-            this.archiveButton});
+            this.newMessageButton});
       this.messageButton.Name = "messageButton";
       this.messageButton.Size = new System.Drawing.Size(71, 22);
       this.messageButton.Text = "Messages";
@@ -108,29 +108,43 @@ namespace Udpit {
       // 
       this.newMessageButton.Name = "newMessageButton";
       this.newMessageButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.newMessageButton.Size = new System.Drawing.Size(141, 22);
+      this.newMessageButton.Size = new System.Drawing.Size(152, 22);
       this.newMessageButton.Text = "New";
       this.newMessageButton.ToolTipText = "Create a new message";
       // 
-      // inProgressButton
+      // messageList
       // 
-      this.inProgressButton.Name = "inProgressButton";
-      this.inProgressButton.Size = new System.Drawing.Size(141, 22);
-      this.inProgressButton.Text = "In Progress";
-      this.inProgressButton.ToolTipText = "Show messages in progress";
+      this.messageList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.idColumn,
+            this.fromColumn,
+            this.stateColumn});
+      this.messageList.Location = new System.Drawing.Point(12, 28);
+      this.messageList.Name = "messageList";
+      this.messageList.Size = new System.Drawing.Size(360, 421);
+      this.messageList.TabIndex = 4;
+      this.messageList.UseCompatibleStateImageBehavior = false;
+      this.messageList.View = System.Windows.Forms.View.Details;
       // 
-      // archiveButton
+      // idColumn
       // 
-      this.archiveButton.Name = "archiveButton";
-      this.archiveButton.Size = new System.Drawing.Size(141, 22);
-      this.archiveButton.Text = "Archive";
-      this.archiveButton.ToolTipText = "Show the archive";
+      this.idColumn.Text = "ID";
+      this.idColumn.Width = 82;
+      // 
+      // stateColumn
+      // 
+      this.stateColumn.Text = "State";
+      this.stateColumn.Width = 156;
+      // 
+      // fromColumn
+      // 
+      this.fromColumn.Text = "From";
       // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(384, 461);
+      this.Controls.Add(this.messageList);
       this.Controls.Add(this.toolbar);
       this.MaximizeBox = false;
       this.MaximumSize = new System.Drawing.Size(600, 800);
@@ -156,7 +170,9 @@ namespace Udpit {
     private ToolStripSeparator applicationSeparator;
     private ToolStripDropDownButton messageButton;
     private ToolStripMenuItem newMessageButton;
-    private ToolStripMenuItem inProgressButton;
-    private ToolStripMenuItem archiveButton;
+    private ListView messageList;
+    private ColumnHeader idColumn;
+    private ColumnHeader stateColumn;
+    private ColumnHeader fromColumn;
   }
 }
