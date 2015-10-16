@@ -49,7 +49,7 @@ namespace Udpit {
       this.toolbar.Location = new System.Drawing.Point(0, 0);
       this.toolbar.Name = "toolbar";
       this.toolbar.Size = new System.Drawing.Size(384, 25);
-      this.toolbar.TabIndex = 3;
+      this.toolbar.TabIndex = 0;
       this.toolbar.Text = "toolbar";
       // 
       // applicationButton
@@ -114,6 +114,9 @@ namespace Udpit {
       // 
       // messageList
       // 
+      this.messageList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.messageList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.idColumn,
             this.fromColumn,
@@ -121,7 +124,7 @@ namespace Udpit {
       this.messageList.Location = new System.Drawing.Point(12, 28);
       this.messageList.Name = "messageList";
       this.messageList.Size = new System.Drawing.Size(360, 421);
-      this.messageList.TabIndex = 4;
+      this.messageList.TabIndex = 1;
       this.messageList.UseCompatibleStateImageBehavior = false;
       this.messageList.View = System.Windows.Forms.View.Details;
       // 
@@ -138,6 +141,7 @@ namespace Udpit {
       // fromColumn
       // 
       this.fromColumn.Text = "From";
+      this.fromColumn.Width = 109;
       // 
       // MainForm
       // 
