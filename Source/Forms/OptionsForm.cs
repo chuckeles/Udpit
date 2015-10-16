@@ -49,6 +49,21 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Validates the receive port box and shows an error.
+    /// </summary>
+    private void ValidateReceivePort(object sender, CancelEventArgs e) {
+      // check against the other port
+      if (receivePortBox.Value == sendPortBox.Value) {
+        // show an error
+        errorProvider.SetError(receivePortBox, "The ports can't be the same");
+      }
+      else {
+        // the port is fine
+        errorProvider.SetError(receivePortBox, "");
+      }
+    }
+
+    /// <summary>
     ///   Validates the send port box and shows an error.
     /// </summary>
     private void ValidateSendPort(object sender, CancelEventArgs e) {
@@ -63,20 +78,6 @@ namespace Udpit {
       }
     }
 
-    /// <summary>
-    ///   Validates the receive port box and shows an error.
-    /// </summary>
-    private void ValidateReceivePort(object sender, CancelEventArgs e) {
-      // check against the other port
-      if (receivePortBox.Value == sendPortBox.Value) {
-        // show an error
-        errorProvider.SetError(receivePortBox, "The ports can't be the same");
-      }
-      else {
-        // the port is fine
-        errorProvider.SetError(receivePortBox, "");
-      }
-    }
   }
 
 }
