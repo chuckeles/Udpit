@@ -34,6 +34,7 @@
       this.receivePortBox = new System.Windows.Forms.NumericUpDown();
       this.sendPortLabel = new System.Windows.Forms.Label();
       this.receivePortLabel = new System.Windows.Forms.Label();
+      this.toolTip = new System.Windows.Forms.ToolTip(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.sendPortBox)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.receivePortBox)).BeginInit();
@@ -46,7 +47,7 @@
       this.cancelButton.Location = new System.Drawing.Point(215, 223);
       this.cancelButton.Name = "cancelButton";
       this.cancelButton.Size = new System.Drawing.Size(75, 26);
-      this.cancelButton.TabIndex = 1;
+      this.cancelButton.TabIndex = 4;
       this.cancelButton.Text = "Cancel";
       this.cancelButton.UseVisualStyleBackColor = true;
       // 
@@ -56,7 +57,7 @@
       this.saveButton.Location = new System.Drawing.Point(113, 223);
       this.saveButton.Name = "saveButton";
       this.saveButton.Size = new System.Drawing.Size(96, 26);
-      this.saveButton.TabIndex = 0;
+      this.saveButton.TabIndex = 3;
       this.saveButton.Text = "Save";
       this.saveButton.UseVisualStyleBackColor = true;
       this.saveButton.Click += new System.EventHandler(this.Save);
@@ -68,7 +69,7 @@
       this.nameBox.Location = new System.Drawing.Point(113, 21);
       this.nameBox.Name = "nameBox";
       this.nameBox.Size = new System.Drawing.Size(177, 20);
-      this.nameBox.TabIndex = 2;
+      this.nameBox.TabIndex = 0;
       this.nameBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateName);
       // 
       // nameLabel
@@ -77,8 +78,9 @@
       this.nameLabel.Location = new System.Drawing.Point(72, 24);
       this.nameLabel.Name = "nameLabel";
       this.nameLabel.Size = new System.Drawing.Size(35, 13);
-      this.nameLabel.TabIndex = 3;
+      this.nameLabel.TabIndex = 5;
       this.nameLabel.Text = "Name";
+      this.toolTip.SetToolTip(this.nameLabel, "Your name");
       // 
       // errorProvider
       // 
@@ -103,7 +105,7 @@
             0});
       this.sendPortBox.Name = "sendPortBox";
       this.sendPortBox.Size = new System.Drawing.Size(177, 20);
-      this.sendPortBox.TabIndex = 4;
+      this.sendPortBox.TabIndex = 1;
       this.sendPortBox.Value = new decimal(new int[] {
             50694,
             0,
@@ -128,7 +130,7 @@
             0});
       this.receivePortBox.Name = "receivePortBox";
       this.receivePortBox.Size = new System.Drawing.Size(177, 20);
-      this.receivePortBox.TabIndex = 4;
+      this.receivePortBox.TabIndex = 2;
       this.receivePortBox.Value = new decimal(new int[] {
             50695,
             0,
@@ -142,8 +144,9 @@
       this.sendPortLabel.Location = new System.Drawing.Point(53, 49);
       this.sendPortLabel.Name = "sendPortLabel";
       this.sendPortLabel.Size = new System.Drawing.Size(54, 13);
-      this.sendPortLabel.TabIndex = 3;
+      this.sendPortLabel.TabIndex = 6;
       this.sendPortLabel.Text = "Send Port";
+      this.toolTip.SetToolTip(this.sendPortLabel, "Port on which to send fragments");
       // 
       // receivePortLabel
       // 
@@ -151,8 +154,9 @@
       this.receivePortLabel.Location = new System.Drawing.Point(38, 75);
       this.receivePortLabel.Name = "receivePortLabel";
       this.receivePortLabel.Size = new System.Drawing.Size(69, 13);
-      this.receivePortLabel.TabIndex = 3;
+      this.receivePortLabel.TabIndex = 7;
       this.receivePortLabel.Text = "Receive Port";
+      this.toolTip.SetToolTip(this.receivePortLabel, "Port on which to listen for incoming fragments");
       // 
       // OptionsForm
       // 
@@ -194,5 +198,6 @@
     private System.Windows.Forms.NumericUpDown receivePortBox;
     private System.Windows.Forms.Label sendPortLabel;
     private System.Windows.Forms.Label receivePortLabel;
+    private System.Windows.Forms.ToolTip toolTip;
   }
 }
