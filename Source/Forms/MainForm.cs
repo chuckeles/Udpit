@@ -27,12 +27,10 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Shows the options modal dialog.
+    ///   Shows the message form.
     /// </summary>
-    private void ShowOptionsForm(object sender, EventArgs e) {
-      var dialog = new OptionsForm();
-      dialog.ShowDialog(this);
-      dialog.Dispose();
+    private void ShowMessageForm(object sender, EventArgs e) {
+      new MessageForm().Show(this);
     }
 
     /// <summary>
@@ -40,6 +38,15 @@ namespace Udpit {
     /// </summary>
     private void ShowNewMessageForm(object sender, EventArgs e) {
       var dialog = new NewMessageForm();
+      dialog.ShowDialog(this);
+      dialog.Dispose();
+    }
+
+    /// <summary>
+    ///   Shows the options modal dialog.
+    /// </summary>
+    private void ShowOptionsForm(object sender, EventArgs e) {
+      var dialog = new OptionsForm();
       dialog.ShowDialog(this);
       dialog.Dispose();
     }
