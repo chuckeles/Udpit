@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Forms\NewMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Forms\NewMessageForm.Designer.cs">
+      <DependentUpon>NewMessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Source\Fragment\Fragmenter.cs" />
     <Compile Include="Source\Fragment\FragmentType.cs" />
     <Compile Include="Source\Forms\MainForm.cs">
@@ -99,6 +105,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Source\Forms\NewMessageForm.resx">
+      <DependentUpon>NewMessageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
