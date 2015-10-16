@@ -26,7 +26,6 @@
       this.destinationAddressLabel = new System.Windows.Forms.Label();
       this.destinationPortLabel = new System.Windows.Forms.Label();
       this.maxSizeLabel = new System.Windows.Forms.Label();
-      this.destinationAddressBox = new System.Windows.Forms.MaskedTextBox();
       this.destinationPortBox = new System.Windows.Forms.NumericUpDown();
       this.maxSizeBox = new System.Windows.Forms.NumericUpDown();
       this.messageBox = new System.Windows.Forms.TextBox();
@@ -34,6 +33,7 @@
       this.createButton = new System.Windows.Forms.Button();
       this.fileButton = new System.Windows.Forms.Button();
       this.removeFileButton = new System.Windows.Forms.Button();
+      this.destinationAddressBox = new System.Windows.Forms.TextBox();
       ((System.ComponentModel.ISupportInitialize)(this.destinationPortBox)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.maxSizeBox)).BeginInit();
       this.SuspendLayout();
@@ -64,15 +64,6 @@
       this.maxSizeLabel.Size = new System.Drawing.Size(116, 13);
       this.maxSizeLabel.TabIndex = 0;
       this.maxSizeLabel.Text = "Maximum fragment size";
-      // 
-      // destinationAddressBox
-      // 
-      this.destinationAddressBox.HidePromptOnLeave = true;
-      this.destinationAddressBox.Location = new System.Drawing.Point(156, 12);
-      this.destinationAddressBox.Mask = "990.990.990.990";
-      this.destinationAddressBox.Name = "destinationAddressBox";
-      this.destinationAddressBox.Size = new System.Drawing.Size(150, 20);
-      this.destinationAddressBox.TabIndex = 1;
       // 
       // destinationPortBox
       // 
@@ -170,11 +161,19 @@
       this.removeFileButton.Text = "Remove";
       this.removeFileButton.UseVisualStyleBackColor = true;
       // 
+      // destinationAddressBox
+      // 
+      this.destinationAddressBox.Location = new System.Drawing.Point(156, 12);
+      this.destinationAddressBox.Name = "destinationAddressBox";
+      this.destinationAddressBox.Size = new System.Drawing.Size(150, 20);
+      this.destinationAddressBox.TabIndex = 6;
+      // 
       // NewMessageForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(334, 361);
+      this.Controls.Add(this.destinationAddressBox);
       this.Controls.Add(this.removeFileButton);
       this.Controls.Add(this.fileButton);
       this.Controls.Add(this.createButton);
@@ -182,7 +181,6 @@
       this.Controls.Add(this.messageBox);
       this.Controls.Add(this.maxSizeBox);
       this.Controls.Add(this.destinationPortBox);
-      this.Controls.Add(this.destinationAddressBox);
       this.Controls.Add(this.maxSizeLabel);
       this.Controls.Add(this.destinationPortLabel);
       this.Controls.Add(this.destinationAddressLabel);
@@ -204,7 +202,6 @@
     private System.Windows.Forms.Label destinationAddressLabel;
     private System.Windows.Forms.Label destinationPortLabel;
     private System.Windows.Forms.Label maxSizeLabel;
-    private System.Windows.Forms.MaskedTextBox destinationAddressBox;
     private System.Windows.Forms.NumericUpDown destinationPortBox;
     private System.Windows.Forms.NumericUpDown maxSizeBox;
     private System.Windows.Forms.TextBox messageBox;
@@ -212,5 +209,6 @@
     private System.Windows.Forms.Button createButton;
     private System.Windows.Forms.Button fileButton;
     private System.Windows.Forms.Button removeFileButton;
+    private System.Windows.Forms.TextBox destinationAddressBox;
   }
 }
