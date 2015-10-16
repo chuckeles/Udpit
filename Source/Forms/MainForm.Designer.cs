@@ -35,8 +35,8 @@ namespace Udpit {
       this.newMessageButton = new System.Windows.Forms.ToolStripMenuItem();
       this.messageList = new System.Windows.Forms.ListView();
       this.idColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-      this.stateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.fromColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.stateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -111,6 +111,7 @@ namespace Udpit {
       this.newMessageButton.Size = new System.Drawing.Size(152, 22);
       this.newMessageButton.Text = "New";
       this.newMessageButton.ToolTipText = "Create a new message";
+      this.newMessageButton.Click += new System.EventHandler(this.ShowNewMessageForm);
       // 
       // messageList
       // 
@@ -133,15 +134,15 @@ namespace Udpit {
       this.idColumn.Text = "ID";
       this.idColumn.Width = 82;
       // 
-      // stateColumn
-      // 
-      this.stateColumn.Text = "State";
-      this.stateColumn.Width = 156;
-      // 
       // fromColumn
       // 
       this.fromColumn.Text = "From";
       this.fromColumn.Width = 109;
+      // 
+      // stateColumn
+      // 
+      this.stateColumn.Text = "State";
+      this.stateColumn.Width = 156;
       // 
       // MainForm
       // 

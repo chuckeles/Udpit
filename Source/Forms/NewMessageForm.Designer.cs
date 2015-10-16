@@ -1,4 +1,4 @@
-﻿namespace Udpit.Source.Forms {
+﻿namespace Udpit {
   partial class NewMessageForm {
     /// <summary>
     /// Required designer variable.
@@ -156,7 +156,7 @@
       this.removeFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.removeFileButton.Location = new System.Drawing.Point(93, 282);
       this.removeFileButton.Name = "removeFileButton";
-      this.removeFileButton.Size = new System.Drawing.Size(75, 23);
+      this.removeFileButton.Size = new System.Drawing.Size(57, 23);
       this.removeFileButton.TabIndex = 5;
       this.removeFileButton.Text = "Remove";
       this.removeFileButton.UseVisualStyleBackColor = true;

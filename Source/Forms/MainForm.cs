@@ -35,6 +35,15 @@ namespace Udpit {
       dialog.Dispose();
     }
 
+    /// <summary>
+    ///   Shows the new message modal dialog.
+    /// </summary>
+    private void ShowNewMessageForm(object sender, EventArgs e) {
+      var dialog = new NewMessageForm();
+      dialog.ShowDialog(this);
+      dialog.Dispose();
+    }
+
   }
 
 }
