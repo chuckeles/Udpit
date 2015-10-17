@@ -12,7 +12,7 @@ namespace Udpit {
     /// <summary>
     ///   Delegate for the fragment event.
     /// </summary>
-    public delegate void FragmentDelegate(byte[] fragment);
+    public delegate void FragmentDelegate(byte[] fragment, IPEndPoint remoteEndPoint);
 
     /// <summary>
     ///   Fired when a fragment is received.
@@ -58,7 +58,7 @@ namespace Udpit {
       Listen();
 
       // fire an event
-      FragmentReceived?.Invoke(fragment);
+      FragmentReceived?.Invoke(fragment, remoteEndPoint);
     }
 
     /// <summary>

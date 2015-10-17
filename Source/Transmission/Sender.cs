@@ -53,10 +53,26 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Sends a prepared fragment for a message.
+    /// </summary>
+    public void SendPreparedFragment(Message message) {
+      // create a task
+      Task.Run(() => {
+        // ask for a prepared fragment
+        var fragment = Fragmenter.GetPreparedFragment(message);
+
+        // send the fragment
+        lock (_udpClient) {
+          _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+        }
+      });
+    }
+
+    /// <summary>
     ///   Sends a prepare fragment for a message.
     /// </summary>
     public void SendPrepareFragment(Message message) {
-      // run asynchronously
+      // create a task
       Task.Run(() => {
         // ask for a prepare fragment
         var fragment = Fragmenter.GetPrepareFragment(message);

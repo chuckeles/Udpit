@@ -58,6 +58,14 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Gets the number of data fragments from a prepare fragment.
+    /// </summary>
+    public static ushort GetFragmentCount(byte[] fragment) {
+      // the count is the fourth and fifth byte
+      return BitConverter.ToUInt16(fragment, 3);
+    }
+
+    /// <summary>
     ///   Gets the type of a fragment.
     /// </summary>
     public static FragmentType GetFragmentType(byte[] fragment) {
@@ -74,7 +82,27 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Make a prepare fragment.
+    ///   Makes a prepared fragment.
+    /// </summary>
+    public static byte[] GetPreparedFragment(Message message) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.Prepared);
+
+      // add the id
+      data.AddRange(message.Id);
+
+      // add name
+      data.AddRange(Encoding.ASCII.GetBytes(Options.Name));
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
+    ///   Makes a prepare fragment.
     /// </summary>
     public static byte[] GetPrepareFragment(Message message) {
       // the resulting array of bytes
@@ -94,6 +122,17 @@ namespace Udpit {
 
       // return data
       return data.ToArray();
+    }
+
+    /// <summary>
+    ///   Get the remote name from a prepare fragment.
+    /// </summary>
+    public static string GetPrepareName(byte[] fragment) {
+      // the name starts at the sixth byte
+      var bytes = fragment.Skip(5).ToArray();
+
+      // convert and return
+      return Encoding.ASCII.GetString(bytes);
     }
 
   }

@@ -81,26 +81,55 @@ namespace Udpit {
     /// <summary>
     ///   Delegate for the receiver's fragment received event.
     /// </summary>
-    private void FragmentReceived(byte[] fragment) {
+    private void FragmentReceived(byte[] fragment, IPEndPoint remoteEndPoint) {
       // check the type
       var type = Fragmenter.GetFragmentType(fragment);
 
+      // decision time
       switch (type) {
         case FragmentType.Prepare:
-          var id = PrepareMessage(fragment);
+          // make a local copy
+          var message = PrepareMessage(fragment, remoteEndPoint);
+
+          // respond
+          Sender.Singleton.SendPreparedFragment(message);
+
+          break;
+
+        case FragmentType.Prepared:
           break;
       }
     }
 
     /// <summary>
-    /// Creates a message based on prepare fragment.
+    ///   Creates a message based on prepare fragment.
     /// </summary>
-    private byte[] PrepareMessage(byte[] fragment) {
+    private Message PrepareMessage(byte[] fragment, IPEndPoint remoteEndPoint) {
       // get message id
       var id = Fragmenter.GetID(fragment);
 
-      // return id
-      return id;
+      // TODO: Handle if we already have a message with this ID
+
+      // get fragment count
+      var count = Fragmenter.GetFragmentCount(fragment);
+
+      // get remote name
+      var name = Fragmenter.GetPrepareName(fragment);
+
+      // create a message
+      var message = new Message(count, id) {
+        RemoteName = name,
+        RemoteEndPoint = remoteEndPoint,
+        Status = MessageStatus.Handshaking
+      };
+
+      // add it to the dictionary
+      lock (_messages) {
+        _messages.Add(id, message);
+      }
+
+      // return the message
+      return message;
     }
 
     /// <summary>
