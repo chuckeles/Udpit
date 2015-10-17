@@ -149,6 +149,7 @@
       this.createButton.TabIndex = 6;
       this.createButton.Text = "Create";
       this.createButton.UseVisualStyleBackColor = true;
+      this.createButton.Click += new System.EventHandler(this.CreateMessage);
       // 
       // fileButton
       // 

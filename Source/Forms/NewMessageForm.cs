@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Net;
 using System.Windows.Forms;
 
@@ -11,6 +12,26 @@ namespace Udpit {
 
     public NewMessageForm() {
       InitializeComponent();
+    }
+
+    /// <summary>
+    ///   Creates the requested message.
+    /// </summary>
+    private void CreateMessage(object sender, EventArgs e) {
+      // check address
+      IPAddress address;
+      if (!IPAddress.TryParse(destinationAddressBox.Text, out address)) {
+        // wrong format
+        return;
+      }
+
+      // create a message
+      MessageCenter.Singleton.CreateMessage(new IPEndPoint(address, (int) destinationPortBox.Value),
+                                            messageBox.Text,
+                                            (ushort) maxSizeBox.Value);
+
+      // set dialog result
+      DialogResult = DialogResult.OK;
     }
 
     /// <summary>
