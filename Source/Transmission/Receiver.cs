@@ -9,6 +9,16 @@ namespace Udpit {
   /// </summary>
   internal class Receiver {
 
+    /// <summary>
+    ///   Delegate for the fragment event.
+    /// </summary>
+    public delegate void FragmentDelegate(byte[] fragment);
+
+    /// <summary>
+    ///   Fired when a fragment is received.
+    /// </summary>
+    public event FragmentDelegate FragmentReceived;
+
     private Receiver() {
       // start listening
       Listen();
@@ -46,6 +56,9 @@ namespace Udpit {
 
       // listen again
       Listen();
+
+      // fire an event
+      FragmentReceived?.Invoke(fragment);
     }
 
     /// <summary>

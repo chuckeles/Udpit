@@ -9,11 +9,11 @@ namespace Udpit {
   internal class Sender {
 
     /// <summary>
-    ///   Delegate for the fragment sent event.
+    ///   Delegate for fragment events.
     /// </summary>
     /// <param name="message">Message the fragment is part of</param>
     /// <param name="number">Fragment number</param>
-    public delegate void FragmentSentDelegate(Message message, ushort number);
+    public delegate void FragmentDelegate(Message message, ushort number);
 
     /// <summary>
     ///   Delegate for the message events.
@@ -23,17 +23,17 @@ namespace Udpit {
     /// <summary>
     ///   Fired when a fragment has been sent.
     /// </summary>
-    public event FragmentSentDelegate OnFragmentSent;
+    public event FragmentDelegate FragmentSent;
 
     /// <summary>
     ///   Fired when a message transmission is complete.
     /// </summary>
-    public event MessageDelegate OnMessageSendingFinish;
+    public event MessageDelegate MessageSendingFinish;
 
     /// <summary>
     ///   Fired when a new message is beginning to be transmitted.
     /// </summary>
-    public event MessageDelegate OnMessageSendingStart;
+    public event MessageDelegate MessageSendingStart;
 
     private Sender() {}
 
@@ -71,7 +71,7 @@ namespace Udpit {
       var fragment = Fragmenter.GetPrepareFragment(message);
 
       // fire the event
-      OnMessageSendingStart?.Invoke(message);
+      MessageSendingStart?.Invoke(message);
 
       // update message status
       lock (message) {
