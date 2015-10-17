@@ -177,6 +177,7 @@
       this.destinationAddressBox.Name = "destinationAddressBox";
       this.destinationAddressBox.Size = new System.Drawing.Size(150, 20);
       this.destinationAddressBox.TabIndex = 0;
+      this.destinationAddressBox.Text = "127.0.0.1";
       this.destinationAddressBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateAddress);
       // 
       // errorProvider
@@ -187,8 +188,10 @@
       // 
       // NewMessageForm
       // 
+      this.AcceptButton = this.createButton;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.CancelButton = this.cancelButton;
       this.ClientSize = new System.Drawing.Size(334, 361);
       this.Controls.Add(this.destinationAddressBox);
       this.Controls.Add(this.removeFileButton);
