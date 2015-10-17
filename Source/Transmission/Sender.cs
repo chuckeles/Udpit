@@ -82,6 +82,8 @@ namespace Udpit {
       lock (_udpClient) {
         _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
       }
+
+      // TODO: Retry
     }
 
     /// <summary>
