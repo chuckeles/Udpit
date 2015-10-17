@@ -58,6 +58,22 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Gets the type of a fragment.
+    /// </summary>
+    public static FragmentType GetFragmentType(byte[] fragment) {
+      // the very first byte is always the type
+      return (FragmentType) fragment[0];
+    }
+
+    /// <summary>
+    ///   Gets the id of a message from fragment.
+    /// </summary>
+    public static byte[] GetID(byte[] fragment) {
+      // id is the second and third byte
+      return fragment.Skip(1).Take(2).ToArray();
+    }
+
+    /// <summary>
     ///   Make a prepare fragment.
     /// </summary>
     public static byte[] GetPrepareFragment(Message message) {

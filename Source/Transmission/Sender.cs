@@ -53,37 +53,29 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Begin the transmission procedure.
-    /// </summary>
-    public void TransmitMessage(Message message) {
-      // create a task
-      Task.Run(() => {
-        // initialize handshake
-        SendPrepareFragment(message);
-      });
-    }
-
-    /// <summary>
     ///   Sends a prepare fragment for a message.
     /// </summary>
-    private void SendPrepareFragment(Message message) {
-      // ask for a prepare fragment
-      var fragment = Fragmenter.GetPrepareFragment(message);
+    public void SendPrepareFragment(Message message) {
+      // run asynchronously
+      Task.Run(() => {
+        // ask for a prepare fragment
+        var fragment = Fragmenter.GetPrepareFragment(message);
 
-      // fire the event
-      MessageSendingStart?.Invoke(message);
+        // fire the event
+        MessageSendingStart?.Invoke(message);
 
-      // update message status
-      lock (message) {
-        message.Status = MessageStatus.Handshaking;
-      }
+        // update message status
+        lock (message) {
+          message.Status = MessageStatus.Handshaking;
+        }
 
-      // send the fragment
-      lock (_udpClient) {
-        _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
-      }
+        // send the fragment
+        lock (_udpClient) {
+          _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+        }
 
-      // TODO: Retry
+        // TODO: Retry
+      });
     }
 
     /// <summary>

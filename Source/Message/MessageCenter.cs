@@ -8,7 +8,10 @@ namespace Udpit {
   /// </summary>
   internal class MessageCenter {
 
-    private MessageCenter() {}
+    private MessageCenter() {
+      // hook the receiver's fragment event
+      Receiver.Singleton.FragmentReceived += FragmentReceived;
+    }
 
     /// <summary>
     ///   Create a singleton instance.
@@ -72,7 +75,32 @@ namespace Udpit {
       }
 
       // begin transmission
-      Sender.Singleton.TransmitMessage(message);
+      Sender.Singleton.SendPrepareFragment(message);
+    }
+
+    /// <summary>
+    ///   Delegate for the receiver's fragment received event.
+    /// </summary>
+    private void FragmentReceived(byte[] fragment) {
+      // check the type
+      var type = Fragmenter.GetFragmentType(fragment);
+
+      switch (type) {
+        case FragmentType.Prepare:
+          var id = PrepareMessage(fragment);
+          break;
+      }
+    }
+
+    /// <summary>
+    /// Creates a message based on prepare fragment.
+    /// </summary>
+    private byte[] PrepareMessage(byte[] fragment) {
+      // get message id
+      var id = Fragmenter.GetID(fragment);
+
+      // return id
+      return id;
     }
 
     /// <summary>
