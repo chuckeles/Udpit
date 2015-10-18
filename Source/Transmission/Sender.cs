@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace Udpit {
@@ -35,7 +36,11 @@ namespace Udpit {
     /// </summary>
     public event MessageDelegate MessageSendingStart;
 
-    private Sender() {}
+    private Sender() {
+      // set up the UDP client
+      _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+      _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+    }
 
     /// <summary>
     ///   Creates the singleton instance.
@@ -102,7 +107,7 @@ namespace Udpit {
     /// <summary>
     ///   The UDP client that is used to send data.
     /// </summary>
-    private readonly UdpClient _udpClient = new UdpClient(Options.Port);
+    private readonly UdpClient _udpClient = new UdpClient();
 
   }
 

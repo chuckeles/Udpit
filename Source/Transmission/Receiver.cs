@@ -20,6 +20,10 @@ namespace Udpit {
     public event FragmentDelegate FragmentReceived;
 
     private Receiver() {
+      // set up the UDP client
+      _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+      _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+
       // start listening
       Listen();
     }
@@ -51,7 +55,7 @@ namespace Udpit {
     /// </summary>
     private void OnReceive(IAsyncResult ar) {
       // receive fragment
-      var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.ReceivePort);
+      var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.Port);
       var fragment = _udpClient.EndReceive(ar, ref remoteEndPoint);
 
       // listen again
@@ -69,7 +73,7 @@ namespace Udpit {
     /// <summary>
     ///   The UDP client.
     /// </summary>
-    private readonly UdpClient _udpClient = new UdpClient(Options.ReceivePort);
+    private readonly UdpClient _udpClient = new UdpClient();
 
   }
 
