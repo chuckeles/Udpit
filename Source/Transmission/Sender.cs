@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -61,8 +62,20 @@ namespace Udpit {
     /// <summary>
     ///   Send all data fragments of a message.
     /// </summary>
-    public void SendDataFragments(Message preparedMessage) {
-      throw new NotImplementedException();
+    public void SendDataFragments(Message message) {
+      // create a task
+      Task.Run(() => {
+        // send all data fragments
+        foreach (var pair in message.FragmentList) {
+          // request a data fragment
+          var fragment = Fragmenter.GetDataFragment(message, pair.Key);
+
+          // send it
+          lock (_udpClient) {
+            _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+          }
+        }
+      });
     }
 
     /// <summary>

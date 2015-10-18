@@ -58,6 +58,29 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Makes a data fragment for a fragment of a message.
+    /// </summary>
+    public static byte[] GetDataFragment(Message message, ushort number) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.Data);
+
+      // add the id
+      data.AddRange(message.Id);
+
+      // add the fragment number
+      data.AddRange(BitConverter.GetBytes(number));
+
+      // add data
+      data.AddRange(message.FragmentList[number]);
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
     ///   Gets the number of data fragments from a prepare fragment.
     /// </summary>
     public static ushort GetFragmentCount(byte[] fragment) {
@@ -136,7 +159,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Get the remote name from a prepare fragment.
+    ///   Gets the remote name from a prepare fragment.
     /// </summary>
     public static string GetPrepareName(byte[] fragment) {
       // the name starts at the sixth byte
