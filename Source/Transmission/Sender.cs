@@ -102,7 +102,7 @@ namespace Udpit {
     /// <summary>
     ///   The UDP client that is used to send data.
     /// </summary>
-    private readonly UdpClient _udpClient = new UdpClient(Options.SendPort);
+    private readonly UdpClient _udpClient = new UdpClient(Options.Port);
 
   }
 

@@ -11,14 +11,9 @@
     public static string Name { get; set; } = "Newbie";
 
     /// <summary>
-    ///   Port on which to listen for data.
+    ///   Port on which to communicate.
     /// </summary>
-    public static int ReceivePort { get; set; } = 50695;
-
-    /// <summary>
-    ///   Port on which to send data.
-    /// </summary>
-    public static int SendPort { get; set; } = 50694;
+    public static int Port { get; set; } = 56994;
 
   }
 

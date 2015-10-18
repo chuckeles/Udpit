@@ -30,14 +30,11 @@
       this.nameBox = new System.Windows.Forms.TextBox();
       this.nameLabel = new System.Windows.Forms.Label();
       this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-      this.sendPortBox = new System.Windows.Forms.NumericUpDown();
-      this.receivePortBox = new System.Windows.Forms.NumericUpDown();
-      this.sendPortLabel = new System.Windows.Forms.Label();
-      this.receivePortLabel = new System.Windows.Forms.Label();
+      this.portBox = new System.Windows.Forms.NumericUpDown();
+      this.portLabel = new System.Windows.Forms.Label();
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.sendPortBox)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.receivePortBox)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.portBox)).BeginInit();
       this.SuspendLayout();
       // 
       // cancelButton
@@ -88,75 +85,39 @@
       this.errorProvider.ContainerControl = this;
       this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
       // 
-      // sendPortBox
+      // portBox
       // 
-      this.sendPortBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.portBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.sendPortBox.Location = new System.Drawing.Point(113, 47);
-      this.sendPortBox.Maximum = new decimal(new int[] {
+      this.portBox.Location = new System.Drawing.Point(113, 47);
+      this.portBox.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
-      this.sendPortBox.Minimum = new decimal(new int[] {
+      this.portBox.Minimum = new decimal(new int[] {
             1025,
             0,
             0,
             0});
-      this.sendPortBox.Name = "sendPortBox";
-      this.sendPortBox.Size = new System.Drawing.Size(177, 20);
-      this.sendPortBox.TabIndex = 1;
-      this.sendPortBox.Value = new decimal(new int[] {
-            50694,
+      this.portBox.Name = "portBox";
+      this.portBox.Size = new System.Drawing.Size(177, 20);
+      this.portBox.TabIndex = 1;
+      this.portBox.Value = new decimal(new int[] {
+            56994,
             0,
             0,
             0});
-      this.sendPortBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateSendPort);
       // 
-      // receivePortBox
+      // portLabel
       // 
-      this.receivePortBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.receivePortBox.Location = new System.Drawing.Point(113, 73);
-      this.receivePortBox.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-      this.receivePortBox.Minimum = new decimal(new int[] {
-            1025,
-            0,
-            0,
-            0});
-      this.receivePortBox.Name = "receivePortBox";
-      this.receivePortBox.Size = new System.Drawing.Size(177, 20);
-      this.receivePortBox.TabIndex = 2;
-      this.receivePortBox.Value = new decimal(new int[] {
-            50695,
-            0,
-            0,
-            0});
-      this.receivePortBox.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateReceivePort);
-      // 
-      // sendPortLabel
-      // 
-      this.sendPortLabel.AutoSize = true;
-      this.sendPortLabel.Location = new System.Drawing.Point(53, 49);
-      this.sendPortLabel.Name = "sendPortLabel";
-      this.sendPortLabel.Size = new System.Drawing.Size(54, 13);
-      this.sendPortLabel.TabIndex = 6;
-      this.sendPortLabel.Text = "Send Port";
-      this.toolTip.SetToolTip(this.sendPortLabel, "Port on which to send fragments");
-      // 
-      // receivePortLabel
-      // 
-      this.receivePortLabel.AutoSize = true;
-      this.receivePortLabel.Location = new System.Drawing.Point(38, 75);
-      this.receivePortLabel.Name = "receivePortLabel";
-      this.receivePortLabel.Size = new System.Drawing.Size(69, 13);
-      this.receivePortLabel.TabIndex = 7;
-      this.receivePortLabel.Text = "Receive Port";
-      this.toolTip.SetToolTip(this.receivePortLabel, "Port on which to listen for incoming fragments");
+      this.portLabel.AutoSize = true;
+      this.portLabel.Location = new System.Drawing.Point(81, 49);
+      this.portLabel.Name = "portLabel";
+      this.portLabel.Size = new System.Drawing.Size(26, 13);
+      this.portLabel.TabIndex = 6;
+      this.portLabel.Text = "Port";
+      this.toolTip.SetToolTip(this.portLabel, "Port on which to communicate");
       // 
       // OptionsForm
       // 
@@ -165,10 +126,8 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.CancelButton = this.cancelButton;
       this.ClientSize = new System.Drawing.Size(334, 261);
-      this.Controls.Add(this.receivePortBox);
-      this.Controls.Add(this.sendPortBox);
-      this.Controls.Add(this.receivePortLabel);
-      this.Controls.Add(this.sendPortLabel);
+      this.Controls.Add(this.portBox);
+      this.Controls.Add(this.portLabel);
       this.Controls.Add(this.nameLabel);
       this.Controls.Add(this.nameBox);
       this.Controls.Add(this.saveButton);
@@ -180,8 +139,7 @@
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Options";
       ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.sendPortBox)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.receivePortBox)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.portBox)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -194,10 +152,8 @@
     private System.Windows.Forms.TextBox nameBox;
     private System.Windows.Forms.Label nameLabel;
     private System.Windows.Forms.ErrorProvider errorProvider;
-    private System.Windows.Forms.NumericUpDown sendPortBox;
-    private System.Windows.Forms.NumericUpDown receivePortBox;
-    private System.Windows.Forms.Label sendPortLabel;
-    private System.Windows.Forms.Label receivePortLabel;
+    private System.Windows.Forms.NumericUpDown portBox;
+    private System.Windows.Forms.Label portLabel;
     private System.Windows.Forms.ToolTip toolTip;
   }
 }
