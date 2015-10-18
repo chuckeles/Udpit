@@ -92,7 +92,8 @@ namespace Udpit {
           var prepareMessage = PrepareMessage(fragment, remoteEndPoint);
 
           // respond
-          Sender.Singleton.SendPreparedFragment(prepareMessage);
+          if (prepareMessage != null)
+            Sender.Singleton.SendPreparedFragment(prepareMessage);
 
           break;
 
@@ -101,7 +102,13 @@ namespace Udpit {
           var preparedMessage = SetRemoteName(fragment);
 
           // start sending data fragments
-          Sender.Singleton.SendDataFragments(preparedMessage);
+          if (preparedMessage != null)
+            Sender.Singleton.SendDataFragments(preparedMessage);
+
+          break;
+
+        case FragmentType.Data:
+
 
           break;
       }
@@ -114,7 +121,11 @@ namespace Udpit {
       // get message id
       var id = Fragmenter.GetID(fragment);
 
-      // TODO: Handle if we already have a message with this ID
+      // check if we already have one like that
+      lock (_messages) {
+        if (_messages.ContainsKey(id))
+          return null;
+      }
 
       // get fragment count
       var count = Fragmenter.GetFragmentCount(fragment);
