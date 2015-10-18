@@ -102,6 +102,17 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Get the remote name from a prepared fragment.
+    /// </summary>
+    public static string GetPreparedName(byte[] fragment) {
+      // the name starts at the fourth byte
+      var bytes = fragment.Skip(3).ToArray();
+
+      // convert and return
+      return Encoding.ASCII.GetString(bytes);
+    }
+
+    /// <summary>
     ///   Makes a prepare fragment.
     /// </summary>
     public static byte[] GetPrepareFragment(Message message) {

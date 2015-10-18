@@ -89,14 +89,20 @@ namespace Udpit {
       switch (type) {
         case FragmentType.Prepare:
           // make a local copy
-          var message = PrepareMessage(fragment, remoteEndPoint);
+          var prepareMessage = PrepareMessage(fragment, remoteEndPoint);
 
           // respond
-          Sender.Singleton.SendPreparedFragment(message);
+          Sender.Singleton.SendPreparedFragment(prepareMessage);
 
           break;
 
         case FragmentType.Prepared:
+          // set remote name
+          var preparedMessage = SetRemoteName(fragment);
+
+          // start sending data fragments
+          Sender.Singleton.SendDataFragments(preparedMessage);
+
           break;
       }
     }
@@ -130,6 +136,30 @@ namespace Udpit {
 
       // return the message
       return message;
+    }
+
+    /// <summary>
+    ///   Update the message remote name from a prepared fragment.
+    /// </summary>
+    private Message SetRemoteName(byte[] fragment) {
+      // get ID
+      var id = Fragmenter.GetID(fragment);
+
+      // get remote name
+      var name = Fragmenter.GetPreparedName(fragment);
+
+      // set the name
+      lock (_messages) {
+        if (_messages.ContainsKey(id)) {
+          _messages[id].RemoteName = name;
+
+          // return the message
+          return _messages[id];
+        }
+      }
+
+      // there's no message
+      return null;
     }
 
     /// <summary>

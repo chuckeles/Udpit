@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
@@ -55,6 +56,13 @@ namespace Udpit {
 
       // return it
       return Singleton;
+    }
+
+    /// <summary>
+    ///   Send all data fragments of a message.
+    /// </summary>
+    public void SendDataFragments(Message preparedMessage) {
+      throw new NotImplementedException();
     }
 
     /// <summary>
