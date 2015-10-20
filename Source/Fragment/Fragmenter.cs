@@ -89,6 +89,14 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Get fragment number of a data fragment.
+    /// </summary>
+    public static ushort GetFragmentNumber(byte[] fragment) {
+      // same implementation
+      return GetFragmentCount(fragment);
+    }
+
+    /// <summary>
     ///   Gets the type of a fragment.
     /// </summary>
     public static FragmentType GetFragmentType(byte[] fragment) {
@@ -167,6 +175,14 @@ namespace Udpit {
 
       // convert and return
       return Encoding.ASCII.GetString(bytes);
+    }
+
+    /// <summary>
+    /// Get data from a data fragment.
+    /// </summary>
+    public static byte[] GetData(byte[] fragment) {
+      // data begins at sixth byte
+      return fragment.Skip(5).ToArray();
     }
 
   }

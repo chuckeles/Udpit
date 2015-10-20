@@ -30,33 +30,6 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Add an incoming fragment.
-    /// </summary>
-    /// <param name="id">Id of the message</param>
-    /// <param name="number">Fragment number</param>
-    /// <param name="data">Fragment data</param>
-    public void AddFragment(byte[] id, ushort number, byte[] data) {
-      // convert id
-      var idKey = BitConverter.ToUInt16(id, 0);
-
-      // find it in the dictionary
-      if (!_messages.ContainsKey(idKey))
-        return;
-
-      // get the message
-      var message = _messages[idKey];
-
-      // check if the fragment exists
-      if (message.FragmentList.ContainsKey(number))
-        return;
-
-      // TODO: Check the fragment
-
-      // add the fragment
-      message.FragmentList.Add(number, data);
-    }
-
-    /// <summary>
     ///   Add a new message to the list.
     /// </summary>
     public void AddMessage(Message message) {
@@ -80,6 +53,39 @@ namespace Udpit {
 
       // begin transmission
       Sender.Singleton.SendPrepareFragment(message);
+    }
+
+    /// <summary>
+    ///   Add an incoming data fragment.
+    /// </summary>
+    private void AddFragment(byte[] fragment) {
+      // get message id
+      var id = Fragmenter.GetID(fragment);
+
+      // convert id
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // find it in the dictionary
+      if (!_messages.ContainsKey(idKey))
+        return;
+
+      // get the message
+      var message = _messages[idKey];
+
+      // get fragment number
+      var number = Fragmenter.GetFragmentNumber(fragment);
+
+      // check if the fragment exists
+      if (message.FragmentList.ContainsKey(number))
+        return;
+
+      // TODO: Check the fragment for errors
+
+      // get data
+      var data = Fragmenter.GetData(fragment);
+
+      // add the fragment
+      message.FragmentList.Add(number, data);
     }
 
     /// <summary>
@@ -112,7 +118,8 @@ namespace Udpit {
           break;
 
         case FragmentType.Data:
-
+          // add fragment
+          AddFragment(fragment);
 
           break;
       }
