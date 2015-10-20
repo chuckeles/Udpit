@@ -58,6 +58,14 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Get data from a data fragment.
+    /// </summary>
+    public static byte[] GetData(byte[] fragment) {
+      // data begins at sixth byte
+      return fragment.Skip(5).ToArray();
+    }
+
+    /// <summary>
     ///   Makes a data fragment for a fragment of a message.
     /// </summary>
     public static byte[] GetDataFragment(Message message, ushort number) {
@@ -75,6 +83,23 @@ namespace Udpit {
 
       // add data
       data.AddRange(message.FragmentList[number]);
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
+    ///   Makes an end fragment.
+    /// </summary>
+    public static byte[] GetEndFragment(Message message) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.End);
+
+      // add the id
+      data.AddRange(message.Id);
 
       // return data
       return data.ToArray();
@@ -175,14 +200,6 @@ namespace Udpit {
 
       // convert and return
       return Encoding.ASCII.GetString(bytes);
-    }
-
-    /// <summary>
-    /// Get data from a data fragment.
-    /// </summary>
-    public static byte[] GetData(byte[] fragment) {
-      // data begins at sixth byte
-      return fragment.Skip(5).ToArray();
     }
 
   }

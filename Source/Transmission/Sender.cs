@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -23,21 +22,6 @@ namespace Udpit {
     /// </summary>
     public delegate void MessageDelegate(Message message);
 
-    /// <summary>
-    ///   Fired when a fragment has been sent.
-    /// </summary>
-    public event FragmentDelegate FragmentSent;
-
-    /// <summary>
-    ///   Fired when a message transmission is complete.
-    /// </summary>
-    public event MessageDelegate MessageSendingFinish;
-
-    /// <summary>
-    ///   Fired when a new message is beginning to be transmitted.
-    /// </summary>
-    public event MessageDelegate MessageSendingStart;
-
     private Sender() {
       // set up the UDP client
       _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
@@ -60,7 +44,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Send all data fragments of a message.
+    ///   Sends all data fragments of a message.
     /// </summary>
     public void SendDataFragments(Message message) {
       // create a task
@@ -75,6 +59,11 @@ namespace Udpit {
             _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
           }
         }
+
+        // TODO: Handle keep-alive fragments
+
+        // send end fragment
+        SendEndFragment(message);
       });
     }
 
@@ -103,9 +92,6 @@ namespace Udpit {
         // ask for a prepare fragment
         var fragment = Fragmenter.GetPrepareFragment(message);
 
-        // fire the event
-        MessageSendingStart?.Invoke(message);
-
         // update message status
         lock (message) {
           message.Status = MessageStatus.Handshaking;
@@ -117,6 +103,22 @@ namespace Udpit {
         }
 
         // TODO: Retry
+      });
+    }
+
+    /// <summary>
+    ///   Sends end fragment for a message.
+    /// </summary>
+    private void SendEndFragment(Message message) {
+      // create a task
+      Task.Run(() => {
+        // ask for an end fragment
+        var fragment = Fragmenter.GetEndFragment(message);
+
+        // send the fragment
+        lock (_udpClient) {
+          _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+        }
       });
     }
 
