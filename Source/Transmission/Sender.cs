@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
@@ -49,6 +48,11 @@ namespace Udpit {
     public void SendDataFragments(Message message) {
       // create a task
       Task.Run(() => {
+        // set state
+        lock (message) {
+          message.Status = MessageStatus.Transmitting;
+        }
+
         // send all data fragments
         foreach (var pair in message.FragmentList) {
           // request a data fragment
@@ -61,6 +65,11 @@ namespace Udpit {
         }
 
         // TODO: Handle keep-alive fragments
+
+        // set state
+        lock (message) {
+          message.Status = MessageStatus.Ending;
+        }
 
         // send end fragment
         SendEndFragment(message);

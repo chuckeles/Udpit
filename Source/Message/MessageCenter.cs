@@ -124,6 +124,10 @@ namespace Udpit {
           AddFragment(fragment);
 
           break;
+
+        case FragmentType.End:
+
+          break;
       }
     }
 
