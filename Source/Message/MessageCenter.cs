@@ -85,7 +85,9 @@ namespace Udpit {
       var data = Fragmenter.GetData(fragment);
 
       // add the fragment
-      message.FragmentList.Add(number, data);
+      lock (message) {
+        message.FragmentList.Add(number, data);
+      }
     }
 
     /// <summary>
