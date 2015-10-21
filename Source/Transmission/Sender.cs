@@ -77,6 +77,22 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Sends ending okay fragment.
+    /// </summary>
+    public void SendOkayFragment(Message message) {
+      // create a task
+      Task.Run(() => {
+        // ask for an end fragment
+        var fragment = Fragmenter.GetOkayFragment(message);
+
+        // send the fragment
+        lock (_udpClient) {
+          _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);
+        }
+      });
+    }
+
+    /// <summary>
     ///   Sends a prepared fragment for a message.
     /// </summary>
     public void SendPreparedFragment(Message message) {

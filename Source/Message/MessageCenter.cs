@@ -126,6 +126,21 @@ namespace Udpit {
           break;
 
         case FragmentType.End:
+          // get id
+          var id = Fragmenter.GetID(fragment);
+          var idKey = BitConverter.ToUInt16(id, 0);
+
+          // find message
+          if (!_messages.ContainsKey(idKey))
+            break;
+
+          // get message
+          var message = _messages[idKey];
+
+          // TODO: Check missing fragments
+
+          // send okay fragment
+          Sender.Singleton.SendOkayFragment(message);
 
           break;
       }

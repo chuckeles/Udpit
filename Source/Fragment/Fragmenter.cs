@@ -138,6 +138,23 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Makes an okay fragment.
+    /// </summary>
+    public static byte[] GetOkayFragment(Message message) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.Okay);
+
+      // add the id
+      data.AddRange(message.Id);
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
     ///   Makes a prepared fragment.
     /// </summary>
     public static byte[] GetPreparedFragment(Message message) {

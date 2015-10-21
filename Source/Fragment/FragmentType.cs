@@ -12,7 +12,7 @@
     Data = 3,
 
     End = 4,
-    Ok = 5,
+    Okay = 5,
     Missing = 6
 
   }
