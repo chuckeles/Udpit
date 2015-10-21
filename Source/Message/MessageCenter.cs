@@ -126,24 +126,47 @@ namespace Udpit {
           break;
 
         case FragmentType.End:
-          // get id
-          var id = Fragmenter.GetID(fragment);
-          var idKey = BitConverter.ToUInt16(id, 0);
-
-          // find message
-          if (!_messages.ContainsKey(idKey))
-            break;
-
           // get message
-          var message = _messages[idKey];
+          var endMessage = GetMessage(fragment);
+          if (endMessage == null)
+            break;
 
           // TODO: Check missing fragments
 
           // send okay fragment
-          Sender.Singleton.SendOkayFragment(message);
+          Sender.Singleton.SendOkayFragment(endMessage);
+
+          break;
+
+        case FragmentType.Okay:
+          // get message
+          var okayMessage = GetMessage(fragment);
+          if (okayMessage == null)
+            break;
+
+          // update status
+          lock (okayMessage) {
+            okayMessage.Status = MessageStatus.Finished;
+          }
 
           break;
       }
+    }
+
+    /// <summary>
+    /// Finds a message from a fragment.
+    /// </summary>
+    private Message GetMessage(byte[] fragment) {
+      // get id
+      var id = Fragmenter.GetID(fragment);
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // find message
+      if (!_messages.ContainsKey(idKey))
+        return null;
+
+      // get message
+      return _messages[idKey];
     }
 
     /// <summary>
