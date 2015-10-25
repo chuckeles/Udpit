@@ -132,6 +132,22 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Updates the client port that is used.
+    /// </summary>
+    public void UpdatePort() {
+      // lock first
+      lock (_udpClient) {
+        // close current client
+        _udpClient.Close();
+
+        // create new client with a different port
+        _udpClient = new UdpClient();
+        _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+        _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+      }
+    }
+
+    /// <summary>
     ///   Sends end fragment for a message.
     /// </summary>
     private void SendEndFragment(Message message) {
@@ -155,7 +171,7 @@ namespace Udpit {
     /// <summary>
     ///   The UDP client that is used to send data.
     /// </summary>
-    private readonly UdpClient _udpClient = new UdpClient();
+    private UdpClient _udpClient = new UdpClient();
 
   }
 

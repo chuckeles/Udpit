@@ -30,6 +30,10 @@ namespace Udpit {
         Options.Name = nameBox.Text;
         Options.Port = (int) portBox.Value;
 
+        // tell sender and receiver to update ports
+        Sender.Singleton.UpdatePort();
+        Receiver.Singleton.UpdatePort();
+
         // set dialog result
         DialogResult = DialogResult.OK;
       }

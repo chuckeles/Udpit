@@ -44,6 +44,22 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Updates the client port that is used.
+    /// </summary>
+    public void UpdatePort() {
+      // lock first
+      lock (_udpClient) {
+        // close current client
+        _udpClient.Close();
+
+        // create new client with a different port
+        _udpClient = new UdpClient();
+        _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+        _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+      }
+    }
+
+    /// <summary>
     ///   Starts listening.
     /// </summary>
     private void Listen() {
@@ -54,15 +70,21 @@ namespace Udpit {
     ///   Called on incoming fragment.
     /// </summary>
     private void OnReceive(IAsyncResult ar) {
-      // receive fragment
-      var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.Port);
-      var fragment = _udpClient.EndReceive(ar, ref remoteEndPoint);
+      try {
+        // receive fragment
+        var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.Port);
+        var fragment = _udpClient.EndReceive(ar, ref remoteEndPoint);
 
-      // listen again
-      Listen();
+        // listen again
+        Listen();
 
-      // fire an event
-      FragmentReceived?.Invoke(fragment, remoteEndPoint);
+        // fire an event
+        FragmentReceived?.Invoke(fragment, remoteEndPoint);
+      }
+      catch (ArgumentException) {
+        // this is in case the socket has been closed, i. e. when changing a port
+        // https://stackoverflow.com/questions/18309974/how-do-you-cancel-a-udpclientbeginreceive
+      }
     }
 
     /// <summary>
@@ -73,7 +95,7 @@ namespace Udpit {
     /// <summary>
     ///   The UDP client.
     /// </summary>
-    private readonly UdpClient _udpClient = new UdpClient();
+    private UdpClient _udpClient = new UdpClient();
 
   }
 
