@@ -53,8 +53,8 @@ namespace Udpit {
       var message = Fragmenter.CreateMessage(remoteEndPoint, messageString, maxFragmentSize);
 
       // add it to the dictionary
-      lock (_messages) {
-        _messages.Add(BitConverter.ToUInt16(message.Id, 0), message);
+      lock (Messages) {
+        Messages.Add(BitConverter.ToUInt16(message.Id, 0), message);
       }
 
       // fire event
@@ -75,11 +75,11 @@ namespace Udpit {
       var idKey = BitConverter.ToUInt16(id, 0);
 
       // find it in the dictionary
-      if (!_messages.ContainsKey(idKey))
+      if (!Messages.ContainsKey(idKey))
         return;
 
       // get the message
-      var message = _messages[idKey];
+      var message = Messages[idKey];
 
       // get fragment number
       var number = Fragmenter.GetFragmentNumber(fragment);
@@ -185,11 +185,11 @@ namespace Udpit {
       var idKey = BitConverter.ToUInt16(id, 0);
 
       // find message
-      if (!_messages.ContainsKey(idKey))
+      if (!Messages.ContainsKey(idKey))
         return null;
 
       // get message
-      return _messages[idKey];
+      return Messages[idKey];
     }
 
     /// <summary>
@@ -203,9 +203,9 @@ namespace Udpit {
       var idKey = BitConverter.ToUInt16(id, 0);
 
       // check if we already have one like that
-      lock (_messages) {
-        if (_messages.ContainsKey(idKey))
-          return _messages[idKey];
+      lock (Messages) {
+        if (Messages.ContainsKey(idKey))
+          return Messages[idKey];
       }
 
       // get fragment count
@@ -222,8 +222,8 @@ namespace Udpit {
       };
 
       // add it to the dictionary
-      lock (_messages) {
-        _messages.Add(idKey, message);
+      lock (Messages) {
+        Messages.Add(idKey, message);
       }
 
       // fire event
@@ -247,12 +247,12 @@ namespace Udpit {
       var name = Fragmenter.GetPreparedName(fragment);
 
       // set the name
-      lock (_messages) {
-        if (_messages.ContainsKey(idKey)) {
-          _messages[idKey].RemoteName = name;
+      lock (Messages) {
+        if (Messages.ContainsKey(idKey)) {
+          Messages[idKey].RemoteName = name;
 
           // return the message
-          return _messages[idKey];
+          return Messages[idKey];
         }
       }
 
@@ -268,7 +268,7 @@ namespace Udpit {
     /// <summary>
     ///   The dictionary of messages in progress keyed by the id.
     /// </summary>
-    private readonly Dictionary<ushort, Message> _messages = new Dictionary<ushort, Message>();
+    public Dictionary<ushort, Message> Messages { get; } = new Dictionary<ushort, Message>();
 
   }
 

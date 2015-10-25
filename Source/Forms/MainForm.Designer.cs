@@ -108,7 +108,7 @@ namespace Udpit {
       // 
       this.newMessageButton.Name = "newMessageButton";
       this.newMessageButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-      this.newMessageButton.Size = new System.Drawing.Size(152, 22);
+      this.newMessageButton.Size = new System.Drawing.Size(141, 22);
       this.newMessageButton.Text = "New";
       this.newMessageButton.ToolTipText = "Create a new message";
       this.newMessageButton.Click += new System.EventHandler(this.ShowNewMessageForm);

@@ -9,7 +9,11 @@ namespace Udpit {
   public partial class MainForm : Form {
 
     public MainForm() {
+      // initialize
       InitializeComponent();
+
+      // hook to the message center
+      MessageCenter.Singleton.Changed += UpdateMessageList;
     }
 
     /// <summary>
@@ -49,6 +53,24 @@ namespace Udpit {
       var dialog = new OptionsForm();
       dialog.ShowDialog(this);
       dialog.Dispose();
+    }
+
+    /// <summary>
+    ///   Updates the message list.
+    /// </summary>
+    private void UpdateMessageList() {
+      Invoke(new MethodInvoker(() => {
+        // clear items
+        messageList.Items.Clear();
+
+        // iterate messages
+        foreach (var message in MessageCenter.Singleton.Messages) {
+          // add a list item
+          messageList.Items.Add(
+            new ListViewItem(new[]
+            {"" + message.Value.Id[0] + message.Value.Id[1], message.Value.RemoteName, message.Value.Status.ToString()}));
+        }
+      }));
     }
 
   }
