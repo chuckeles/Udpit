@@ -20,9 +20,11 @@ namespace Udpit {
     public event FragmentDelegate FragmentReceived;
 
     private Receiver() {
-      // set up the UDP client
-      _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-      _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+      lock (_udpClient) {
+        // set up the UDP client
+        _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+        _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+      }
 
       // start listening
       Listen();
@@ -56,6 +58,9 @@ namespace Udpit {
         _udpClient = new UdpClient();
         _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
         _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+
+        // listen
+        Listen();
       }
     }
 
@@ -63,7 +68,9 @@ namespace Udpit {
     ///   Starts listening.
     /// </summary>
     private void Listen() {
-      _udpClient.BeginReceive(OnReceive, null);
+      lock (_udpClient) {
+        _udpClient.BeginReceive(OnReceive, null);
+      }
     }
 
     /// <summary>
@@ -73,7 +80,10 @@ namespace Udpit {
       try {
         // receive fragment
         var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.Port);
-        var fragment = _udpClient.EndReceive(ar, ref remoteEndPoint);
+        byte[] fragment;
+        lock (_udpClient) {
+          fragment = _udpClient.EndReceive(ar, ref remoteEndPoint);
+        }
 
         // listen again
         Listen();
@@ -81,9 +91,12 @@ namespace Udpit {
         // fire an event
         FragmentReceived?.Invoke(fragment, remoteEndPoint);
       }
-      catch (ArgumentException) {
+      catch (ObjectDisposedException) {
         // this is in case the socket has been closed, i. e. when changing a port
         // https://stackoverflow.com/questions/18309974/how-do-you-cancel-a-udpclientbeginreceive
+      }
+      catch (ArgumentException) {
+        // ignore as well
       }
     }
 
