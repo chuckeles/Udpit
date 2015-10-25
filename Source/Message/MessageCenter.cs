@@ -9,6 +9,19 @@ namespace Udpit {
   /// </summary>
   internal class MessageCenter {
 
+    /// <summary>
+    ///   Delegate for the changed event.
+    /// </summary>
+    public delegate void ChangedDelegate();
+
+    /// <summary>
+    ///   Fired when messages in the message center update.
+    /// </summary>
+    /// <remarks>
+    ///   That is when the number of messages or the state of a message changes.
+    /// </remarks>
+    public event ChangedDelegate Changed;
+
     private MessageCenter() {
       // hook the receiver's fragment event
       Receiver.Singleton.FragmentReceived += FragmentReceived;
@@ -30,13 +43,6 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Add a new message to the list.
-    /// </summary>
-    public void AddMessage(Message message) {
-      _messages.Add(BitConverter.ToUInt16(message.Id, 0), message);
-    }
-
-    /// <summary>
     ///   Create a new message that needs to be send. Called by the UI.
     /// </summary>
     /// <param name="remoteEndPoint">Where to send the message</param>
@@ -50,6 +56,9 @@ namespace Udpit {
       lock (_messages) {
         _messages.Add(BitConverter.ToUInt16(message.Id, 0), message);
       }
+
+      // fire event
+      Changed?.Invoke();
 
       // begin transmission
       Sender.Singleton.SendPrepareFragment(message);
@@ -104,8 +113,12 @@ namespace Udpit {
           var prepareMessage = PrepareMessage(fragment, remoteEndPoint);
 
           // respond
-          if (prepareMessage != null)
+          if (prepareMessage != null) {
+            // fire event
+            Changed?.Invoke();
+
             Sender.Singleton.SendPreparedFragment(prepareMessage);
+          }
 
           break;
 
@@ -114,8 +127,12 @@ namespace Udpit {
           var preparedMessage = SetRemoteName(fragment);
 
           // start sending data fragments
-          if (preparedMessage != null)
+          if (preparedMessage != null) {
+            // fire event
+            Changed?.Invoke();
+
             Sender.Singleton.SendDataFragments(preparedMessage);
+          }
 
           break;
 
@@ -133,6 +150,9 @@ namespace Udpit {
 
           // TODO: Check missing fragments
 
+          // fire event
+          Changed?.Invoke();
+
           // send okay fragment
           Sender.Singleton.SendOkayFragment(endMessage);
 
@@ -149,12 +169,15 @@ namespace Udpit {
             okayMessage.Status = MessageStatus.Finished;
           }
 
+          // fire event
+          Changed?.Invoke();
+
           break;
       }
     }
 
     /// <summary>
-    /// Finds a message from a fragment.
+    ///   Finds a message from a fragment.
     /// </summary>
     private Message GetMessage(byte[] fragment) {
       // get id
@@ -202,6 +225,9 @@ namespace Udpit {
       lock (_messages) {
         _messages.Add(idKey, message);
       }
+
+      // fire event
+      Changed?.Invoke();
 
       // return the message
       return message;
