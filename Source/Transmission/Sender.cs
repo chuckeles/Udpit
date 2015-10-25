@@ -122,6 +122,9 @@ namespace Udpit {
           message.Status = MessageStatus.Handshaking;
         }
 
+        // update message center
+        MessageCenter.Singleton.ChangedFromOutside();
+
         // send the fragment
         lock (_udpClient) {
           _udpClient.Send(fragment, fragment.Length, message.RemoteEndPoint);

@@ -65,6 +65,14 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Fires the changed event.
+    /// </summary>
+    public void ChangedFromOutside() {
+      // fire event
+      Changed?.Invoke();
+    }
+
+    /// <summary>
     ///   Add an incoming data fragment.
     /// </summary>
     private void AddFragment(byte[] fragment) {
