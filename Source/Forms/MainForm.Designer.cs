@@ -37,7 +37,6 @@ namespace Udpit {
       this.idColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.fromColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.stateColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-      this.showMessageButton = new System.Windows.Forms.ToolStripMenuItem();
       this.toolbar.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -99,8 +98,7 @@ namespace Udpit {
       // messageButton
       // 
       this.messageButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newMessageButton,
-            this.showMessageButton});
+            this.newMessageButton});
       this.messageButton.Name = "messageButton";
       this.messageButton.Size = new System.Drawing.Size(71, 22);
       this.messageButton.Text = "Messages";
@@ -146,13 +144,6 @@ namespace Udpit {
       this.stateColumn.Text = "State";
       this.stateColumn.Width = 156;
       // 
-      // showMessageButton
-      // 
-      this.showMessageButton.Name = "showMessageButton";
-      this.showMessageButton.Size = new System.Drawing.Size(152, 22);
-      this.showMessageButton.Text = "Show";
-      this.showMessageButton.Click += new System.EventHandler(this.ShowMessageForm);
-      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,6 +179,5 @@ namespace Udpit {
     private ColumnHeader idColumn;
     private ColumnHeader stateColumn;
     private ColumnHeader fromColumn;
-    private ToolStripMenuItem showMessageButton;
   }
 }

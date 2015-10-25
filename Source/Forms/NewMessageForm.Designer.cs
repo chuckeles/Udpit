@@ -154,6 +154,7 @@
       // fileButton
       // 
       this.fileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.fileButton.Enabled = false;
       this.fileButton.Location = new System.Drawing.Point(12, 282);
       this.fileButton.Name = "fileButton";
       this.fileButton.Size = new System.Drawing.Size(75, 23);
@@ -164,6 +165,7 @@
       // removeFileButton
       // 
       this.removeFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.removeFileButton.Enabled = false;
       this.removeFileButton.Location = new System.Drawing.Point(93, 282);
       this.removeFileButton.Name = "removeFileButton";
       this.removeFileButton.Size = new System.Drawing.Size(57, 23);
