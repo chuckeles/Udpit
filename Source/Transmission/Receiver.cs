@@ -58,10 +58,10 @@ namespace Udpit {
         _udpClient = new UdpClient();
         _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
         _udpClient.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
-
-        // listen
-        Listen();
       }
+
+      // listen
+      Listen();
     }
 
     /// <summary>
