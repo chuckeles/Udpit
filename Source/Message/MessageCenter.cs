@@ -93,7 +93,7 @@ namespace Udpit {
       var number = Fragmenter.GetFragmentNumber(fragment);
 
       // check if the fragment exists
-      if (message.FragmentList.ContainsKey(number))
+      if (message.PartList.ContainsKey(number))
         return;
 
       // TODO: Check the fragment for errors
@@ -103,7 +103,7 @@ namespace Udpit {
 
       // add the fragment
       lock (message) {
-        message.FragmentList.Add(number, data);
+        message.PartList.Add(number, data);
       }
     }
 

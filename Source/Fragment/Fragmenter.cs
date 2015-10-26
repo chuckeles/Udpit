@@ -135,7 +135,7 @@ namespace Udpit {
       data.AddRange(BitConverter.GetBytes(number));
 
       // add data
-      data.AddRange(message.FragmentList[number]);
+      data.AddRange(message.PartList[number]);
 
       // return data
       return data.ToArray();
@@ -209,7 +209,7 @@ namespace Udpit {
       data.AddRange(message.Id);
 
       // add fragment count
-      data.AddRange(BitConverter.GetBytes(message.FragmentCount));
+      data.AddRange(BitConverter.GetBytes(message.PartCount));
 
       // add name
       data.AddRange(Encoding.ASCII.GetBytes(Options.Name));

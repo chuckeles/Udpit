@@ -9,26 +9,18 @@ namespace Udpit {
   /// </summary>
   internal class Message {
 
-    public Message(ushort fragmentCount, MessageOrigin origin = MessageOrigin.Local) {
-      // set fragment count
-      FragmentCount = fragmentCount;
+    public Message(ushort partCount, MessageOrigin origin = MessageOrigin.Local)
+      : this(partCount, new[] {(byte) DateTime.Now.Minute, (byte) DateTime.Now.Second}) {}
 
-      // set origin
-      Origin = origin;
-
-      // generate an id
-      Id[0] = (byte)DateTime.Now.Minute;
-      Id[1] = (byte)DateTime.Now.Second;
+    public Message(ushort partCount, SortedList<ushort, byte[]> parts, MessageOrigin origin = MessageOrigin.Local)
+      : this(partCount, origin) {
+      // set the part list
+      PartList = parts;
     }
 
-    public Message(ushort fragmentCount, SortedList<ushort, byte[]> fragments, MessageOrigin origin = MessageOrigin.Local) : this(fragmentCount, origin) {
-      // set the list
-      FragmentList = fragments;
-    }
-
-    public Message(ushort fragmentCount, byte[] id, MessageOrigin origin = MessageOrigin.Remote) {
-      // set fragment count
-      FragmentCount = fragmentCount;
+    public Message(ushort partCount, byte[] id, MessageOrigin origin = MessageOrigin.Remote) {
+      // set part count
+      PartCount = partCount;
 
       // set origin
       Origin = origin;
@@ -39,21 +31,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Number of fragments.
-    /// </summary>
-    public ushort FragmentCount { get; }
-
-    /// <summary>
-    ///   The sorted list of fragments.
-    /// </summary>
-    /// <remarks>
-    ///   In the source this is a list of all fragments.
-    ///   In the destination this is a list of received and checked fragments.
-    /// </remarks>
-    public SortedList<ushort, byte[]> FragmentList { get; } = new SortedList<ushort, byte[]>();
-
-    /// <summary>
-    ///   Message id.
+    ///   Message ID.
     /// </summary>
     public byte[] Id { get; } = new byte[2];
 
@@ -63,7 +41,21 @@ namespace Udpit {
     public MessageOrigin Origin { get; }
 
     /// <summary>
-    ///   Remote's ip and port.
+    ///   Number of parts.
+    /// </summary>
+    public ushort PartCount { get; }
+
+    /// <summary>
+    ///   The sorted list of parts.
+    /// </summary>
+    /// <remarks>
+    ///   In the source this is a list of all parts.
+    ///   In the destination this is a list of received and checked parts.
+    /// </remarks>
+    public SortedList<ushort, byte[]> PartList { get; } = new SortedList<ushort, byte[]>();
+
+    /// <summary>
+    ///   Remote's IP and port.
     /// </summary>
     public IPEndPoint RemoteEndPoint { get; set; }
 
