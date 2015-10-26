@@ -47,16 +47,23 @@
       this._sendActionsContainer = new System.Windows.Forms.TableLayoutPanel();
       this._sendButton = new System.Windows.Forms.Button();
       this._sendCancelButton = new System.Windows.Forms.Button();
+      this._receiveGroup = new System.Windows.Forms.GroupBox();
+      this._receiveActionsContainer = new System.Windows.Forms.TableLayoutPanel();
+      this._receiveListenButton = new System.Windows.Forms.Button();
+      this._receiveStopButton = new System.Windows.Forms.Button();
       this._mainMenu.SuspendLayout();
       this._tabContainer.SuspendLayout();
       this._tabLog.SuspendLayout();
       this._tabSend.SuspendLayout();
+      this._tabReceive.SuspendLayout();
       this._sendTableContainer.SuspendLayout();
       this._sendInputGroup.SuspendLayout();
       this._sendFileGroup.SuspendLayout();
       this._sendActionsGroup.SuspendLayout();
       this._sendFileContainer.SuspendLayout();
       this._sendActionsContainer.SuspendLayout();
+      this._receiveGroup.SuspendLayout();
+      this._receiveActionsContainer.SuspendLayout();
       this.SuspendLayout();
       // 
       // _mainMenu
@@ -140,6 +147,7 @@
       // 
       // _tabReceive
       // 
+      this._tabReceive.Controls.Add(this._receiveGroup);
       this._tabReceive.Location = new System.Drawing.Point(4, 22);
       this._tabReceive.Name = "_tabReceive";
       this._tabReceive.Size = new System.Drawing.Size(276, 389);
@@ -324,6 +332,54 @@
       this._sendCancelButton.Text = "Cancel";
       this._sendCancelButton.UseVisualStyleBackColor = true;
       // 
+      // _receiveGroup
+      // 
+      this._receiveGroup.Controls.Add(this._receiveActionsContainer);
+      this._receiveGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._receiveGroup.Location = new System.Drawing.Point(0, 0);
+      this._receiveGroup.Name = "_receiveGroup";
+      this._receiveGroup.Size = new System.Drawing.Size(276, 389);
+      this._receiveGroup.TabIndex = 0;
+      this._receiveGroup.TabStop = false;
+      this._receiveGroup.Text = "Actions";
+      // 
+      // _receiveActionsContainer
+      // 
+      this._receiveActionsContainer.ColumnCount = 1;
+      this._receiveActionsContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+      this._receiveActionsContainer.Controls.Add(this._receiveListenButton, 0, 0);
+      this._receiveActionsContainer.Controls.Add(this._receiveStopButton, 0, 1);
+      this._receiveActionsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._receiveActionsContainer.Location = new System.Drawing.Point(3, 16);
+      this._receiveActionsContainer.Name = "_receiveActionsContainer";
+      this._receiveActionsContainer.RowCount = 2;
+      this._receiveActionsContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this._receiveActionsContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this._receiveActionsContainer.Size = new System.Drawing.Size(270, 370);
+      this._receiveActionsContainer.TabIndex = 0;
+      // 
+      // _receiveListenButton
+      // 
+      this._receiveListenButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this._receiveListenButton.Location = new System.Drawing.Point(3, 3);
+      this._receiveListenButton.Name = "_receiveListenButton";
+      this._receiveListenButton.Size = new System.Drawing.Size(264, 23);
+      this._receiveListenButton.TabIndex = 0;
+      this._receiveListenButton.Text = "Listen";
+      this._receiveListenButton.UseVisualStyleBackColor = true;
+      // 
+      // _receiveStopButton
+      // 
+      this._receiveStopButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this._receiveStopButton.Location = new System.Drawing.Point(3, 32);
+      this._receiveStopButton.Name = "_receiveStopButton";
+      this._receiveStopButton.Size = new System.Drawing.Size(264, 23);
+      this._receiveStopButton.TabIndex = 1;
+      this._receiveStopButton.Text = "Stop";
+      this._receiveStopButton.UseVisualStyleBackColor = true;
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,6 +400,7 @@
       this._tabLog.ResumeLayout(false);
       this._tabLog.PerformLayout();
       this._tabSend.ResumeLayout(false);
+      this._tabReceive.ResumeLayout(false);
       this._sendTableContainer.ResumeLayout(false);
       this._sendInputGroup.ResumeLayout(false);
       this._sendInputGroup.PerformLayout();
@@ -352,6 +409,8 @@
       this._sendFileContainer.ResumeLayout(false);
       this._sendFileContainer.PerformLayout();
       this._sendActionsContainer.ResumeLayout(false);
+      this._receiveGroup.ResumeLayout(false);
+      this._receiveActionsContainer.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -383,5 +442,9 @@
     private System.Windows.Forms.TableLayoutPanel _sendActionsContainer;
     private System.Windows.Forms.Button _sendButton;
     private System.Windows.Forms.Button _sendCancelButton;
+    private System.Windows.Forms.GroupBox _receiveGroup;
+    private System.Windows.Forms.TableLayoutPanel _receiveActionsContainer;
+    private System.Windows.Forms.Button _receiveListenButton;
+    private System.Windows.Forms.Button _receiveStopButton;
   }
 }
