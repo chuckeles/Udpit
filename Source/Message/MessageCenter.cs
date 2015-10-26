@@ -10,7 +10,7 @@ namespace Udpit {
     private MessageCenter() {}
 
     /// <summary>
-    ///   Create a singleton instance.
+    ///   Creates a singleton instance.
     /// </summary>
     public static MessageCenter Create() {
       // check existing instance

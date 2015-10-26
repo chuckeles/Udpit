@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Source\Fragment\Fragmenter.cs" />
     <Compile Include="Source\Fragment\FragmentType.cs" />
+    <Compile Include="Source\Log\Log.cs" />
     <Compile Include="Source\Message\Message.cs" />
     <Compile Include="Source\Message\MessageCenter.cs" />
     <Compile Include="Source\Message\MessageOrigin.cs" />
