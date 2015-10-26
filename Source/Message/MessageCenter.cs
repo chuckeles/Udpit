@@ -9,23 +9,7 @@ namespace Udpit {
   /// </summary>
   internal class MessageCenter {
 
-    /// <summary>
-    ///   Delegate for the changed event.
-    /// </summary>
-    public delegate void ChangedDelegate();
-
-    /// <summary>
-    ///   Fired when messages in the message center update.
-    /// </summary>
-    /// <remarks>
-    ///   That is when the number of messages or the state of a message changes.
-    /// </remarks>
-    public event ChangedDelegate Changed;
-
-    private MessageCenter() {
-      // hook the receiver's fragment event
-      //Receiver.Singleton.FragmentReceived += FragmentReceived;
-    }
+    private MessageCenter() {}
 
     /// <summary>
     ///   Create a singleton instance.
@@ -57,19 +41,8 @@ namespace Udpit {
         Messages.Add(BitConverter.ToUInt16(message.Id, 0), message);
       }
 
-      // fire event
-      Changed?.Invoke();
-
       // begin transmission
       //Sender.Singleton.SendPrepareFragment(message);
-    }
-
-    /// <summary>
-    ///   Fires the changed event.
-    /// </summary>
-    public void ChangedFromOutside() {
-      // fire event
-      Changed?.Invoke();
     }
 
     /// <summary>
@@ -122,9 +95,6 @@ namespace Udpit {
 
           // respond
           if (prepareMessage != null) {
-            // fire event
-            Changed?.Invoke();
-
             //Sender.Singleton.SendPreparedFragment(prepareMessage);
           }
 
@@ -136,9 +106,6 @@ namespace Udpit {
 
           // start sending data fragments
           if (preparedMessage != null) {
-            // fire event
-            Changed?.Invoke();
-
             //Sender.Singleton.SendDataFragments(preparedMessage);
           }
 
@@ -158,9 +125,6 @@ namespace Udpit {
 
           // TODO: Check missing fragments
 
-          // fire event
-          Changed?.Invoke();
-
           // send okay fragment
           //Sender.Singleton.SendOkayFragment(endMessage);
 
@@ -177,9 +141,6 @@ namespace Udpit {
             okayMessage.Status = MessageStatus.Finished;
           }
 
-          // fire event
-          Changed?.Invoke();
-
           break;
       }
     }
@@ -192,12 +153,8 @@ namespace Udpit {
       var id = Fragmenter.GetID(fragment);
       var idKey = BitConverter.ToUInt16(id, 0);
 
-      // find message
-      if (!Messages.ContainsKey(idKey))
-        return null;
-
-      // get message
-      return Messages[idKey];
+      // find and return message
+      return Messages.ContainsKey(idKey) ? Messages[idKey] : null;
     }
 
     /// <summary>
@@ -233,9 +190,6 @@ namespace Udpit {
       lock (Messages) {
         Messages.Add(idKey, message);
       }
-
-      // fire event
-      Changed?.Invoke();
 
       // return the message
       return message;
