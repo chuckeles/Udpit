@@ -28,7 +28,13 @@
       this._fileMenu = new System.Windows.Forms.ToolStripMenuItem();
       this._restartButton = new System.Windows.Forms.ToolStripMenuItem();
       this._exitButton = new System.Windows.Forms.ToolStripMenuItem();
+      this._tabContainer = new System.Windows.Forms.TabControl();
+      this._tabLog = new System.Windows.Forms.TabPage();
+      this._tabSend = new System.Windows.Forms.TabPage();
+      this._tabReceive = new System.Windows.Forms.TabPage();
+      this._tabOptions = new System.Windows.Forms.TabPage();
       this._mainMenu.SuspendLayout();
+      this._tabContainer.SuspendLayout();
       this.SuspendLayout();
       // 
       // _mainMenu
@@ -45,8 +51,9 @@
       // 
       this._statusBar.Location = new System.Drawing.Point(0, 439);
       this._statusBar.Name = "_statusBar";
+      this._statusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
       this._statusBar.Size = new System.Drawing.Size(284, 22);
-      this._statusBar.TabIndex = 1;
+      this._statusBar.TabIndex = 2;
       this._statusBar.Text = "Status Bar";
       // 
       // _fileMenu
@@ -74,11 +81,63 @@
       this._exitButton.Text = "Exit";
       this._exitButton.Click += new System.EventHandler(this.Exit);
       // 
+      // _tabContainer
+      // 
+      this._tabContainer.Controls.Add(this._tabLog);
+      this._tabContainer.Controls.Add(this._tabSend);
+      this._tabContainer.Controls.Add(this._tabReceive);
+      this._tabContainer.Controls.Add(this._tabOptions);
+      this._tabContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._tabContainer.Location = new System.Drawing.Point(0, 24);
+      this._tabContainer.Name = "_tabContainer";
+      this._tabContainer.SelectedIndex = 0;
+      this._tabContainer.Size = new System.Drawing.Size(284, 415);
+      this._tabContainer.TabIndex = 1;
+      // 
+      // _tabLog
+      // 
+      this._tabLog.Location = new System.Drawing.Point(4, 22);
+      this._tabLog.Name = "_tabLog";
+      this._tabLog.Padding = new System.Windows.Forms.Padding(3);
+      this._tabLog.Size = new System.Drawing.Size(276, 389);
+      this._tabLog.TabIndex = 0;
+      this._tabLog.Text = "Log";
+      this._tabLog.UseVisualStyleBackColor = true;
+      // 
+      // _tabSend
+      // 
+      this._tabSend.Location = new System.Drawing.Point(4, 22);
+      this._tabSend.Name = "_tabSend";
+      this._tabSend.Padding = new System.Windows.Forms.Padding(3);
+      this._tabSend.Size = new System.Drawing.Size(276, 389);
+      this._tabSend.TabIndex = 1;
+      this._tabSend.Text = "Send";
+      this._tabSend.UseVisualStyleBackColor = true;
+      // 
+      // _tabReceive
+      // 
+      this._tabReceive.Location = new System.Drawing.Point(4, 22);
+      this._tabReceive.Name = "_tabReceive";
+      this._tabReceive.Size = new System.Drawing.Size(276, 389);
+      this._tabReceive.TabIndex = 2;
+      this._tabReceive.Text = "Receive";
+      this._tabReceive.UseVisualStyleBackColor = true;
+      // 
+      // _tabOptions
+      // 
+      this._tabOptions.Location = new System.Drawing.Point(4, 22);
+      this._tabOptions.Name = "_tabOptions";
+      this._tabOptions.Size = new System.Drawing.Size(276, 389);
+      this._tabOptions.TabIndex = 3;
+      this._tabOptions.Text = "Options";
+      this._tabOptions.UseVisualStyleBackColor = true;
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(284, 461);
+      this.Controls.Add(this._tabContainer);
       this.Controls.Add(this._statusBar);
       this.Controls.Add(this._mainMenu);
       this.MainMenuStrip = this._mainMenu;
@@ -89,6 +148,7 @@
       this.Text = "Udpit";
       this._mainMenu.ResumeLayout(false);
       this._mainMenu.PerformLayout();
+      this._tabContainer.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -101,5 +161,10 @@
     private System.Windows.Forms.ToolStripMenuItem _fileMenu;
     private System.Windows.Forms.ToolStripMenuItem _restartButton;
     private System.Windows.Forms.ToolStripMenuItem _exitButton;
+    private System.Windows.Forms.TabControl _tabContainer;
+    private System.Windows.Forms.TabPage _tabLog;
+    private System.Windows.Forms.TabPage _tabSend;
+    private System.Windows.Forms.TabPage _tabReceive;
+    private System.Windows.Forms.TabPage _tabOptions;
   }
 }
