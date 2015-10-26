@@ -57,51 +57,11 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Get data from a data fragment.
+    ///   Gets data from a data fragment.
     /// </summary>
     public static byte[] GetData(byte[] fragment) {
       // data begins at sixth byte
       return fragment.Skip(5).ToArray();
-    }
-
-    /// <summary>
-    ///   Makes a data fragment for a fragment of a message.
-    /// </summary>
-    public static byte[] GetDataFragment(Message message, ushort number) {
-      // the resulting array of bytes
-      var data = new List<byte>();
-
-      // add the type
-      data.Add((byte) FragmentType.Data);
-
-      // add the id
-      data.AddRange(message.Id);
-
-      // add the fragment number
-      data.AddRange(BitConverter.GetBytes(number));
-
-      // add data
-      data.AddRange(message.FragmentList[number]);
-
-      // return data
-      return data.ToArray();
-    }
-
-    /// <summary>
-    ///   Makes an end fragment.
-    /// </summary>
-    public static byte[] GetEndFragment(Message message) {
-      // the resulting array of bytes
-      var data = new List<byte>();
-
-      // add the type
-      data.Add((byte) FragmentType.End);
-
-      // add the id
-      data.AddRange(message.Id);
-
-      // return data
-      return data.ToArray();
     }
 
     /// <summary>
@@ -113,7 +73,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Get fragment number of a data fragment.
+    ///   Gets fragment number of a data fragment.
     /// </summary>
     public static ushort GetFragmentNumber(byte[] fragment) {
       // same implementation
@@ -137,9 +97,71 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Gets the remote name from a prepared fragment.
+    /// </summary>
+    public static string GetPreparedName(byte[] fragment) {
+      // the name starts at the fourth byte
+      var bytes = fragment.Skip(3).ToArray();
+
+      // convert and return
+      return Encoding.ASCII.GetString(bytes);
+    }
+
+    /// <summary>
+    ///   Gets the remote name from a prepare fragment.
+    /// </summary>
+    public static string GetPrepareName(byte[] fragment) {
+      // the name starts at the sixth byte
+      var bytes = fragment.Skip(5).ToArray();
+
+      // convert and return
+      return Encoding.ASCII.GetString(bytes);
+    }
+
+    /// <summary>
+    ///   Makes a data fragment for a fragment of a message.
+    /// </summary>
+    public static byte[] MakeDataFragment(Message message, ushort number) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.Data);
+
+      // add the id
+      data.AddRange(message.Id);
+
+      // add the fragment number
+      data.AddRange(BitConverter.GetBytes(number));
+
+      // add data
+      data.AddRange(message.FragmentList[number]);
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
+    ///   Makes an end fragment.
+    /// </summary>
+    public static byte[] MakeEndFragment(Message message) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.End);
+
+      // add the id
+      data.AddRange(message.Id);
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
     ///   Makes an okay fragment.
     /// </summary>
-    public static byte[] GetOkayFragment(Message message) {
+    public static byte[] MakeOkayFragment(Message message) {
       // the resulting array of bytes
       var data = new List<byte>();
 
@@ -156,7 +178,7 @@ namespace Udpit {
     /// <summary>
     ///   Makes a prepared fragment.
     /// </summary>
-    public static byte[] GetPreparedFragment(Message message) {
+    public static byte[] MakePreparedFragment(Message message) {
       // the resulting array of bytes
       var data = new List<byte>();
 
@@ -174,20 +196,9 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Get the remote name from a prepared fragment.
-    /// </summary>
-    public static string GetPreparedName(byte[] fragment) {
-      // the name starts at the fourth byte
-      var bytes = fragment.Skip(3).ToArray();
-
-      // convert and return
-      return Encoding.ASCII.GetString(bytes);
-    }
-
-    /// <summary>
     ///   Makes a prepare fragment.
     /// </summary>
-    public static byte[] GetPrepareFragment(Message message) {
+    public static byte[] MakePrepareFragment(Message message) {
       // the resulting array of bytes
       var data = new List<byte>();
 
@@ -205,17 +216,6 @@ namespace Udpit {
 
       // return data
       return data.ToArray();
-    }
-
-    /// <summary>
-    ///   Gets the remote name from a prepare fragment.
-    /// </summary>
-    public static string GetPrepareName(byte[] fragment) {
-      // the name starts at the sixth byte
-      var bytes = fragment.Skip(5).ToArray();
-
-      // convert and return
-      return Encoding.ASCII.GetString(bytes);
     }
 
   }
