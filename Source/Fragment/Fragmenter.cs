@@ -129,7 +129,7 @@ namespace Udpit {
       data.Add((byte) FragmentType.Data);
 
       // add the id
-      data.AddRange(message.Id);
+      data.AddRange(message.ID);
 
       // add the fragment number
       data.AddRange(BitConverter.GetBytes(number));
@@ -152,7 +152,7 @@ namespace Udpit {
       data.Add((byte) FragmentType.End);
 
       // add the id
-      data.AddRange(message.Id);
+      data.AddRange(message.ID);
 
       // return data
       return data.ToArray();
@@ -169,7 +169,7 @@ namespace Udpit {
       data.Add((byte) FragmentType.Okay);
 
       // add the id
-      data.AddRange(message.Id);
+      data.AddRange(message.ID);
 
       // return data
       return data.ToArray();
@@ -186,7 +186,7 @@ namespace Udpit {
       data.Add((byte) FragmentType.Prepared);
 
       // add the id
-      data.AddRange(message.Id);
+      data.AddRange(message.ID);
 
       // add name
       data.AddRange(Encoding.ASCII.GetBytes(Options.Name));
@@ -206,7 +206,7 @@ namespace Udpit {
       data.Add((byte) FragmentType.Prepare);
 
       // add the id
-      data.AddRange(message.Id);
+      data.AddRange(message.ID);
 
       // add fragment count
       data.AddRange(BitConverter.GetBytes(message.PartCount));

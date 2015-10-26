@@ -10,10 +10,16 @@ namespace Udpit {
   internal class Message {
 
     public Message(ushort partCount, MessageOrigin origin = MessageOrigin.Local)
-      : this(partCount, new[] {(byte) DateTime.Now.Minute, (byte) DateTime.Now.Second}) {}
+      : this(partCount, new[] {(byte) DateTime.Now.Minute, (byte) DateTime.Now.Second}, origin) {}
 
     public Message(ushort partCount, SortedList<ushort, byte[]> parts, MessageOrigin origin = MessageOrigin.Local)
-      : this(partCount, origin) {
+      : this(partCount, new[] {(byte) DateTime.Now.Minute, (byte) DateTime.Now.Second}, parts, origin) {}
+
+    public Message(ushort partCount,
+                   byte[] id,
+                   SortedList<ushort, byte[]> parts,
+                   MessageOrigin origin = MessageOrigin.Local)
+      : this(partCount, id, origin) {
       // set the part list
       PartList = parts;
     }
@@ -26,14 +32,14 @@ namespace Udpit {
       Origin = origin;
 
       // set the id
-      Id[0] = id[0];
-      Id[1] = id[1];
+      ID[0] = id[0];
+      ID[1] = id[1];
     }
 
     /// <summary>
     ///   Message ID.
     /// </summary>
-    public byte[] Id { get; } = new byte[2];
+    public byte[] ID { get; } = new byte[2];
 
     /// <summary>
     ///   The origin of the message.
