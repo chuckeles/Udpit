@@ -17,8 +17,13 @@ namespace Udpit {
       Origin = origin;
 
       // generate an id
-      Id[0] = (byte) DateTime.Now.Second;
-      Id[1] = (byte) DateTime.Now.Minute;
+      Id[0] = (byte)DateTime.Now.Minute;
+      Id[1] = (byte)DateTime.Now.Second;
+    }
+
+    public Message(ushort fragmentCount, SortedList<ushort, byte[]> fragments, MessageOrigin origin = MessageOrigin.Local) : this(fragmentCount, origin) {
+      // set the list
+      FragmentList = fragments;
     }
 
     public Message(ushort fragmentCount, byte[] id, MessageOrigin origin = MessageOrigin.Remote) {
@@ -45,7 +50,7 @@ namespace Udpit {
     ///   In the source this is a list of all fragments.
     ///   In the destination this is a list of received and checked fragments.
     /// </remarks>
-    public SortedList<ushort, byte[]> FragmentList { get; set; } = new SortedList<ushort, byte[]>();
+    public SortedList<ushort, byte[]> FragmentList { get; } = new SortedList<ushort, byte[]>();
 
     /// <summary>
     ///   Message id.

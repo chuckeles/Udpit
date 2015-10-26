@@ -48,9 +48,8 @@ namespace Udpit {
       }
 
       // create a message
-      var message = new Message((ushort) fragmentList.Count) {
-        RemoteEndPoint = remoteEndPoint,
-        FragmentList = fragmentList
+      var message = new Message((ushort) fragmentList.Count, fragmentList) {
+        RemoteEndPoint = remoteEndPoint
       };
 
       // return the message

@@ -24,7 +24,7 @@ namespace Udpit {
 
     private MessageCenter() {
       // hook the receiver's fragment event
-      Receiver.Singleton.FragmentReceived += FragmentReceived;
+      //Receiver.Singleton.FragmentReceived += FragmentReceived;
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ namespace Udpit {
       Changed?.Invoke();
 
       // begin transmission
-      Sender.Singleton.SendPrepareFragment(message);
+      //Sender.Singleton.SendPrepareFragment(message);
     }
 
     /// <summary>
@@ -125,7 +125,7 @@ namespace Udpit {
             // fire event
             Changed?.Invoke();
 
-            Sender.Singleton.SendPreparedFragment(prepareMessage);
+            //Sender.Singleton.SendPreparedFragment(prepareMessage);
           }
 
           break;
@@ -139,7 +139,7 @@ namespace Udpit {
             // fire event
             Changed?.Invoke();
 
-            Sender.Singleton.SendDataFragments(preparedMessage);
+            //Sender.Singleton.SendDataFragments(preparedMessage);
           }
 
           break;
@@ -162,7 +162,7 @@ namespace Udpit {
           Changed?.Invoke();
 
           // send okay fragment
-          Sender.Singleton.SendOkayFragment(endMessage);
+          //Sender.Singleton.SendOkayFragment(endMessage);
 
           break;
 
