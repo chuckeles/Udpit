@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Udpit {
@@ -51,7 +52,19 @@ namespace Udpit {
     ///   Logs messages.
     /// </summary>
     private void WriteToLog(object sender, string message) {
-      _logBox.AppendText($"[{DateTime.Now.ToShortTimeString()}] {message}\n");
+      // get time
+      var time = DateTime.Now;
+
+      // write the time
+      _logBox.SelectionColor = Color.Chocolate;
+      _logBox.AppendText($"[{time.Hour}:{time.Minute}:{time.Second}:{time.Millisecond}] ");
+
+      // write the message
+      _logBox.SelectionColor = DefaultForeColor;
+      _logBox.AppendText(message);
+
+      // end line
+      _logBox.AppendText("\n");
     }
 
     /// <summary>

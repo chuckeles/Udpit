@@ -30,7 +30,6 @@
       this._statusBar = new System.Windows.Forms.StatusStrip();
       this._tabContainer = new System.Windows.Forms.TabControl();
       this._tabLog = new System.Windows.Forms.TabPage();
-      this._logBox = new System.Windows.Forms.TextBox();
       this._tabSend = new System.Windows.Forms.TabPage();
       this._sendContainer = new System.Windows.Forms.TableLayoutPanel();
       this._sendInputGroup = new System.Windows.Forms.GroupBox();
@@ -62,6 +61,7 @@
       this._optionsSaveButton = new System.Windows.Forms.Button();
       this._optionsCancelButton = new System.Windows.Forms.Button();
       this._optionsPortBox = new System.Windows.Forms.NumericUpDown();
+      this._logBox = new System.Windows.Forms.RichTextBox();
       this._mainMenu.SuspendLayout();
       this._tabContainer.SuspendLayout();
       this._tabLog.SuspendLayout();
@@ -151,16 +151,6 @@
       this._tabLog.TabIndex = 0;
       this._tabLog.Text = "Log";
       this._tabLog.UseVisualStyleBackColor = true;
-      // 
-      // _logBox
-      // 
-      this._logBox.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._logBox.Location = new System.Drawing.Point(3, 3);
-      this._logBox.Multiline = true;
-      this._logBox.Name = "_logBox";
-      this._logBox.ReadOnly = true;
-      this._logBox.Size = new System.Drawing.Size(270, 383);
-      this._logBox.TabIndex = 0;
       // 
       // _tabSend
       // 
@@ -556,6 +546,16 @@
             0,
             0});
       // 
+      // _logBox
+      // 
+      this._logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._logBox.Location = new System.Drawing.Point(3, 3);
+      this._logBox.Name = "_logBox";
+      this._logBox.ReadOnly = true;
+      this._logBox.Size = new System.Drawing.Size(270, 383);
+      this._logBox.TabIndex = 0;
+      this._logBox.Text = "";
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -574,7 +574,6 @@
       this._mainMenu.PerformLayout();
       this._tabContainer.ResumeLayout(false);
       this._tabLog.ResumeLayout(false);
-      this._tabLog.PerformLayout();
       this._tabSend.ResumeLayout(false);
       this._sendContainer.ResumeLayout(false);
       this._sendInputGroup.ResumeLayout(false);
@@ -612,7 +611,6 @@
     private System.Windows.Forms.TabPage _tabSend;
     private System.Windows.Forms.TabPage _tabReceive;
     private System.Windows.Forms.TabPage _tabOptions;
-    private System.Windows.Forms.TextBox _logBox;
     private System.Windows.Forms.TableLayoutPanel _sendContainer;
     private System.Windows.Forms.GroupBox _sendInputGroup;
     private System.Windows.Forms.GroupBox _sendFileGroup;
@@ -641,5 +639,6 @@
     private System.Windows.Forms.Button _optionsSaveButton;
     private System.Windows.Forms.Button _optionsCancelButton;
     private System.Windows.Forms.NumericUpDown _optionsPortBox;
+    private System.Windows.Forms.RichTextBox _logBox;
   }
 }
