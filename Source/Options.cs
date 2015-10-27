@@ -13,9 +13,6 @@
     /// <summary>
     ///   Port on which to communicate.
     /// </summary>
-    /// <remarks>
-    ///   https://stackoverflow.com/questions/9120050/connecting-two-udp-clients-to-one-port-send-and-receive
-    /// </remarks>
     public static int Port { get; set; } = 6994;
 
   }

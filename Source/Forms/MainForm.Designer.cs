@@ -54,7 +54,6 @@
       this._optionsContainer = new System.Windows.Forms.TableLayoutPanel();
       this._optionsGroup = new System.Windows.Forms.GroupBox();
       this._optionsInputContainer = new System.Windows.Forms.TableLayoutPanel();
-      this._optionsPortBox = new System.Windows.Forms.TextBox();
       this._optionsPortLabel = new System.Windows.Forms.Label();
       this._optionsNameLabel = new System.Windows.Forms.Label();
       this._optionsNameBox = new System.Windows.Forms.TextBox();
@@ -62,6 +61,7 @@
       this._optionsActionsContainer = new System.Windows.Forms.TableLayoutPanel();
       this._optionsSaveButton = new System.Windows.Forms.Button();
       this._optionsCancelButton = new System.Windows.Forms.Button();
+      this._optionsPortBox = new System.Windows.Forms.NumericUpDown();
       this._mainMenu.SuspendLayout();
       this._tabContainer.SuspendLayout();
       this._tabLog.SuspendLayout();
@@ -81,6 +81,7 @@
       this._optionsInputContainer.SuspendLayout();
       this._optionsActionsGroup.SuspendLayout();
       this._optionsActionsContainer.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this._optionsPortBox)).BeginInit();
       this.SuspendLayout();
       // 
       // _mainMenu
@@ -435,10 +436,10 @@
       this._optionsInputContainer.ColumnCount = 2;
       this._optionsInputContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
       this._optionsInputContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-      this._optionsInputContainer.Controls.Add(this._optionsPortBox, 1, 1);
       this._optionsInputContainer.Controls.Add(this._optionsPortLabel, 0, 1);
       this._optionsInputContainer.Controls.Add(this._optionsNameLabel, 0, 0);
       this._optionsInputContainer.Controls.Add(this._optionsNameBox, 1, 0);
+      this._optionsInputContainer.Controls.Add(this._optionsPortBox, 1, 1);
       this._optionsInputContainer.Dock = System.Windows.Forms.DockStyle.Fill;
       this._optionsInputContainer.Location = new System.Drawing.Point(3, 16);
       this._optionsInputContainer.Name = "_optionsInputContainer";
@@ -448,14 +449,6 @@
       this._optionsInputContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
       this._optionsInputContainer.Size = new System.Drawing.Size(264, 147);
       this._optionsInputContainer.TabIndex = 0;
-      // 
-      // _optionsPortBox
-      // 
-      this._optionsPortBox.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsPortBox.Location = new System.Drawing.Point(82, 29);
-      this._optionsPortBox.Name = "_optionsPortBox";
-      this._optionsPortBox.Size = new System.Drawing.Size(179, 20);
-      this._optionsPortBox.TabIndex = 3;
       // 
       // _optionsPortLabel
       // 
@@ -486,6 +479,7 @@
       this._optionsNameBox.Name = "_optionsNameBox";
       this._optionsNameBox.Size = new System.Drawing.Size(179, 20);
       this._optionsNameBox.TabIndex = 1;
+      this._optionsNameBox.TextChanged += new System.EventHandler(this.OptionChanged);
       // 
       // _optionsActionsGroup
       // 
@@ -524,6 +518,7 @@
       this._optionsSaveButton.TabIndex = 0;
       this._optionsSaveButton.Text = "Save";
       this._optionsSaveButton.UseVisualStyleBackColor = true;
+      this._optionsSaveButton.Click += new System.EventHandler(this.Save);
       // 
       // _optionsCancelButton
       // 
@@ -536,6 +531,30 @@
       this._optionsCancelButton.TabIndex = 1;
       this._optionsCancelButton.Text = "Cancel";
       this._optionsCancelButton.UseVisualStyleBackColor = true;
+      this._optionsCancelButton.Click += new System.EventHandler(this.Cancel);
+      // 
+      // _optionsPortBox
+      // 
+      this._optionsPortBox.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsPortBox.Location = new System.Drawing.Point(82, 29);
+      this._optionsPortBox.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+      this._optionsPortBox.Minimum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+      this._optionsPortBox.Name = "_optionsPortBox";
+      this._optionsPortBox.Size = new System.Drawing.Size(179, 20);
+      this._optionsPortBox.TabIndex = 3;
+      this._optionsPortBox.Value = new decimal(new int[] {
+            6994,
+            0,
+            0,
+            0});
       // 
       // MainForm
       // 
@@ -575,6 +594,7 @@
       this._optionsInputContainer.PerformLayout();
       this._optionsActionsGroup.ResumeLayout(false);
       this._optionsActionsContainer.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this._optionsPortBox)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -617,9 +637,9 @@
     private System.Windows.Forms.Label _optionsNameLabel;
     private System.Windows.Forms.TextBox _optionsNameBox;
     private System.Windows.Forms.Label _optionsPortLabel;
-    private System.Windows.Forms.TextBox _optionsPortBox;
     private System.Windows.Forms.TableLayoutPanel _optionsActionsContainer;
     private System.Windows.Forms.Button _optionsSaveButton;
     private System.Windows.Forms.Button _optionsCancelButton;
+    private System.Windows.Forms.NumericUpDown _optionsPortBox;
   }
 }
