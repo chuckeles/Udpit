@@ -21,7 +21,7 @@ namespace Udpit {
       Log.Singleton.LogMessage("Udpit has started");
 
       // log the option tip
-      Log.Singleton.LogMessage("Go to the Options and set things up");
+      Log.Singleton.LogMessage("Go to the <Options> and set things up");
 
       // set option inputs
       SetOptionInputs();
@@ -194,7 +194,17 @@ namespace Udpit {
 
       // write the message
       _logBox.SelectionColor = DefaultForeColor;
-      _logBox.AppendText(message);
+      foreach (var c in message) {
+        // text in <...> is a different color
+        if (c == '<')
+          _logBox.SelectionColor = Color.BlueViolet;
+        else if (c == '>')
+          _logBox.SelectionColor = DefaultForeColor;
+
+        // append
+        else
+          _logBox.AppendText(c.ToString());
+      }
 
       // end line
       _logBox.AppendText("\n");
