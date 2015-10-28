@@ -43,11 +43,11 @@ namespace Udpit {
       // log the start
       lock (message) {
         Log.Singleton.LogMessage(
-          $"Sending message <{message.ID[0]}{message.ID[1]}> to <{Options.Remote}> with maximum part size of <{Options.MaxPartSize}B>");
+          $"Sending message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> to <{Options.Remote}> with maximum part size of <{Options.MaxPartSize}B>");
       }
 
       // delegate to the transmitter
-      Transmitter.Singleton.SendMessage(message);
+      Transmitter.Singleton.SendPrepare(message);
     }
 
     /// <summary>
@@ -59,6 +59,12 @@ namespace Udpit {
 
       // log
       Log.Singleton.LogMessage($"Received a fragment of type <{type}> and size <{fragment.Length}B>");
+
+      // decision time
+      switch (type) {
+        case FragmentType.Prepare:
+          break;
+      }
     }
 
     /// <summary>
