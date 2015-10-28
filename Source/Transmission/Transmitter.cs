@@ -75,7 +75,7 @@ namespace Udpit {
         }
 
         // send all data fragments
-        List<Task> sendTasks = new List<Task>();
+        var sendTasks = new List<Task>();
         lock (message) {
           foreach (var pair in message.PartList) {
             // request a data fragment
@@ -103,7 +103,6 @@ namespace Udpit {
           // send end fragment
           SendEndFragment(message);
         });
-
       });
     }
 
@@ -186,8 +185,10 @@ namespace Udpit {
       _listening = false;
 
       // close and destroy the client
-      _client.Close();
-      _client = null;
+      lock (_clientMutex) {
+        _client.Close();
+        _client = null;
+      }
 
       // log
       Log.Singleton.LogMessage("Stopped listening");
@@ -199,19 +200,23 @@ namespace Udpit {
     private void CreateListenSocket() {
       // create a task
       Task.Run(() => {
-        // create UDP client
-        _client = new UdpClient();
-
-        // bind it
         try {
-          _client.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+          lock (_clientMutex) {
+            // create UDP client
+            _client = new UdpClient();
+
+            // bind it
+            _client.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+          }
         }
         catch (SocketException) {
           // the port is probably already bound to
           Log.Singleton.LogError($"Failed to bind the listening socket to the port <{Options.Port}>");
 
           // remove client
-          _client = null;
+          lock (_clientMutex) {
+            _client = null;
+          }
 
           // set the flag
           _listening = false;
@@ -229,27 +234,37 @@ namespace Udpit {
 
         // receive
         try {
-          var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.Port);
-          var bytes = _client.Receive(ref remoteEndPoint);
+          lock (_clientMutex) {
+            var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.Port);
+            var bytes = _client.Receive(ref remoteEndPoint);
 
-          // got some fragment, oh my god!
-          FragmentReceived?.Invoke(bytes, remoteEndPoint);
+            // done, close please and goodbye
+            _client.Close();
 
-          // done, close please and goodbye
-          _client.Close();
+            // need to do this to allow listening immediately after this
+            _listening = false;
+
+            // got some fragment, oh my god!
+            FragmentReceived?.Invoke(bytes, remoteEndPoint);
+          }
         }
         catch (ObjectDisposedException) {
           // fine, the socket has been closed
-        }
-        catch (SocketException) {
-          // same deal
-        }
-        finally {
-          // remote the client
-          _client = null;
 
           // set the flag
           _listening = false;
+        }
+        catch (SocketException) {
+          // same deal
+
+          // set the flag
+          _listening = false;
+        }
+        finally {
+          // remote the client
+          lock (_clientMutex) {
+            _client = null;
+          }
 
           // fire the event
           StoppedListening?.Invoke(this, EventArgs.Empty);
@@ -293,40 +308,44 @@ namespace Udpit {
 
           // TODO: Delete message
         }
-        // create a client
-        _client = new UdpClient();
 
-        // bind it
-        try {
-          _client.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
-        }
-        catch (SocketException) {
-          // nope, can't bind to that port
-          Log.Singleton.LogError($"Failed to bind the sending socket to the port <{Options.Port}>");
+        // need to lock to prevent multiple tasks trying to send simultaneously
+        lock (_clientMutex) {
+          // create a client
+          _client = new UdpClient();
 
-          // remove client
+          // bind it
+          try {
+            _client.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+          }
+          catch (SocketException) {
+            // nope, can't bind to that port
+            Log.Singleton.LogError($"Failed to bind the sending socket to the port <{Options.Port}>");
+
+            // remove client
+            _client = null;
+
+            // stop
+            return;
+
+            // TODO: Remove message
+          }
+
+          // log
+          lock (message) {
+            Log.Singleton.LogMessage(
+              $"Sending a <{type}> fragment for message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> to <{message.RemoteEndPoint}>");
+          }
+
+          // send the fragment
+          lock (message) {
+            _client.Send(fragment, fragment.Length, message.RemoteEndPoint);
+          }
+
+          // close and remove client
+          _client.Close();
           _client = null;
-
-          // stop
-          return;
-
-          // TODO: Remove message
         }
-
-        // log
-        lock (message) {
-          Log.Singleton.LogMessage(
-            $"Sending a <{type}> fragment for message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> to <{message.RemoteEndPoint}>");
-        }
-
-        // send the fragment
-        lock (message) {
-          _client.Send(fragment, fragment.Length, message.RemoteEndPoint);
-        }
-
-        // close and remove client
-        _client.Close();
-        _client = null;
       });
     }
 
@@ -339,6 +358,11 @@ namespace Udpit {
     ///   The UDP client used for transmission.
     /// </summary>
     private UdpClient _client;
+
+    /// <summary>
+    ///   Mutex for the client.
+    /// </summary>
+    private readonly object _clientMutex = new object();
 
     /// <summary>
     ///   Whether the socket is currently listening.

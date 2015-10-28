@@ -180,6 +180,8 @@ namespace Udpit {
               $"Message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> is in state <{okayMessage.Status}>");
           }
 
+          // TODO: Delete message
+
           break;
       }
     }
