@@ -15,8 +15,18 @@ namespace Udpit {
       InitializeComponent();
 
       // hook up the log
-      Log.Singleton.MessageLogged += (sender, message) => WriteToLog(message, false);
-      Log.Singleton.ErrorLogged += (sender, message) => WriteToLog(message, true);
+      Log.Singleton.MessageLogged += (sender, message) => {
+        if (_logBox.InvokeRequired)
+          _logBox.Invoke(new MethodInvoker(() => WriteToLog(message, false)));
+        else
+          WriteToLog(message, false);
+      };
+      Log.Singleton.ErrorLogged += (sender, message) => {
+        if (_logBox.InvokeRequired)
+          _logBox.Invoke(new MethodInvoker(() => WriteToLog(message, true)));
+        else
+          WriteToLog(message, true);
+      };
 
       // log the start
       Log.Singleton.LogMessage("Udpit has started");
@@ -67,6 +77,9 @@ namespace Udpit {
       // flip buttons
       _receiveListenButton.Enabled = false;
       _receiveStopButton.Enabled = true;
+
+      // go to the log tab
+      _tabContainer.SelectTab(_tabLog);
     }
 
     /// <summary>
