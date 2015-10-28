@@ -52,9 +52,89 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Sends all data fragments of a message.
+    /// </summary>
+    public void SendDataFragments(Message message) {
+      // create a task
+      Task.Run(() => {
+        // set state
+        lock (message) {
+          message.Status = MessageStatus.Transmitting;
+        }
+
+        // log that
+        lock (message) {
+          Log.Singleton.LogMessage(
+            $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+        }
+
+        // send all data fragments
+        lock (message) {
+          foreach (var pair in message.PartList) {
+            // request a data fragment
+            var fragment = Fragmenter.MakeDataFragment(message, pair.Key);
+
+            // send it
+            SendFragment(message, fragment, FragmentType.Data);
+          }
+        }
+
+        // TODO: Handle keep-alive fragments
+
+        // set state
+        lock (message) {
+          message.Status = MessageStatus.Ending;
+        }
+
+        // log that
+        lock (message) {
+          Log.Singleton.LogMessage(
+            $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+        }
+
+        // send end fragment
+        SendEndFragment(message);
+      });
+    }
+
+    /// <summary>
+    ///   Sends ending okay fragment.
+    /// </summary>
+    public void SendOkayFragment(Message message) {
+      // create a task
+      Task.Run(() => {
+        // ask for an end fragment
+        byte[] fragment;
+        lock (message) {
+          fragment = Fragmenter.MakeOkayFragment(message);
+        }
+
+        // send the fragment
+        SendFragment(message, fragment, FragmentType.Okay);
+      });
+    }
+
+    /// <summary>
+    ///   Sends a prepared fragment for a message.
+    /// </summary>
+    public void SendPreparedFragment(Message message) {
+      // create a task
+      Task.Run(() => {
+        // ask for a prepared fragment
+        byte[] fragment;
+        lock (message) {
+          fragment = Fragmenter.MakePreparedFragment(message);
+        }
+
+        // send the fragment
+        SendFragment(message, fragment, FragmentType.Prepared);
+      });
+    }
+
+    /// <summary>
     ///   Send a prepare fragment for a message.
     /// </summary>
-    public void SendPrepare(Message message) {
+    public void SendPrepareFragment(Message message) {
       // create a task
       Task.Run(() => {
         // create a prepare fragment
@@ -70,7 +150,8 @@ namespace Udpit {
 
         // log that
         lock (message) {
-          Log.Singleton.LogMessage($"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+          Log.Singleton.LogMessage(
+            $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
         }
 
         // go ahead, send it
@@ -157,6 +238,23 @@ namespace Udpit {
           // fire the event
           StoppedListening?.Invoke(this, EventArgs.Empty);
         }
+      });
+    }
+
+    /// <summary>
+    ///   Sends end fragment for a message.
+    /// </summary>
+    private void SendEndFragment(Message message) {
+      // create a task
+      Task.Run(() => {
+        // ask for an end fragment
+        byte[] fragment;
+        lock (message) {
+          fragment = Fragmenter.MakeEndFragment(message);
+        }
+
+        // send the fragment
+        SendFragment(message, fragment, FragmentType.End);
       });
     }
 

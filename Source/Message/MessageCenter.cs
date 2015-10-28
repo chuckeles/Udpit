@@ -47,7 +47,7 @@ namespace Udpit {
       }
 
       // delegate to the transmitter
-      Transmitter.Singleton.SendPrepare(message);
+      Transmitter.Singleton.SendPrepareFragment(message);
     }
 
     /// <summary>
