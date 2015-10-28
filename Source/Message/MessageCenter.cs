@@ -73,6 +73,17 @@ namespace Udpit {
         message = Messages[idKey];
       }
 
+      // update status
+      lock (message) {
+        if (message.Status != MessageStatus.Transmitting) {
+          message.Status = MessageStatus.Transmitting;
+
+          // log
+          Log.Singleton.LogMessage(
+            $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+        }
+      }
+
       // get fragment number
       var number = Fragmenter.GetFragmentNumber(fragment);
 
@@ -109,9 +120,14 @@ namespace Udpit {
           // make a local copy
           var prepareMessage = PrepareMessage(fragment, remoteEndPoint);
 
+          // log the fact
+          lock (prepareMessage) {
+            Log.Singleton.LogMessage(
+              $"Created a message <{prepareMessage.ID[0].ToString("00")}{prepareMessage.ID[1].ToString("00")}>");
+          }
+
           // respond
-          if (prepareMessage != null)
-            Transmitter.Singleton.SendPreparedFragment(prepareMessage);
+          Transmitter.Singleton.SendPreparedFragment(prepareMessage);
 
           break;
 

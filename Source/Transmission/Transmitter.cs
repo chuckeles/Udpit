@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -74,31 +75,35 @@ namespace Udpit {
         }
 
         // send all data fragments
+        List<Task> sendTasks = new List<Task>();
         lock (message) {
           foreach (var pair in message.PartList) {
             // request a data fragment
             var fragment = Fragmenter.MakeDataFragment(message, pair.Key);
 
             // send it
-            SendFragment(message, fragment, FragmentType.Data);
+            sendTasks.Add(SendFragment(message, fragment, FragmentType.Data));
           }
         }
 
         // TODO: Handle keep-alive fragments
 
-        // set state
-        lock (message) {
-          message.Status = MessageStatus.Ending;
-        }
+        Task.WhenAll(sendTasks).ContinueWith(task => {
+          // set state
+          lock (message) {
+            message.Status = MessageStatus.Ending;
+          }
 
-        // log that
-        lock (message) {
-          Log.Singleton.LogMessage(
-            $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
-        }
+          // log that
+          lock (message) {
+            Log.Singleton.LogMessage(
+              $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+          }
 
-        // send end fragment
-        SendEndFragment(message);
+          // send end fragment
+          SendEndFragment(message);
+        });
+
       });
     }
 
@@ -132,7 +137,10 @@ namespace Udpit {
         }
 
         // send the fragment
-        SendFragment(message, fragment, FragmentType.Prepared);
+        SendFragment(message, fragment, FragmentType.Prepared)
+
+          // listen
+          .ContinueWith(task => Listen());
       });
     }
 
@@ -160,7 +168,10 @@ namespace Udpit {
         }
 
         // go ahead, send it
-        SendFragment(message, prepareFragment, FragmentType.Prepare);
+        SendFragment(message, prepareFragment, FragmentType.Prepare)
+
+          // listen
+          .ContinueWith(task => Listen());
       });
     }
 
@@ -259,16 +270,19 @@ namespace Udpit {
         }
 
         // send the fragment
-        SendFragment(message, fragment, FragmentType.End);
+        SendFragment(message, fragment, FragmentType.End)
+
+          // listen
+          .ContinueWith(task => Listen());
       });
     }
 
     /// <summary>
     ///   Sends a fragment.
     /// </summary>
-    private void SendFragment(Message message, byte[] fragment, FragmentType type) {
+    private Task SendFragment(Message message, byte[] fragment, FragmentType type) {
       // create a task
-      Task.Run(() => {
+      return Task.Run(() => {
         // check the listening state
         if (_listening) {
           // error
