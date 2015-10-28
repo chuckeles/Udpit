@@ -145,6 +145,9 @@ namespace Udpit {
           // add fragment
           AddFragment(fragment);
 
+          // listen again
+          Transmitter.Singleton.Listen();
+
           break;
 
         case FragmentType.End:
