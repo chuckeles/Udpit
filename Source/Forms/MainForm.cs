@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Net;
 using System.Windows.Forms;
 
 namespace Udpit {
@@ -24,14 +25,15 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Gets current options and updates inputs.
+    ///   Cancels modifying options.
     /// </summary>
-    private void SetOptionInputs() {
-      // set name
-      _optionsNameBox.Text = Options.Name;
+    private void Cancel(object sender, EventArgs e) {
+      // reset inputs
+      SetOptionInputs();
 
-      // set port
-      _optionsPortBox.Text = Options.Port.ToString();
+      // disable buttons
+      _optionsSaveButton.Enabled = false;
+      _optionsCancelButton.Enabled = false;
     }
 
     /// <summary>
@@ -42,10 +44,95 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Checks the option inputs and enables / disables buttons.
+    /// </summary>
+    private void OptionChanged(object sender, EventArgs e) {
+      // compare names
+      var namesEqual = _optionsNameBox.Text == Options.Name;
+
+      // compare ports
+      var portsEqual = _optionsPortBox.Value == Options.Port;
+
+      // compare remote address
+      IPAddress addr;
+      var addrEqual = IPAddress.TryParse(_sendingAddressBox.Text, out addr) && addr.Equals(Options.Remote.Address);
+
+      // compare remote port
+      var remotePortsEqual = _sendingPortBox.Value == Options.Remote.Port;
+
+      // compare max size
+      var sizesEqual = _sendingSizeBox.Value == Options.MaxPartSize;
+
+      // compare corrupt
+      var corruptsEqual = _sendingErrorCheckBox.Checked == Options.SendCorrupt;
+
+      // update buttons
+      if (namesEqual && portsEqual && addrEqual && remotePortsEqual && sizesEqual && corruptsEqual) {
+        _optionsSaveButton.Enabled = false;
+        _optionsCancelButton.Enabled = false;
+      }
+      else {
+        _optionsSaveButton.Enabled = true;
+        _optionsCancelButton.Enabled = true;
+      }
+    }
+
+    /// <summary>
     ///   Restarts the application.
     /// </summary>
     private void Restart(object sender, EventArgs e) {
       Application.Restart();
+    }
+
+    /// <summary>
+    ///   Saves the options.
+    /// </summary>
+    private void Save(object sender, EventArgs e) {
+      // save options
+      Options.Name = _optionsNameBox.Text;
+      Options.Port = (int) _optionsPortBox.Value;
+
+      // save remote
+      IPAddress addr;
+      if (IPAddress.TryParse(_sendingAddressBox.Text, out addr))
+        Options.Remote = new IPEndPoint(addr, (int) _sendingPortBox.Value);
+
+      // save max size
+      Options.MaxPartSize = (ushort) _sendingSizeBox.Value;
+
+      // save corrupt
+      Options.SendCorrupt = _sendingErrorCheckBox.Checked;
+
+      // reset inputs
+      SetOptionInputs();
+
+      // disable buttons
+      _optionsSaveButton.Enabled = false;
+      _optionsCancelButton.Enabled = false;
+
+      // log
+      Log.Singleton.LogMessage("Options changed");
+    }
+
+    /// <summary>
+    ///   Gets current options and updates inputs.
+    /// </summary>
+    private void SetOptionInputs() {
+      // set name
+      _optionsNameBox.Text = Options.Name;
+
+      // set port
+      _optionsPortBox.Value = Options.Port;
+
+      // set remote address and port
+      _sendingAddressBox.Text = Options.Remote.Address.ToString();
+      _sendingPortBox.Value = Options.Remote.Port;
+
+      // set max size
+      _sendingSizeBox.Value = Options.MaxPartSize;
+
+      // set corrupt
+      _sendingErrorCheckBox.Checked = Options.SendCorrupt;
     }
 
     /// <summary>
@@ -67,57 +154,6 @@ namespace Udpit {
       _logBox.AppendText("\n");
     }
 
-    /// <summary>
-    /// Checks the option inputs and enables / disables buttons.
-    /// </summary>
-    private void OptionChanged(object sender, EventArgs e) {
-      // compare names
-      var namesEqual = _optionsNameBox.Text == Options.Name;
-
-      // compare ports
-      var portsEqual = _optionsPortBox.Text == Options.Port.ToString();
-
-      // update buttons
-      if (namesEqual && portsEqual) {
-        _optionsSaveButton.Enabled = false;
-        _optionsCancelButton.Enabled = false;
-      }
-      else {
-        _optionsSaveButton.Enabled = true;
-        _optionsCancelButton.Enabled = true;
-      }
-    }
-
-    /// <summary>
-    /// Cancels modifying options.
-    /// </summary>
-    private void Cancel(object sender, EventArgs e) {
-      // reset inputs
-      SetOptionInputs();
-
-      // disable buttons
-      _optionsSaveButton.Enabled = false;
-      _optionsCancelButton.Enabled = false;
-    }
-
-    /// <summary>
-    /// Saves the options.
-    /// </summary>
-    private void Save(object sender, EventArgs e) {
-      // save options
-      Options.Name = _optionsNameBox.Text;
-      Options.Port = int.Parse(_optionsPortBox.Text);
-
-      // reset inputs
-      SetOptionInputs();
-
-      // disable buttons
-      _optionsSaveButton.Enabled = false;
-      _optionsCancelButton.Enabled = false;
-
-      // log
-      Log.Singleton.LogMessage("Options changed");
-    }
   }
 
 }

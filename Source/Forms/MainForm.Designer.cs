@@ -30,6 +30,7 @@
       this._statusBar = new System.Windows.Forms.StatusStrip();
       this._tabContainer = new System.Windows.Forms.TabControl();
       this._tabLog = new System.Windows.Forms.TabPage();
+      this._logBox = new System.Windows.Forms.RichTextBox();
       this._tabSend = new System.Windows.Forms.TabPage();
       this._sendContainer = new System.Windows.Forms.TableLayoutPanel();
       this._sendInputGroup = new System.Windows.Forms.GroupBox();
@@ -51,17 +52,6 @@
       this._receiveStopButton = new System.Windows.Forms.Button();
       this._tabOptions = new System.Windows.Forms.TabPage();
       this._optionsContainer = new System.Windows.Forms.TableLayoutPanel();
-      this._optionsGroup = new System.Windows.Forms.GroupBox();
-      this._optionsInputContainer = new System.Windows.Forms.TableLayoutPanel();
-      this._optionsPortLabel = new System.Windows.Forms.Label();
-      this._optionsNameLabel = new System.Windows.Forms.Label();
-      this._optionsNameBox = new System.Windows.Forms.TextBox();
-      this._optionsActionsGroup = new System.Windows.Forms.GroupBox();
-      this._optionsActionsContainer = new System.Windows.Forms.TableLayoutPanel();
-      this._optionsSaveButton = new System.Windows.Forms.Button();
-      this._optionsCancelButton = new System.Windows.Forms.Button();
-      this._optionsPortBox = new System.Windows.Forms.NumericUpDown();
-      this._logBox = new System.Windows.Forms.RichTextBox();
       this._sendingGroup = new System.Windows.Forms.GroupBox();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
       this._sendingPortLabel = new System.Windows.Forms.Label();
@@ -72,6 +62,16 @@
       this._sendingSizeBox = new System.Windows.Forms.NumericUpDown();
       this._sendingErrorLabel = new System.Windows.Forms.Label();
       this._sendingErrorCheckBox = new System.Windows.Forms.CheckBox();
+      this._optionsGroup = new System.Windows.Forms.GroupBox();
+      this._optionsInputContainer = new System.Windows.Forms.TableLayoutPanel();
+      this._optionsPortLabel = new System.Windows.Forms.Label();
+      this._optionsNameLabel = new System.Windows.Forms.Label();
+      this._optionsNameBox = new System.Windows.Forms.TextBox();
+      this._optionsPortBox = new System.Windows.Forms.NumericUpDown();
+      this._optionsActionsGroup = new System.Windows.Forms.GroupBox();
+      this._optionsActionsContainer = new System.Windows.Forms.TableLayoutPanel();
+      this._optionsSaveButton = new System.Windows.Forms.Button();
+      this._optionsCancelButton = new System.Windows.Forms.Button();
       this._mainMenu.SuspendLayout();
       this._tabContainer.SuspendLayout();
       this._tabLog.SuspendLayout();
@@ -87,15 +87,15 @@
       this._receiveActionsContainer.SuspendLayout();
       this._tabOptions.SuspendLayout();
       this._optionsContainer.SuspendLayout();
-      this._optionsGroup.SuspendLayout();
-      this._optionsInputContainer.SuspendLayout();
-      this._optionsActionsGroup.SuspendLayout();
-      this._optionsActionsContainer.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this._optionsPortBox)).BeginInit();
       this._sendingGroup.SuspendLayout();
       this.tableLayoutPanel1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this._sendingPortBox)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this._sendingSizeBox)).BeginInit();
+      this._optionsGroup.SuspendLayout();
+      this._optionsInputContainer.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this._optionsPortBox)).BeginInit();
+      this._optionsActionsGroup.SuspendLayout();
+      this._optionsActionsContainer.SuspendLayout();
       this.SuspendLayout();
       // 
       // _mainMenu
@@ -165,6 +165,16 @@
       this._tabLog.TabIndex = 0;
       this._tabLog.Text = "Log";
       this._tabLog.UseVisualStyleBackColor = true;
+      // 
+      // _logBox
+      // 
+      this._logBox.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._logBox.Location = new System.Drawing.Point(3, 3);
+      this._logBox.Name = "_logBox";
+      this._logBox.ReadOnly = true;
+      this._logBox.Size = new System.Drawing.Size(270, 383);
+      this._logBox.TabIndex = 0;
+      this._logBox.Text = "";
       // 
       // _tabSend
       // 
@@ -427,152 +437,6 @@
       this._optionsContainer.Size = new System.Drawing.Size(276, 389);
       this._optionsContainer.TabIndex = 0;
       // 
-      // _optionsGroup
-      // 
-      this._optionsGroup.Controls.Add(this._optionsInputContainer);
-      this._optionsGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsGroup.Location = new System.Drawing.Point(3, 3);
-      this._optionsGroup.Name = "_optionsGroup";
-      this._optionsGroup.Size = new System.Drawing.Size(270, 149);
-      this._optionsGroup.TabIndex = 0;
-      this._optionsGroup.TabStop = false;
-      this._optionsGroup.Text = "Options";
-      // 
-      // _optionsInputContainer
-      // 
-      this._optionsInputContainer.ColumnCount = 2;
-      this._optionsInputContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-      this._optionsInputContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-      this._optionsInputContainer.Controls.Add(this._optionsPortLabel, 0, 1);
-      this._optionsInputContainer.Controls.Add(this._optionsNameLabel, 0, 0);
-      this._optionsInputContainer.Controls.Add(this._optionsNameBox, 1, 0);
-      this._optionsInputContainer.Controls.Add(this._optionsPortBox, 1, 1);
-      this._optionsInputContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsInputContainer.Location = new System.Drawing.Point(3, 16);
-      this._optionsInputContainer.Name = "_optionsInputContainer";
-      this._optionsInputContainer.RowCount = 3;
-      this._optionsInputContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this._optionsInputContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this._optionsInputContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this._optionsInputContainer.Size = new System.Drawing.Size(264, 130);
-      this._optionsInputContainer.TabIndex = 0;
-      // 
-      // _optionsPortLabel
-      // 
-      this._optionsPortLabel.AutoSize = true;
-      this._optionsPortLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsPortLabel.Location = new System.Drawing.Point(3, 26);
-      this._optionsPortLabel.Name = "_optionsPortLabel";
-      this._optionsPortLabel.Size = new System.Drawing.Size(73, 26);
-      this._optionsPortLabel.TabIndex = 2;
-      this._optionsPortLabel.Text = "Port";
-      this._optionsPortLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // _optionsNameLabel
-      // 
-      this._optionsNameLabel.AutoSize = true;
-      this._optionsNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsNameLabel.Location = new System.Drawing.Point(3, 0);
-      this._optionsNameLabel.Name = "_optionsNameLabel";
-      this._optionsNameLabel.Size = new System.Drawing.Size(73, 26);
-      this._optionsNameLabel.TabIndex = 0;
-      this._optionsNameLabel.Text = "Name";
-      this._optionsNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-      // 
-      // _optionsNameBox
-      // 
-      this._optionsNameBox.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsNameBox.Location = new System.Drawing.Point(82, 3);
-      this._optionsNameBox.Name = "_optionsNameBox";
-      this._optionsNameBox.Size = new System.Drawing.Size(179, 20);
-      this._optionsNameBox.TabIndex = 1;
-      this._optionsNameBox.TextChanged += new System.EventHandler(this.OptionChanged);
-      // 
-      // _optionsActionsGroup
-      // 
-      this._optionsActionsGroup.Controls.Add(this._optionsActionsContainer);
-      this._optionsActionsGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsActionsGroup.Location = new System.Drawing.Point(3, 313);
-      this._optionsActionsGroup.Name = "_optionsActionsGroup";
-      this._optionsActionsGroup.Size = new System.Drawing.Size(270, 73);
-      this._optionsActionsGroup.TabIndex = 1;
-      this._optionsActionsGroup.TabStop = false;
-      this._optionsActionsGroup.Text = "Actions";
-      // 
-      // _optionsActionsContainer
-      // 
-      this._optionsActionsContainer.ColumnCount = 2;
-      this._optionsActionsContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this._optionsActionsContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this._optionsActionsContainer.Controls.Add(this._optionsSaveButton, 0, 0);
-      this._optionsActionsContainer.Controls.Add(this._optionsCancelButton, 1, 0);
-      this._optionsActionsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsActionsContainer.Location = new System.Drawing.Point(3, 16);
-      this._optionsActionsContainer.Name = "_optionsActionsContainer";
-      this._optionsActionsContainer.RowCount = 1;
-      this._optionsActionsContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this._optionsActionsContainer.Size = new System.Drawing.Size(264, 54);
-      this._optionsActionsContainer.TabIndex = 0;
-      // 
-      // _optionsSaveButton
-      // 
-      this._optionsSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this._optionsSaveButton.Enabled = false;
-      this._optionsSaveButton.Location = new System.Drawing.Point(3, 28);
-      this._optionsSaveButton.Name = "_optionsSaveButton";
-      this._optionsSaveButton.Size = new System.Drawing.Size(126, 23);
-      this._optionsSaveButton.TabIndex = 0;
-      this._optionsSaveButton.Text = "Save";
-      this._optionsSaveButton.UseVisualStyleBackColor = true;
-      this._optionsSaveButton.Click += new System.EventHandler(this.Save);
-      // 
-      // _optionsCancelButton
-      // 
-      this._optionsCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this._optionsCancelButton.Enabled = false;
-      this._optionsCancelButton.Location = new System.Drawing.Point(135, 28);
-      this._optionsCancelButton.Name = "_optionsCancelButton";
-      this._optionsCancelButton.Size = new System.Drawing.Size(126, 23);
-      this._optionsCancelButton.TabIndex = 1;
-      this._optionsCancelButton.Text = "Cancel";
-      this._optionsCancelButton.UseVisualStyleBackColor = true;
-      this._optionsCancelButton.Click += new System.EventHandler(this.Cancel);
-      // 
-      // _optionsPortBox
-      // 
-      this._optionsPortBox.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._optionsPortBox.Location = new System.Drawing.Point(82, 29);
-      this._optionsPortBox.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-      this._optionsPortBox.Minimum = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
-      this._optionsPortBox.Name = "_optionsPortBox";
-      this._optionsPortBox.Size = new System.Drawing.Size(179, 20);
-      this._optionsPortBox.TabIndex = 3;
-      this._optionsPortBox.Value = new decimal(new int[] {
-            6994,
-            0,
-            0,
-            0});
-      // 
-      // _logBox
-      // 
-      this._logBox.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._logBox.Location = new System.Drawing.Point(3, 3);
-      this._logBox.Name = "_logBox";
-      this._logBox.ReadOnly = true;
-      this._logBox.Size = new System.Drawing.Size(270, 383);
-      this._logBox.TabIndex = 0;
-      this._logBox.Text = "";
-      // 
       // _sendingGroup
       // 
       this._sendingGroup.Controls.Add(this.tableLayoutPanel1);
@@ -638,6 +502,7 @@
       this._sendingAddressBox.Name = "_sendingAddressBox";
       this._sendingAddressBox.Size = new System.Drawing.Size(179, 20);
       this._sendingAddressBox.TabIndex = 1;
+      this._sendingAddressBox.TextChanged += new System.EventHandler(this.OptionChanged);
       // 
       // _sendingPortBox
       // 
@@ -661,6 +526,7 @@
             0,
             0,
             0});
+      this._sendingPortBox.ValueChanged += new System.EventHandler(this.OptionChanged);
       // 
       // _sendingSizeLabel
       // 
@@ -695,6 +561,7 @@
             0,
             0,
             0});
+      this._sendingSizeBox.ValueChanged += new System.EventHandler(this.OptionChanged);
       // 
       // _sendingErrorLabel
       // 
@@ -716,6 +583,144 @@
       this._sendingErrorCheckBox.Size = new System.Drawing.Size(179, 14);
       this._sendingErrorCheckBox.TabIndex = 7;
       this._sendingErrorCheckBox.UseVisualStyleBackColor = true;
+      this._sendingErrorCheckBox.CheckedChanged += new System.EventHandler(this.OptionChanged);
+      // 
+      // _optionsGroup
+      // 
+      this._optionsGroup.Controls.Add(this._optionsInputContainer);
+      this._optionsGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsGroup.Location = new System.Drawing.Point(3, 3);
+      this._optionsGroup.Name = "_optionsGroup";
+      this._optionsGroup.Size = new System.Drawing.Size(270, 149);
+      this._optionsGroup.TabIndex = 0;
+      this._optionsGroup.TabStop = false;
+      this._optionsGroup.Text = "Options";
+      // 
+      // _optionsInputContainer
+      // 
+      this._optionsInputContainer.ColumnCount = 2;
+      this._optionsInputContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+      this._optionsInputContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+      this._optionsInputContainer.Controls.Add(this._optionsPortLabel, 0, 1);
+      this._optionsInputContainer.Controls.Add(this._optionsNameLabel, 0, 0);
+      this._optionsInputContainer.Controls.Add(this._optionsNameBox, 1, 0);
+      this._optionsInputContainer.Controls.Add(this._optionsPortBox, 1, 1);
+      this._optionsInputContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsInputContainer.Location = new System.Drawing.Point(3, 16);
+      this._optionsInputContainer.Name = "_optionsInputContainer";
+      this._optionsInputContainer.RowCount = 3;
+      this._optionsInputContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this._optionsInputContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this._optionsInputContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this._optionsInputContainer.Size = new System.Drawing.Size(264, 130);
+      this._optionsInputContainer.TabIndex = 0;
+      // 
+      // _optionsPortLabel
+      // 
+      this._optionsPortLabel.AutoSize = true;
+      this._optionsPortLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsPortLabel.Location = new System.Drawing.Point(3, 26);
+      this._optionsPortLabel.Name = "_optionsPortLabel";
+      this._optionsPortLabel.Size = new System.Drawing.Size(73, 26);
+      this._optionsPortLabel.TabIndex = 2;
+      this._optionsPortLabel.Text = "Port";
+      this._optionsPortLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      // 
+      // _optionsNameLabel
+      // 
+      this._optionsNameLabel.AutoSize = true;
+      this._optionsNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsNameLabel.Location = new System.Drawing.Point(3, 0);
+      this._optionsNameLabel.Name = "_optionsNameLabel";
+      this._optionsNameLabel.Size = new System.Drawing.Size(73, 26);
+      this._optionsNameLabel.TabIndex = 0;
+      this._optionsNameLabel.Text = "Name";
+      this._optionsNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      // 
+      // _optionsNameBox
+      // 
+      this._optionsNameBox.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsNameBox.Location = new System.Drawing.Point(82, 3);
+      this._optionsNameBox.Name = "_optionsNameBox";
+      this._optionsNameBox.Size = new System.Drawing.Size(179, 20);
+      this._optionsNameBox.TabIndex = 1;
+      this._optionsNameBox.TextChanged += new System.EventHandler(this.OptionChanged);
+      // 
+      // _optionsPortBox
+      // 
+      this._optionsPortBox.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsPortBox.Location = new System.Drawing.Point(82, 29);
+      this._optionsPortBox.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+      this._optionsPortBox.Minimum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+      this._optionsPortBox.Name = "_optionsPortBox";
+      this._optionsPortBox.Size = new System.Drawing.Size(179, 20);
+      this._optionsPortBox.TabIndex = 3;
+      this._optionsPortBox.Value = new decimal(new int[] {
+            6994,
+            0,
+            0,
+            0});
+      this._optionsPortBox.ValueChanged += new System.EventHandler(this.OptionChanged);
+      // 
+      // _optionsActionsGroup
+      // 
+      this._optionsActionsGroup.Controls.Add(this._optionsActionsContainer);
+      this._optionsActionsGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsActionsGroup.Location = new System.Drawing.Point(3, 313);
+      this._optionsActionsGroup.Name = "_optionsActionsGroup";
+      this._optionsActionsGroup.Size = new System.Drawing.Size(270, 73);
+      this._optionsActionsGroup.TabIndex = 1;
+      this._optionsActionsGroup.TabStop = false;
+      this._optionsActionsGroup.Text = "Actions";
+      // 
+      // _optionsActionsContainer
+      // 
+      this._optionsActionsContainer.ColumnCount = 2;
+      this._optionsActionsContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this._optionsActionsContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+      this._optionsActionsContainer.Controls.Add(this._optionsSaveButton, 0, 0);
+      this._optionsActionsContainer.Controls.Add(this._optionsCancelButton, 1, 0);
+      this._optionsActionsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._optionsActionsContainer.Location = new System.Drawing.Point(3, 16);
+      this._optionsActionsContainer.Name = "_optionsActionsContainer";
+      this._optionsActionsContainer.RowCount = 1;
+      this._optionsActionsContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this._optionsActionsContainer.Size = new System.Drawing.Size(264, 54);
+      this._optionsActionsContainer.TabIndex = 0;
+      // 
+      // _optionsSaveButton
+      // 
+      this._optionsSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this._optionsSaveButton.Enabled = false;
+      this._optionsSaveButton.Location = new System.Drawing.Point(3, 28);
+      this._optionsSaveButton.Name = "_optionsSaveButton";
+      this._optionsSaveButton.Size = new System.Drawing.Size(126, 23);
+      this._optionsSaveButton.TabIndex = 0;
+      this._optionsSaveButton.Text = "Save";
+      this._optionsSaveButton.UseVisualStyleBackColor = true;
+      this._optionsSaveButton.Click += new System.EventHandler(this.Save);
+      // 
+      // _optionsCancelButton
+      // 
+      this._optionsCancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this._optionsCancelButton.Enabled = false;
+      this._optionsCancelButton.Location = new System.Drawing.Point(135, 28);
+      this._optionsCancelButton.Name = "_optionsCancelButton";
+      this._optionsCancelButton.Size = new System.Drawing.Size(126, 23);
+      this._optionsCancelButton.TabIndex = 1;
+      this._optionsCancelButton.Text = "Cancel";
+      this._optionsCancelButton.UseVisualStyleBackColor = true;
+      this._optionsCancelButton.Click += new System.EventHandler(this.Cancel);
       // 
       // MainForm
       // 
@@ -749,17 +754,17 @@
       this._receiveActionsContainer.ResumeLayout(false);
       this._tabOptions.ResumeLayout(false);
       this._optionsContainer.ResumeLayout(false);
-      this._optionsGroup.ResumeLayout(false);
-      this._optionsInputContainer.ResumeLayout(false);
-      this._optionsInputContainer.PerformLayout();
-      this._optionsActionsGroup.ResumeLayout(false);
-      this._optionsActionsContainer.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this._optionsPortBox)).EndInit();
       this._sendingGroup.ResumeLayout(false);
       this.tableLayoutPanel1.ResumeLayout(false);
       this.tableLayoutPanel1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this._sendingPortBox)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this._sendingSizeBox)).EndInit();
+      this._optionsGroup.ResumeLayout(false);
+      this._optionsInputContainer.ResumeLayout(false);
+      this._optionsInputContainer.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this._optionsPortBox)).EndInit();
+      this._optionsActionsGroup.ResumeLayout(false);
+      this._optionsActionsContainer.ResumeLayout(false);
       this.ResumeLayout(false);
       this.PerformLayout();
 
