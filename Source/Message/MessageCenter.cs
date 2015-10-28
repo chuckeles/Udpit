@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 
 namespace Udpit {
 
@@ -163,8 +164,16 @@ namespace Udpit {
 
           // print the message
           lock (endMessage) {
+            // reconstruct the message
+            // TODO: Do this elsewhere
+            var text = "";
+
+            foreach (var part in endMessage.PartList) {
+              text += Encoding.ASCII.GetString(part.Value);
+            }
+
             Log.Singleton.LogMessage(
-              $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> with a text '<TODO>'");
+              $"Successfully sent a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> to <{endMessage.RemoteName}> with a text <'{text}'>");
             // TODO: text please
           }
 
@@ -189,8 +198,16 @@ namespace Udpit {
 
           // print the message
           lock (okayMessage) {
+            // reconstruct the message
+            // TODO: Do this elsewhere
+            var text = "";
+
+            foreach (var part in okayMessage.PartList) {
+              text += Encoding.ASCII.GetString(part.Value);
+            }
+
             Log.Singleton.LogMessage(
-              $"Successfully sent a full message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> to <{okayMessage.RemoteName}> with a text <'TODO'>");
+              $"Successfully sent a full message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> to <{okayMessage.RemoteName}> with a text <'{text}'>");
             // TODO: text please
           }
 
