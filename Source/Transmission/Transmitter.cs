@@ -50,7 +50,70 @@ namespace Udpit {
     ///   Send a message.
     /// </summary>
     public void SendMessage(Message message) {
-      throw new NotImplementedException();
+      // create a task
+      Task.Run(() => {
+        // check the listening state
+        if (_listening) {
+          // error
+          Log.Singleton.LogError("Can't send a message while listening");
+
+          // cancel
+          return;
+
+          // TODO: Delete message
+        }
+
+        // create a prepare fragment
+        byte[] prepareFragment;
+        lock (message) {
+          prepareFragment = Fragmenter.MakePrepareFragment(message);
+        }
+
+        // update status
+        lock (message) {
+          message.Status = MessageStatus.Handshaking;
+        }
+
+        // log that
+        lock (message) {
+          Log.Singleton.LogMessage($"Message <{message.ID[0]}{message.ID[1]}> is in state <{message.Status}>");
+        }
+
+        // create a client
+        _client = new UdpClient();
+
+        // bind it
+        try {
+          _client.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
+        }
+        catch (SocketException) {
+          // nope, can't bind to that port
+          Log.Singleton.LogError($"Failed to bind the sending socket to the port <{Options.Port}>");
+
+          // remove client
+          _client = null;
+
+          // stop
+          return;
+
+          // TODO: Remove message
+        }
+
+        // log
+        lock (message) {
+          Log.Singleton.LogMessage(
+            $"Sending a <{FragmentType.Prepare}> fragment for message <{message.ID[0]}{message.ID[1]}> to <{message.RemoteEndPoint}>");
+        }
+
+        // send the fragment
+        lock (message) {
+          _client.Send(prepareFragment, prepareFragment.Length, message.RemoteEndPoint);
+        }
+
+        // close and remove client
+        _client.Close();
+        _client = null;
+      });
     }
 
     /// <summary>
@@ -88,7 +151,7 @@ namespace Udpit {
           // the port is probably already bound to
           Log.Singleton.LogError($"Failed to bind the listening socket to the port <{Options.Port}>");
 
-          // remote client
+          // remove client
           _client = null;
 
           // set the flag

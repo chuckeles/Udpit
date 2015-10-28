@@ -41,8 +41,10 @@ namespace Udpit {
       }
 
       // log the start
-      Log.Singleton.LogMessage(
-        $"Sending message to <{Options.Remote}> with maximum part size of <{Options.MaxPartSize}B>");
+      lock (message) {
+        Log.Singleton.LogMessage(
+          $"Sending message <{message.ID[0]}{message.ID[1]}> to <{Options.Remote}> with maximum part size of <{Options.MaxPartSize}B>");
+      }
 
       // delegate to the transmitter
       Transmitter.Singleton.SendMessage(message);
