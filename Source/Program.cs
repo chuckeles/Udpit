@@ -10,6 +10,7 @@ namespace Udpit {
     private static void Main() {
       // create singletons
       Log.Create();
+      Transmitter.Create();
       MessageCenter.Create();
 
       // start application

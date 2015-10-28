@@ -57,6 +57,30 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Start listening.
+    /// </summary>
+    private void Listen(object sender, EventArgs e) {
+      // tell the transmitter
+      Transmitter.Singleton.Listen();
+
+      // flip buttons
+      _receiveListenButton.Enabled = false;
+      _receiveStopButton.Enabled = true;
+    }
+
+    /// <summary>
+    ///   Start listening.
+    /// </summary>
+    private void StopListening(object sender, EventArgs e) {
+      // tell the transmitter
+      Transmitter.Singleton.StopListening();
+
+      // flip buttons
+      _receiveListenButton.Enabled = true;
+      _receiveStopButton.Enabled = false;
+    }
+
+    /// <summary>
     ///   Checks the option inputs and enables / disables buttons.
     /// </summary>
     private void OptionChanged(object sender, EventArgs e) {

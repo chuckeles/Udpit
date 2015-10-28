@@ -399,6 +399,7 @@
       this._receiveListenButton.TabIndex = 0;
       this._receiveListenButton.Text = "Listen";
       this._receiveListenButton.UseVisualStyleBackColor = true;
+      this._receiveListenButton.Click += new System.EventHandler(this.Listen);
       // 
       // _receiveStopButton
       // 
@@ -411,6 +412,7 @@
       this._receiveStopButton.TabIndex = 1;
       this._receiveStopButton.Text = "Stop";
       this._receiveStopButton.UseVisualStyleBackColor = true;
+      this._receiveStopButton.Click += new System.EventHandler(this.StopListening);
       // 
       // _tabOptions
       // 
