@@ -25,11 +25,6 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Sends a file.
-    /// </summary>
-    public void SendFile(string file) {}
-
-    /// <summary>
     ///   Sends a message.
     /// </summary>
     public void SendMessage(string message) {}
