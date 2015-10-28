@@ -63,6 +63,61 @@ namespace Udpit {
       // decision time
       switch (type) {
         case FragmentType.Prepare:
+          // make a local copy
+          var prepareMessage = PrepareMessage(fragment, remoteEndPoint);
+
+          // respond
+          if (prepareMessage != null)
+            Transmitter.Singleton.SendPreparedFragment(prepareMessage);
+
+          break;
+
+        case FragmentType.Prepared:
+          // set remote name
+          var preparedMessage = SetRemoteName(fragment);
+
+          // start sending data fragments
+          if (preparedMessage != null)
+            Transmitter.Singleton.SendDataFragments(preparedMessage);
+
+          break;
+
+        case FragmentType.Data:
+          // add fragment
+          AddFragment(fragment);
+
+          break;
+
+        case FragmentType.End:
+          // get message
+          var endMessage = GetMessage(fragment);
+          if (endMessage == null)
+            break;
+
+          // TODO: Check missing fragments
+
+          // send okay fragment
+          Transmitter.Singleton.SendOkayFragment(endMessage);
+
+          break;
+
+        case FragmentType.Okay:
+          // get message
+          var okayMessage = GetMessage(fragment);
+          if (okayMessage == null)
+            break;
+
+          // update status
+          lock (okayMessage) {
+            okayMessage.Status = MessageStatus.Finished;
+          }
+
+          // log that
+          lock (okayMessage) {
+            Log.Singleton.LogMessage(
+              $"Message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> is in state <{okayMessage.Status}>");
+          }
+
           break;
       }
     }
