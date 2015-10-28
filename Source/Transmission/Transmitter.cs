@@ -11,9 +11,14 @@ namespace Udpit {
   internal class Transmitter {
 
     /// <summary>
+    ///   Delegate for the fragment received event.
+    /// </summary>
+    public delegate void FragmentReceivedDelegate(byte[] fragment, IPEndPoint remoteEndPoint);
+
+    /// <summary>
     ///   Fired when the socket is listening and a fragment is received.
     /// </summary>
-    public event EventHandler<byte[]> FragmentReceived;
+    public event FragmentReceivedDelegate FragmentReceived;
 
     /// <summary>
     ///   Fired when stopping listening and not from a user input.
@@ -217,7 +222,7 @@ namespace Udpit {
           var bytes = _client.Receive(ref remoteEndPoint);
 
           // got some fragment, oh my god!
-          FragmentReceived?.Invoke(this, bytes);
+          FragmentReceived?.Invoke(bytes, remoteEndPoint);
 
           // done, close please and goodbye
           _client.Close();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Udpit {
 
@@ -51,9 +52,51 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Add an incoming data fragment.
+    /// </summary>
+    private void AddFragment(byte[] fragment) {
+      // get message id
+      var id = Fragmenter.GetID(fragment);
+
+      // convert id
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // find it in the dictionary
+      lock (Messages) {
+        if (!Messages.ContainsKey(idKey))
+          return;
+      }
+
+      // get the message
+      Message message;
+      lock (Messages) {
+        message = Messages[idKey];
+      }
+
+      // get fragment number
+      var number = Fragmenter.GetFragmentNumber(fragment);
+
+      // check if the fragment exists
+      lock (message) {
+        if (message.PartList.ContainsKey(number))
+          return;
+      }
+
+      // TODO: Check the fragment for errors
+
+      // get data
+      var data = Fragmenter.GetData(fragment);
+
+      // add the fragment
+      lock (message) {
+        message.PartList.Add(number, data);
+      }
+    }
+
+    /// <summary>
     ///   Handles an incoming fragment.
     /// </summary>
-    private void FragmentCame(object sender, byte[] fragment) {
+    private void FragmentCame(byte[] fragment, IPEndPoint remoteEndPoint) {
       // get type
       var type = Fragmenter.GetFragmentType(fragment);
 
@@ -120,6 +163,93 @@ namespace Udpit {
 
           break;
       }
+    }
+
+    /// <summary>
+    ///   Finds a message from a fragment.
+    /// </summary>
+    private Message GetMessage(byte[] fragment) {
+      // get id
+      var id = Fragmenter.GetID(fragment);
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // find message
+      lock (Messages) {
+        if (!Messages.ContainsKey(idKey))
+          return null;
+      }
+
+      // get message
+      lock (Messages) {
+        return Messages[idKey];
+      }
+    }
+
+    /// <summary>
+    ///   Creates a message based on prepare fragment.
+    /// </summary>
+    private Message PrepareMessage(byte[] fragment, IPEndPoint remoteEndPoint) {
+      // get message id
+      var id = Fragmenter.GetID(fragment);
+
+      // convert id
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // check if we already have one like that
+      lock (Messages) {
+        if (Messages.ContainsKey(idKey))
+          return Messages[idKey];
+      }
+
+      // get fragment count
+      var count = Fragmenter.GetFragmentCount(fragment);
+
+      // get remote name
+      var name = Fragmenter.GetPrepareName(fragment);
+
+      // create a message
+      var message = new Message(count, id) {
+        RemoteName = name,
+        RemoteEndPoint = remoteEndPoint,
+        Status = MessageStatus.Handshaking
+      };
+
+      // add it to the dictionary
+      lock (Messages) {
+        Messages.Add(idKey, message);
+      }
+
+      // return the message
+      return message;
+    }
+
+    /// <summary>
+    ///   Update the message remote name from a prepared fragment.
+    /// </summary>
+    private Message SetRemoteName(byte[] fragment) {
+      // get ID
+      var id = Fragmenter.GetID(fragment);
+
+      // convert id
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // get remote name
+      var name = Fragmenter.GetPreparedName(fragment);
+
+      // set the name
+      lock (Messages) {
+        if (Messages.ContainsKey(idKey)) {
+          lock (Messages[idKey]) {
+            Messages[idKey].RemoteName = name;
+          }
+
+          // return the message
+          return Messages[idKey];
+        }
+      }
+
+      // there's no message
+      return null;
     }
 
     /// <summary>
