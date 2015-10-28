@@ -119,7 +119,16 @@ namespace Udpit {
         }
 
         // send the fragment
-        SendFragment(message, fragment, FragmentType.Okay);
+        SendFragment(message, fragment, FragmentType.Okay)
+
+          // set status
+          .ContinueWith(task => {
+            lock (message) {
+              message.Status = MessageStatus.Finished;
+              Log.Singleton.LogMessage(
+                $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+            }
+          });
       });
     }
 

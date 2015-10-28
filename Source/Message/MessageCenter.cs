@@ -161,6 +161,13 @@ namespace Udpit {
           // send okay fragment
           Transmitter.Singleton.SendOkayFragment(endMessage);
 
+          // print the message
+          lock (endMessage) {
+            Log.Singleton.LogMessage(
+              $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> with a text '<TODO>'");
+            // TODO: text please
+          }
+
           break;
 
         case FragmentType.Okay:
@@ -178,6 +185,13 @@ namespace Udpit {
           lock (okayMessage) {
             Log.Singleton.LogMessage(
               $"Message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> is in state <{okayMessage.Status}>");
+          }
+
+          // print the message
+          lock (okayMessage) {
+            Log.Singleton.LogMessage(
+              $"Successfully sent a full message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> to <{okayMessage.RemoteName}> with a text <'TODO'>");
+            // TODO: text please
           }
 
           // TODO: Delete message
