@@ -20,6 +20,9 @@ namespace Udpit {
       // log the start
       Log.Singleton.LogMessage("Udpit has started");
 
+      // log the option tip
+      Log.Singleton.LogMessage("Go to the Options and set things up");
+
       // set option inputs
       SetOptionInputs();
     }
