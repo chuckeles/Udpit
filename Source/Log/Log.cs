@@ -8,6 +8,11 @@ namespace Udpit {
   public class Log {
 
     /// <summary>
+    ///   Fired when an error is logged.
+    /// </summary>
+    public event EventHandler<string> ErrorLogged;
+
+    /// <summary>
     ///   Fired when a message is logged.
     /// </summary>
     public event EventHandler<string> MessageLogged;
@@ -27,6 +32,14 @@ namespace Udpit {
 
       // return it
       return Singleton;
+    }
+
+    /// <summary>
+    ///   Logs an error.
+    /// </summary>
+    public void LogError(string errorMessage) {
+      // fire the event
+      ErrorLogged?.Invoke(this, errorMessage);
     }
 
     /// <summary>

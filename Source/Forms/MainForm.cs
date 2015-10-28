@@ -15,7 +15,8 @@ namespace Udpit {
       InitializeComponent();
 
       // hook up the log
-      Log.Singleton.MessageLogged += WriteToLog;
+      Log.Singleton.MessageLogged += (sender, message) => WriteToLog(message, false);
+      Log.Singleton.ErrorLogged += (sender, message) => WriteToLog(message, true);
 
       // log the start
       Log.Singleton.LogMessage("Udpit has started");
@@ -66,18 +67,6 @@ namespace Udpit {
       // flip buttons
       _receiveListenButton.Enabled = false;
       _receiveStopButton.Enabled = true;
-    }
-
-    /// <summary>
-    ///   Start listening.
-    /// </summary>
-    private void StopListening(object sender, EventArgs e) {
-      // tell the transmitter
-      Transmitter.Singleton.StopListening();
-
-      // flip buttons
-      _receiveListenButton.Enabled = true;
-      _receiveStopButton.Enabled = false;
     }
 
     /// <summary>
@@ -206,9 +195,21 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Start listening.
+    /// </summary>
+    private void StopListening(object sender, EventArgs e) {
+      // tell the transmitter
+      Transmitter.Singleton.StopListening();
+
+      // flip buttons
+      _receiveListenButton.Enabled = true;
+      _receiveStopButton.Enabled = false;
+    }
+
+    /// <summary>
     ///   Logs messages.
     /// </summary>
-    private void WriteToLog(object sender, string message) {
+    private void WriteToLog(string message, bool error) {
       // get time
       var time = DateTime.Now;
 
@@ -217,13 +218,13 @@ namespace Udpit {
       _logBox.AppendText($"[{time.Hour}:{time.Minute}:{time.Second}:{time.Millisecond}] ");
 
       // write the message
-      _logBox.SelectionColor = DefaultForeColor;
+      _logBox.SelectionColor = error ? Color.Red : DefaultForeColor;
       foreach (var c in message) {
         // text in <...> is a different color
         if (c == '<')
           _logBox.SelectionColor = Color.BlueViolet;
         else if (c == '>')
-          _logBox.SelectionColor = DefaultForeColor;
+          _logBox.SelectionColor = error ? Color.Red : DefaultForeColor;
 
         // append
         else
