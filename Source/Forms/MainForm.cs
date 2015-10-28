@@ -48,7 +48,7 @@ namespace Udpit {
     /// </summary>
     private void OptionChanged(object sender, EventArgs e) {
       // compare names
-      var namesEqual = _optionsNameBox.Text == Options.Name;
+      var namesEqual = _optionsNameBox.Text.Equals(Options.Name);
 
       // compare ports
       var portsEqual = _optionsPortBox.Value == Options.Port;
@@ -112,6 +112,23 @@ namespace Udpit {
 
       // log
       Log.Singleton.LogMessage("Options changed");
+    }
+
+    /// <summary>
+    ///   Enables / disables send buttons based on send input.
+    /// </summary>
+    private void SendTextChanged(object sender, EventArgs e) {
+      // check the input box
+      if (_sendInputBox.Text.Equals("")) {
+        // disable buttons
+        _sendButton.Enabled = false;
+        _sendCancelButton.Enabled = false;
+      }
+      else {
+        // enable buttons
+        _sendButton.Enabled = true;
+        _sendCancelButton.Enabled = true;
+      }
     }
 
     /// <summary>

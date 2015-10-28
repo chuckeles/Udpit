@@ -223,6 +223,7 @@
       this._sendInputBox.Name = "_sendInputBox";
       this._sendInputBox.Size = new System.Drawing.Size(258, 128);
       this._sendInputBox.TabIndex = 0;
+      this._sendInputBox.TextChanged += new System.EventHandler(this.SendTextChanged);
       // 
       // _sendFileGroup
       // 
