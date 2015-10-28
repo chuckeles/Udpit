@@ -337,6 +337,7 @@
       this._sendButton.TabIndex = 0;
       this._sendButton.Text = "Send";
       this._sendButton.UseVisualStyleBackColor = true;
+      this._sendButton.Click += new System.EventHandler(this.Send);
       // 
       // _sendCancelButton
       // 
@@ -349,6 +350,7 @@
       this._sendCancelButton.TabIndex = 1;
       this._sendCancelButton.Text = "Cancel";
       this._sendCancelButton.UseVisualStyleBackColor = true;
+      this._sendCancelButton.Click += new System.EventHandler(this.CancelSending);
       // 
       // _tabReceive
       // 

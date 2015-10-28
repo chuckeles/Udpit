@@ -37,6 +37,16 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Cancel sending a message and reset inputs.
+    /// </summary>
+    private void CancelSending(object sender, EventArgs e) {
+      // reset input box
+      _sendInputBox.Text = "";
+
+      // TODO: Reset input file
+    }
+
+    /// <summary>
     ///   Exits the application.
     /// </summary>
     private void Exit(object sender, EventArgs e) {
@@ -112,6 +122,19 @@ namespace Udpit {
 
       // log
       Log.Singleton.LogMessage("Options changed");
+    }
+
+    /// <summary>
+    ///   Sends the message from the user input.
+    /// </summary>
+    private void Send(object sender, EventArgs e) {
+      // delegate to the message center
+      MessageCenter.Singleton.SendMessage(_sendInputBox.Text);
+
+      // reset input
+      _sendInputBox.Text = "";
+
+      // TODO: Switch to the log tab
     }
 
     /// <summary>

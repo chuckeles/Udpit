@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Net;
 
 namespace Udpit {
 
@@ -26,20 +25,14 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Sends a message.
+    ///   Sends a file.
     /// </summary>
-    /// <param name="endPoint">Where to send the message</param>
-    /// <param name="maxPartSize">Maximum size of one part, in bytes</param>
-    /// <param name="message">Message body</param>
-    public void SendMessage(IPEndPoint endPoint, ushort maxPartSize, string message) {}
+    public void SendFile(string file) {}
 
     /// <summary>
-    /// Sends a file.
+    ///   Sends a message.
     /// </summary>
-    /// <param name="endPoint">Where to send the file</param>
-    /// <param name="maxPartSize">Maximum size of one part, in bytes</param>
-    /// <param name="file">Path to the file</param>
-    public void SendFile(IPEndPoint endPoint, ushort maxPartSize, string file) {}
+    public void SendMessage(string message) {}
 
     /// <summary>
     ///   The singleton instance.
