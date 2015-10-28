@@ -134,7 +134,8 @@ namespace Udpit {
       // reset input
       _sendInputBox.Text = "";
 
-      // TODO: Switch to the log tab
+      // switch to the log tab
+      _tabContainer.SelectTab(_tabLog);
     }
 
     /// <summary>
