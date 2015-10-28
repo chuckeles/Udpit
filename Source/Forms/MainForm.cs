@@ -28,6 +28,9 @@ namespace Udpit {
           WriteToLog(message, true);
       };
 
+      // hook up the listening event
+      Transmitter.Singleton.StoppedListening += UpdateListening;
+
       // log the start
       Log.Singleton.LogMessage("Udpit has started");
 
@@ -36,6 +39,15 @@ namespace Udpit {
 
       // set option inputs
       SetOptionInputs();
+    }
+
+    /// <summary>
+    /// Updates listening buttons when not listening.
+    /// </summary>
+    private void UpdateListening(object sender, EventArgs e) {
+      // move to the GUI thread
+      _receiveListenButton.Invoke(new MethodInvoker(() => _receiveListenButton.Enabled = true));
+      _receiveStopButton.Invoke(new MethodInvoker(() => _receiveStopButton.Enabled = false));
     }
 
     /// <summary>
