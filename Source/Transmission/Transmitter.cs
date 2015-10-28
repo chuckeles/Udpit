@@ -44,9 +44,6 @@ namespace Udpit {
 
       // create a socket
       CreateListenSocket();
-
-      // log
-      Log.Singleton.LogMessage("Listening for incoming fragments");
     }
 
     /// <summary>
@@ -66,8 +63,12 @@ namespace Udpit {
       // set the flag
       _listening = false;
 
+      // close and destroy the client
+      _client.Close();
+      _client = null;
+
       // log
-      Log.Singleton.LogMessage("Stopping listening");
+      Log.Singleton.LogMessage("Stopped listening");
     }
 
     /// <summary>
@@ -109,14 +110,18 @@ namespace Udpit {
           // got some fragment, oh my god!
           FragmentReceived?.Invoke(this, bytes);
 
-          // done, close please
+          // done, close please and goodbye
           _client.Close();
+          _client = null;
 
           // set the flag
           _listening = false;
         }
         catch (ObjectDisposedException) {
           // fine, the socket has been closed
+        }
+        catch (SocketException) {
+          // same deal
         }
       });
     }
