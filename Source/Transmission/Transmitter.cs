@@ -161,12 +161,11 @@ namespace Udpit {
               else {
                 // message timed out
                 lock (message) {
-                  message.Status = MessageStatus.TimedOut;
-
-                  // TODO: Remove message
+                  MessageCenter.Singleton.Messages.Remove(BitConverter.ToUInt16(message.ID, 0));
 
                   // log
-                  Log.Singleton.LogError($"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+                  Log.Singleton.LogError(
+                    $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
                 }
               }
             }
@@ -214,12 +213,11 @@ namespace Udpit {
               else {
                 // message timed out
                 lock (message) {
-                  message.Status = MessageStatus.TimedOut;
-
-                  // TODO: Remove message
+                  MessageCenter.Singleton.Messages.Remove(BitConverter.ToUInt16(message.ID, 0));
 
                   // log
-                  Log.Singleton.LogError($"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+                  Log.Singleton.LogError(
+                    $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
                 }
               }
             }
@@ -368,12 +366,11 @@ namespace Udpit {
               else {
                 // message timed out
                 lock (message) {
-                  message.Status = MessageStatus.TimedOut;
-
-                  // TODO: Remove message
+                  MessageCenter.Singleton.Messages.Remove(BitConverter.ToUInt16(message.ID, 0));
 
                   // log
-                  Log.Singleton.LogError($"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+                  Log.Singleton.LogError(
+                    $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
                 }
               }
             }
@@ -392,10 +389,13 @@ namespace Udpit {
           // error
           Log.Singleton.LogError("Can't send a fragment while listening");
 
+          // delete message
+          lock (message) {
+            MessageCenter.Singleton.Messages.Remove(BitConverter.ToUInt16(message.ID, 0));
+          }
+
           // cancel
           return;
-
-          // TODO: Delete message
         }
 
         // need to lock to prevent multiple tasks trying to send simultaneously
@@ -414,10 +414,14 @@ namespace Udpit {
             // remove client
             _client = null;
 
+            // remove message
+            lock (message) {
+              MessageCenter.Singleton.Messages.Remove(BitConverter.ToUInt16(message.ID, 0));
+            }
+
+
             // stop
             return;
-
-            // TODO: Remove message
           }
 
           // log
