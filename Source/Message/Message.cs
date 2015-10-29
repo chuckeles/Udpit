@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 
 namespace Udpit {
 
@@ -34,6 +35,21 @@ namespace Udpit {
       // set the id
       ID[0] = id[0];
       ID[1] = id[1];
+    }
+
+    /// <summary>
+    /// The body of the message.
+    /// </summary>
+    public string Text { get; set; } = "";
+
+    /// <summary>
+    /// Reconstructs the message body from the parts.
+    /// </summary>
+    public void ReconstructText() {
+      Text = "";
+      foreach (var part in PartList) {
+        Text += Encoding.ASCII.GetString(part.Value);
+      }
     }
 
     /// <summary>
