@@ -46,7 +46,7 @@ namespace Udpit {
     /// <summary>
     ///   Open a socket for listening.
     /// </summary>
-    public Task Listen(bool timeout = true) {
+    public Task<bool> Listen(bool timeout = true) {
       if (_listening)
         return null;
 
@@ -206,9 +206,9 @@ namespace Udpit {
     /// <summary>
     ///   Create an UPD client and set it up to receive fragments.
     /// </summary>
-    private Task CreateListenSocket(bool timeout) {
+    private Task<bool> CreateListenSocket(bool timeout) {
       // create a task
-      return Task.Run(() => {
+      return Task.Run(new Func<bool>(() => {
         try {
           lock (_clientMutex) {
             // create UDP client
@@ -239,7 +239,7 @@ namespace Udpit {
           StoppedListening?.Invoke(this, EventArgs.Empty);
 
           // stop
-          return;
+          return false;
         }
 
         // log
@@ -247,6 +247,7 @@ namespace Udpit {
 
 
         // receive
+        var received = false;
         try {
           lock (_clientMutex) {
             var remoteEndPoint = new IPEndPoint(IPAddress.Any, Options.Port);
@@ -259,6 +260,7 @@ namespace Udpit {
             _listening = false;
 
             // got some fragment, oh my god!
+            received = true;
             FragmentReceived?.Invoke(bytes, remoteEndPoint);
           }
         }
@@ -287,7 +289,9 @@ namespace Udpit {
           // fire the event
           StoppedListening?.Invoke(this, EventArgs.Empty);
         }
-      });
+
+        return received;
+      }));
     }
 
     /// <summary>
