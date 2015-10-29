@@ -194,8 +194,8 @@ namespace Udpit {
       _listening = false;
 
       // close and destroy the client
+      _client.Close();
       lock (_clientMutex) {
-        _client.Close();
         _client = null;
       }
 
@@ -208,7 +208,7 @@ namespace Udpit {
     /// </summary>
     private Task<bool> CreateListenSocket(bool timeout) {
       // create a task
-      return Task.Run(new Func<bool>(() => {
+      return Task.Run(() => {
         try {
           lock (_clientMutex) {
             // create UDP client
@@ -277,8 +277,10 @@ namespace Udpit {
           _listening = false;
 
           // done, close please and goodbye
-          if (_client.Client.IsBound)
-            _client.Close();
+          lock (_clientMutex) {
+            if (_client != null && _client.Client.IsBound)
+              _client.Close();
+          }
         }
         finally {
           // remote the client
@@ -291,7 +293,7 @@ namespace Udpit {
         }
 
         return received;
-      }));
+      });
     }
 
     /// <summary>
