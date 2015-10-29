@@ -135,7 +135,7 @@ namespace Udpit {
     /// <summary>
     ///   Sends a prepared fragment for a message.
     /// </summary>
-    public void SendPreparedFragment(Message message) {
+    public void SendPreparedFragment(Message message, int retries = 0) {
       // create a task
       Task.Run(() => {
         // ask for a prepared fragment
@@ -148,14 +148,36 @@ namespace Udpit {
         SendFragment(message, fragment, FragmentType.Prepared)
 
           // listen
-          .ContinueWith(task => Listen());
+          .ContinueWith(task => Listen())
+
+          // handle timeout
+          .ContinueWith(task => {
+            // check the result
+            if (!task.Result.Result) {
+              // timeout, check retries
+              if (retries < Options.Retries)
+                SendPreparedFragment(message, retries + 1);
+
+              else {
+                // message timed out
+                lock (message) {
+                  message.Status = MessageStatus.TimedOut;
+
+                  // TODO: Remove message
+
+                  // log
+                  Log.Singleton.LogError($"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+                }
+              }
+            }
+          });
       });
     }
 
     /// <summary>
     ///   Send a prepare fragment for a message.
     /// </summary>
-    public void SendPrepareFragment(Message message) {
+    public void SendPrepareFragment(Message message, int retries = 0) {
       // create a task
       Task.Run(() => {
         // create a prepare fragment
@@ -179,7 +201,29 @@ namespace Udpit {
         SendFragment(message, prepareFragment, FragmentType.Prepare)
 
           // listen
-          .ContinueWith(task => Listen());
+          .ContinueWith(task => Listen())
+
+          // handle timeout
+          .ContinueWith(task => {
+            // check the result
+            if (!task.Result.Result) {
+              // timeout, check retries
+              if (retries < Options.Retries)
+                SendPrepareFragment(message, retries + 1);
+
+              else {
+                // message timed out
+                lock (message) {
+                  message.Status = MessageStatus.TimedOut;
+
+                  // TODO: Remove message
+
+                  // log
+                  Log.Singleton.LogError($"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+                }
+              }
+            }
+          });
       });
     }
 
@@ -218,9 +262,8 @@ namespace Udpit {
             _client.Client.Bind(new IPEndPoint(IPAddress.Any, Options.Port));
 
             // set the timeout flag
-            // TODO: Magic number
             if (timeout)
-              _client.Client.ReceiveTimeout = 1000;
+              _client.Client.ReceiveTimeout = Options.TimeoutTime;
           }
         }
         catch (SocketException) {
@@ -299,7 +342,7 @@ namespace Udpit {
     /// <summary>
     ///   Sends end fragment for a message.
     /// </summary>
-    private void SendEndFragment(Message message) {
+    private void SendEndFragment(Message message, int retries = 0) {
       // create a task
       Task.Run(() => {
         // ask for an end fragment
@@ -312,7 +355,29 @@ namespace Udpit {
         SendFragment(message, fragment, FragmentType.End)
 
           // listen
-          .ContinueWith(task => Listen());
+          .ContinueWith(task => Listen())
+
+          // handle timeout
+          .ContinueWith(task => {
+            // check the result
+            if (!task.Result.Result) {
+              // timeout, check retries
+              if (retries < Options.Retries)
+                SendEndFragment(message, retries + 1);
+
+              else {
+                // message timed out
+                lock (message) {
+                  message.Status = MessageStatus.TimedOut;
+
+                  // TODO: Remove message
+
+                  // log
+                  Log.Singleton.LogError($"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+                }
+              }
+            }
+          });
       });
     }
 

@@ -28,9 +28,19 @@ namespace Udpit {
     public static IPEndPoint Remote = new IPEndPoint(new IPAddress(new byte[] {127, 0, 0, 1}), 6994);
 
     /// <summary>
+    ///   Number of retries when fails occur.
+    /// </summary>
+    public const int Retries = 5;
+
+    /// <summary>
     ///   Whether to send corrupt fragments.
     /// </summary>
     public static bool SendCorrupt = false;
+
+    /// <summary>
+    ///   Time in ms after which to time out operations.
+    /// </summary>
+    public const int TimeoutTime = 1000;
 
   }
 
