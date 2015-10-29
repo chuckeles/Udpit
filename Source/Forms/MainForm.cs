@@ -84,7 +84,7 @@ namespace Udpit {
     /// </summary>
     private void Listen(object sender, EventArgs e) {
       // tell the transmitter
-      Transmitter.Singleton.Listen();
+      Transmitter.Singleton.Listen(false);
 
       // flip buttons
       _receiveListenButton.Enabled = false;
