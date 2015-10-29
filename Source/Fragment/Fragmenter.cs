@@ -73,9 +73,9 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Gets fragment number of a data fragment.
+    ///   Gets the number of a message part.
     /// </summary>
-    public static ushort GetFragmentNumber(byte[] fragment) {
+    public static ushort GetPartNumber(byte[] fragment) {
       // same implementation
       return GetFragmentCount(fragment);
     }

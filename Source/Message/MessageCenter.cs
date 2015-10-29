@@ -53,9 +53,9 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Add an incoming data fragment.
+    ///   Add an incoming part.
     /// </summary>
-    private void AddFragment(byte[] fragment) {
+    private void AddPart(byte[] fragment) {
       // get message id
       var id = Fragmenter.GetID(fragment);
 
@@ -85,16 +85,14 @@ namespace Udpit {
         }
       }
 
-      // get fragment number
-      var number = Fragmenter.GetFragmentNumber(fragment);
+      // get part number
+      var number = Fragmenter.GetPartNumber(fragment);
 
       // check if the fragment exists
       lock (message) {
         if (message.PartList.ContainsKey(number))
           return;
       }
-
-      // TODO: Check the fragment for errors
 
       // get data
       var data = Fragmenter.GetData(fragment);
@@ -109,6 +107,8 @@ namespace Udpit {
     ///   Handles an incoming fragment.
     /// </summary>
     private void FragmentCame(byte[] fragment, IPEndPoint remoteEndPoint) {
+      // TODO: CRC, check for errors
+
       // get type
       var type = Fragmenter.GetFragmentType(fragment);
 
@@ -144,7 +144,7 @@ namespace Udpit {
 
         case FragmentType.Data:
           // add fragment
-          AddFragment(fragment);
+          AddPart(fragment);
 
           // listen again
           Transmitter.Singleton.Listen();
