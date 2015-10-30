@@ -65,9 +65,12 @@ namespace Udpit {
       return fragment.Skip(5).ToArray();
     }
 
+    /// <summary>
+    /// Get file name from a prepare file fragment.
+    /// </summary>
     public static string GetFileName(byte[] fragment) {
       // get file name size
-      var size = BitConverter.ToUInt16(fragment.Skip(3).Take(2).ToArray(), 0);
+      var size = fragment.Skip(3).ToArray()[0];
 
       // get bytes
       var bytes = fragment.Skip(5).Take(size).ToArray();
@@ -142,9 +145,12 @@ namespace Udpit {
       return Encoding.ASCII.GetString(bytes);
     }
 
+    /// <summary>
+    /// Gets remote name from a prepare file fragment.
+    /// </summary>
     public static string GetPrepareFileName(byte[] fragment) {
       // get file name size
-      var size = BitConverter.ToUInt16(fragment.Skip(3).Take(2).ToArray(), 0);
+      var size = fragment.Skip(3).ToArray()[0];
 
       // get bytes
       var bytes = fragment.Skip(5).Skip(size).ToArray();
