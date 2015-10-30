@@ -234,7 +234,7 @@ namespace Udpit {
       }
 
       // reset input
-      Cancel(this, EventArgs.Empty);
+      CancelSending(this, EventArgs.Empty);
 
       // switch to the log tab
       _tabContainer.SelectTab(_tabLog);
