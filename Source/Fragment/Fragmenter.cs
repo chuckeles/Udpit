@@ -51,7 +51,7 @@ namespace Udpit {
       // create a message
       var message = new Message((ushort)fragmentList.Count, fragmentList) {
         RemoteEndPoint = remoteEndPoint,
-        FileName = file
+        FileName = file.Substring(file.LastIndexOf("\\"))
       };
 
       // return the message

@@ -38,12 +38,18 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// The body of the message.
+    ///   Returns a complete file byte array.
     /// </summary>
-    public string Text { get; set; } = "";
+    public byte[] ReconstructFile() {
+      var bytes = new List<byte>();
+      foreach (var part in PartList) {
+        bytes.AddRange(part.Value);
+      }
+      return bytes.ToArray();
+    }
 
     /// <summary>
-    /// Reconstructs the message body from the parts.
+    ///   Reconstructs the message body from the parts.
     /// </summary>
     public void ReconstructText() {
       Text = "";
@@ -51,6 +57,11 @@ namespace Udpit {
         Text += Encoding.ASCII.GetString(part.Value);
       }
     }
+
+    /// <summary>
+    ///   Filename for sending files.
+    /// </summary>
+    public string FileName { get; set; } = "";
 
     /// <summary>
     ///   Message ID.
@@ -77,11 +88,6 @@ namespace Udpit {
     public SortedList<ushort, byte[]> PartList { get; } = new SortedList<ushort, byte[]>();
 
     /// <summary>
-    /// Filename for sending files.
-    /// </summary>
-    public string FileName { get; set; } = "";
-
-    /// <summary>
     ///   Remote's IP and port.
     /// </summary>
     public IPEndPoint RemoteEndPoint { get; set; }
@@ -90,6 +96,11 @@ namespace Udpit {
     ///   Remote's name.
     /// </summary>
     public string RemoteName { get; set; }
+
+    /// <summary>
+    ///   The body of the message.
+    /// </summary>
+    public string Text { get; set; } = "";
 
     /// <summary>
     ///   The current status of the message.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 
 namespace Udpit {
@@ -223,11 +224,21 @@ namespace Udpit {
 
           // print the message
           lock (endMessage) {
-            if (endMessage.Text.Equals(""))
-              endMessage.ReconstructText();
+            if (!endMessage.FileName.Equals("")) {
+              // received a file
+              Log.Singleton.LogMessage(
+                $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> to a file <'{endMessage.FileName}'>");
 
-            Log.Singleton.LogMessage(
-              $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> with a text <'{endMessage.Text}'>");
+              // save to the file
+              File.WriteAllBytes(endMessage.FileName, endMessage.ReconstructFile());
+            }
+            else {
+              if (endMessage.Text.Equals(""))
+                endMessage.ReconstructText();
+
+              Log.Singleton.LogMessage(
+                $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> with a text <'{endMessage.Text}'>");
+            }
           }
 
           // remove message
@@ -256,11 +267,18 @@ namespace Udpit {
 
           // print the message
           lock (okayMessage) {
-            if (okayMessage.Text.Equals(""))
-              okayMessage.ReconstructText();
+            if (!okayMessage.FileName.Equals("")) {
+              // sent a file
+              Log.Singleton.LogMessage(
+                $"Successfully sent a full message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> to <{okayMessage.RemoteName}> from a file <'{okayMessage.FileName}'>");
+            }
+            else {
+              if (okayMessage.Text.Equals(""))
+                okayMessage.ReconstructText();
 
-            Log.Singleton.LogMessage(
-              $"Successfully sent a full message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> to <{okayMessage.RemoteName}> with a text <'{okayMessage.Text}'>");
+              Log.Singleton.LogMessage(
+                $"Successfully sent a full message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> to <{okayMessage.RemoteName}> with a text <'{okayMessage.Text}'>");
+            }
           }
 
           // remove message
