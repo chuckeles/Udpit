@@ -222,6 +222,58 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Sends a prepare file fragment for a message.
+    /// </summary>
+    public void SendPrepareFileFragment(Message message, int retries = 0) {
+      // create a task
+      Task.Run(() => {
+        // create a prepare file fragment
+        byte[] prepareFragment;
+        lock (message) {
+          prepareFragment = Fragmenter.MakePrepareFileFragment(message);
+        }
+
+        // update status
+        lock (message) {
+          message.Status = MessageStatus.Handshaking;
+        }
+
+        // log that
+        lock (message) {
+          Log.Singleton.LogMessage(
+            $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+        }
+
+        // go ahead, send it
+        SendFragment(message, prepareFragment, FragmentType.PrepareFile)
+
+          // listen
+          .ContinueWith(task => Listen())
+
+          // handle timeout
+          .ContinueWith(task => {
+            // check the result
+            if (!task.Result.Result) {
+              // timeout, check retries
+              if (retries < Options.Retries)
+                SendPrepareFileFragment(message, retries + 1);
+
+              else {
+                // message timed out
+                lock (message) {
+                  MessageCenter.Singleton.Messages.Remove(BitConverter.ToUInt16(message.ID, 0));
+
+                  // log
+                  Log.Singleton.LogError(
+                    $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+                }
+              }
+            }
+          });
+      });
+    }
+
+    /// <summary>
     ///   Send a prepare fragment for a message.
     /// </summary>
     public void SendPrepareFragment(Message message, int retries = 0) {

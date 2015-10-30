@@ -45,13 +45,13 @@ namespace Udpit {
         }
 
         // add the fragment to the list
-        fragmentList.Add((ushort)fragmentList.Count, bytes);
+        fragmentList.Add((ushort) fragmentList.Count, bytes);
       }
 
       // create a message
-      var message = new Message((ushort)fragmentList.Count, fragmentList) {
+      var message = new Message((ushort) fragmentList.Count, fragmentList) {
         RemoteEndPoint = remoteEndPoint,
-        FileName = file.Substring(file.LastIndexOf("\\"))
+        FileName = file.Substring(file.LastIndexOf("\\") + 1)
       };
 
       // return the message
@@ -308,6 +308,35 @@ namespace Udpit {
 
       // add the id
       data.AddRange(message.ID);
+
+      // add name
+      data.AddRange(Encoding.ASCII.GetBytes(Options.Name));
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
+    ///   Makes a prepare file fragment.
+    /// </summary>
+    public static byte[] MakePrepareFileFragment(Message message) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.PrepareFile);
+
+      // add the id
+      data.AddRange(message.ID);
+
+      // add fragment count
+      data.AddRange(BitConverter.GetBytes(message.PartCount));
+
+      // add file name size
+      data.Add((byte) message.FileName.Length);
+
+      // add file name
+      data.AddRange(Encoding.ASCII.GetBytes(message.FileName));
 
       // add name
       data.AddRange(Encoding.ASCII.GetBytes(Options.Name));
