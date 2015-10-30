@@ -400,6 +400,41 @@ namespace Udpit {
 
         // need to lock to prevent multiple tasks trying to send simultaneously
         lock (_clientMutex) {
+          // check if we want to lose some fragments
+          if (Options.LoseFragments) {
+            // get a random value
+            var random = new Random();
+            if (random.Next() % 100 < 20) {
+              // 20% of fragments will be lost
+
+              // log that
+              Log.Singleton.LogMessage($"Purposefully losing a fragment of type <{type}>");
+
+              // exit
+              return;
+            }
+          }
+
+          // check if we want to corrupt some fragments
+          if (Options.SendCorrupt) {
+            // get a random value
+            var random = new Random();
+            if (random.Next() % 100 < 20) {
+              // 20% of fragments will be corrupted
+
+              // log that
+              Log.Singleton.LogMessage($"Purposefully corrupting a fragment of type <{type}>");
+
+              // change random bytes
+              for (int i = 0, imax = Math.Abs(random.Next() + 2) % 16; i < imax; ++i) {
+                fragment[random.Next() % fragment.Length] = (byte) random.Next();
+              }
+
+              // exit
+              return;
+            }
+          }
+
           // create a client
           _client = new UdpClient();
 
