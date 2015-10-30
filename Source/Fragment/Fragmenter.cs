@@ -90,6 +90,29 @@ namespace Udpit {
     }
 
     /// <summary>
+    /// Gets the list of missing fragments from a missing fragment.
+    /// </summary>
+    public static List<ushort> GetMissingFragments(byte[] fragment) {
+      // start at fourth byte
+      var byteList = fragment.Skip(3).ToArray();
+
+      // make a list
+      var list = new List<ushort>();
+
+      // add missing fragment numbers
+      while (byteList.Length > 0) {
+        // get number
+        list.Add(BitConverter.ToUInt16(byteList.Take(2).ToArray(), 0));
+
+        // shift
+        byteList = byteList.Skip(2).ToArray();
+      }
+
+      // return the list
+      return list;
+    }
+
+    /// <summary>
     ///   Gets the number of a message part.
     /// </summary>
     public static ushort GetPartNumber(byte[] fragment) {

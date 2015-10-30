@@ -171,7 +171,8 @@ namespace Udpit {
           // if missing, request them
           if (missing.Count > 0) {
             // log
-            Log.Singleton.LogMessage($"Message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> is <missing> some parts");
+            Log.Singleton.LogMessage(
+              $"Message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> is <missing> some parts");
 
             // send missing fragment
             Transmitter.Singleton.SendMissingFragment(endMessage, missing);
@@ -226,6 +227,20 @@ namespace Udpit {
           lock (okayMessage) {
             Messages.Remove(BitConverter.ToUInt16(okayMessage.ID, 0));
           }
+
+          break;
+
+        case FragmentType.Missing:
+          // get message
+          var missingMessage = GetMessage(fragment);
+          if (missingMessage == null)
+            break;
+
+          // get missing list
+          var missingList = Fragmenter.GetMissingFragments(fragment);
+
+          // resend data
+          Transmitter.Singleton.SendDataFragments(missingMessage, missingList);
 
           break;
       }

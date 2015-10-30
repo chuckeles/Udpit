@@ -107,6 +107,55 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Sends only missing parts of a message.
+    /// </summary>
+    public void SendDataFragments(Message message, List<ushort> missingList) {
+      // create a task
+      Task.Run(() => {
+        // set state
+        lock (message) {
+          message.Status = MessageStatus.Transmitting;
+        }
+
+        // log that
+        lock (message) {
+          Log.Singleton.LogMessage(
+            $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+        }
+
+        // send missing data fragments
+        var sendTasks = new List<Task>();
+        lock (message) {
+          foreach (var missingNumber in missingList) {
+            // request a data fragment
+            var fragment = Fragmenter.MakeDataFragment(message, missingNumber);
+
+            // send it
+            sendTasks.Add(SendFragment(message, fragment, FragmentType.Data));
+          }
+        }
+
+        // TODO: Handle keep-alive fragments
+
+        Task.WhenAll(sendTasks).ContinueWith(task => {
+          // set state
+          lock (message) {
+            message.Status = MessageStatus.Ending;
+          }
+
+          // log that
+          lock (message) {
+            Log.Singleton.LogMessage(
+              $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+          }
+
+          // send end fragment
+          SendEndFragment(message);
+        });
+      });
+    }
+
+    /// <summary>
     ///   Sends a missing fragment for a message.
     /// </summary>
     public void SendMissingFragment(Message message, List<ushort> missingList) {
