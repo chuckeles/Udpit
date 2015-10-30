@@ -72,6 +72,8 @@ namespace Udpit {
         lock (message) {
           Log.Singleton.LogMessage(
             $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+          MessageCenter.Singleton.FireChange(message.Status);
         }
 
         // send all data fragments
@@ -98,6 +100,8 @@ namespace Udpit {
           lock (message) {
             Log.Singleton.LogMessage(
               $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+            MessageCenter.Singleton.FireChange(message.Status);
           }
 
           // send end fragment
@@ -121,6 +125,8 @@ namespace Udpit {
         lock (message) {
           Log.Singleton.LogMessage(
             $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+          MessageCenter.Singleton.FireChange(message.Status);
         }
 
         // send missing data fragments
@@ -147,6 +153,8 @@ namespace Udpit {
           lock (message) {
             Log.Singleton.LogMessage(
               $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+            MessageCenter.Singleton.FireChange(message.Status);
           }
 
           // send end fragment
@@ -196,6 +204,8 @@ namespace Udpit {
               message.Status = MessageStatus.Finished;
               Log.Singleton.LogMessage(
                 $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+              MessageCenter.Singleton.FireChange(message.Status);
             }
           });
       });
@@ -242,6 +252,8 @@ namespace Udpit {
         lock (message) {
           Log.Singleton.LogMessage(
             $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+          MessageCenter.Singleton.FireChange(message.Status);
         }
 
         // go ahead, send it
@@ -294,6 +306,8 @@ namespace Udpit {
         lock (message) {
           Log.Singleton.LogMessage(
             $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+          MessageCenter.Singleton.FireChange(message.Status);
         }
 
         // go ahead, send it

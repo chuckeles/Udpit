@@ -10,6 +10,18 @@ namespace Udpit {
   /// </summary>
   internal class MessageCenter {
 
+    /// <summary>
+    /// Fired when a message status changes.
+    /// </summary>
+    public event EventHandler<MessageStatus> StatusChanged;
+
+    /// <summary>
+    /// Fires the status changed event.
+    /// </summary>
+    public void FireChange(MessageStatus status) {
+      StatusChanged?.Invoke(this, status);
+    } 
+
     private MessageCenter() {
       // hook the transmitter's fragment received
       Transmitter.Singleton.FragmentReceived += FragmentCame;
@@ -104,6 +116,8 @@ namespace Udpit {
           // log
           Log.Singleton.LogMessage(
             $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> is in state <{message.Status}>");
+
+          FireChange(message.Status);
         }
       }
 
@@ -273,6 +287,8 @@ namespace Udpit {
           lock (okayMessage) {
             Log.Singleton.LogMessage(
               $"Message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> is in state <{okayMessage.Status}>");
+
+            FireChange(okayMessage.Status);
           }
 
           // print the message
