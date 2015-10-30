@@ -74,7 +74,10 @@
       this._optionsActionsContainer = new System.Windows.Forms.TableLayoutPanel();
       this._optionsSaveButton = new System.Windows.Forms.Button();
       this._optionsCancelButton = new System.Windows.Forms.Button();
+      this._statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+      this._statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
       this._mainMenu.SuspendLayout();
+      this._statusBar.SuspendLayout();
       this._tabContainer.SuspendLayout();
       this._tabLog.SuspendLayout();
       this._tabSend.SuspendLayout();
@@ -123,7 +126,7 @@
       // 
       this._restartButton.Name = "_restartButton";
       this._restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-      this._restartButton.Size = new System.Drawing.Size(151, 22);
+      this._restartButton.Size = new System.Drawing.Size(152, 22);
       this._restartButton.Text = "Restart";
       this._restartButton.Click += new System.EventHandler(this.Restart);
       // 
@@ -131,12 +134,15 @@
       // 
       this._exitButton.Name = "_exitButton";
       this._exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-      this._exitButton.Size = new System.Drawing.Size(151, 22);
+      this._exitButton.Size = new System.Drawing.Size(152, 22);
       this._exitButton.Text = "Exit";
       this._exitButton.Click += new System.EventHandler(this.Exit);
       // 
       // _statusBar
       // 
+      this._statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._statusProgressBar,
+            this._statusLabel});
       this._statusBar.Location = new System.Drawing.Point(0, 439);
       this._statusBar.Name = "_statusBar";
       this._statusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
@@ -756,6 +762,18 @@
       this._optionsCancelButton.UseVisualStyleBackColor = true;
       this._optionsCancelButton.Click += new System.EventHandler(this.Cancel);
       // 
+      // _statusLabel
+      // 
+      this._statusLabel.Name = "_statusLabel";
+      this._statusLabel.Size = new System.Drawing.Size(39, 17);
+      this._statusLabel.Text = "Ready";
+      // 
+      // _statusProgressBar
+      // 
+      this._statusProgressBar.Name = "_statusProgressBar";
+      this._statusProgressBar.Size = new System.Drawing.Size(200, 16);
+      this._statusProgressBar.Step = 1;
+      // 
       // MainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,6 +790,8 @@
       this.Text = "Udpit";
       this._mainMenu.ResumeLayout(false);
       this._mainMenu.PerformLayout();
+      this._statusBar.ResumeLayout(false);
+      this._statusBar.PerformLayout();
       this._tabContainer.ResumeLayout(false);
       this._tabLog.ResumeLayout(false);
       this._tabSend.ResumeLayout(false);
@@ -857,5 +877,7 @@
     private System.Windows.Forms.CheckBox _sendingErrorCheckBox;
     private System.Windows.Forms.Label _sendingLoseLabel;
     private System.Windows.Forms.CheckBox _sendingLoseChackbox;
+    private System.Windows.Forms.ToolStripStatusLabel _statusLabel;
+    private System.Windows.Forms.ToolStripProgressBar _statusProgressBar;
   }
 }
