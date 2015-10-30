@@ -51,7 +51,7 @@ namespace Udpit {
       // create a message
       var message = new Message((ushort) fragmentList.Count, fragmentList) {
         RemoteEndPoint = remoteEndPoint,
-        FileName = file.Substring(file.LastIndexOf("\\") + 1)
+        FileName = Path.GetFileName(file)
       };
 
       // return the message
@@ -117,10 +117,10 @@ namespace Udpit {
     /// </summary>
     public static string GetFileName(byte[] fragment) {
       // get file name size
-      var size = fragment.Skip(3).ToArray()[0];
+      var size = fragment.Skip(5).ToArray()[0];
 
       // get bytes
-      var bytes = fragment.Skip(5).Take(size).ToArray();
+      var bytes = fragment.Skip(6).Take(size).ToArray();
 
       // convert and return
       return Encoding.ASCII.GetString(bytes);
@@ -197,10 +197,10 @@ namespace Udpit {
     /// </summary>
     public static string GetPrepareFileName(byte[] fragment) {
       // get file name size
-      var size = fragment.Skip(3).ToArray()[0];
+      var size = fragment.Skip(5).ToArray()[0];
 
       // get bytes
-      var bytes = fragment.Skip(5).Skip(size).ToArray();
+      var bytes = fragment.Skip(6).Skip(size).ToArray();
 
       // convert and return
       return Encoding.ASCII.GetString(bytes);

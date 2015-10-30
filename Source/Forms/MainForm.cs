@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Windows.Forms;
 
@@ -210,7 +211,7 @@ namespace Udpit {
         _sendFileRemoveButton.Enabled = true;
 
         // update label
-        _sendFileName.Text = _file.Substring(_file.LastIndexOf('\\') + 1);
+        _sendFileName.Text = Path.GetFileName(_file);
 
         // enable send buttons
         _sendButton.Enabled = true;

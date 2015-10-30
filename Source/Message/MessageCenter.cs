@@ -230,7 +230,7 @@ namespace Udpit {
                 $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> to a file <'{endMessage.FileName}'>");
 
               // save to the file
-              File.WriteAllBytes(endMessage.FileName, endMessage.ReconstructFile());
+              File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), endMessage.FileName), endMessage.ReconstructFile());
             }
             else {
               if (endMessage.Text.Equals(""))
