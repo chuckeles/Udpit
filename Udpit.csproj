@@ -70,6 +70,7 @@
     <Compile Include="Source\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Source\Fragment\CRC.cs" />
     <Compile Include="Source\Fragment\Fragmenter.cs" />
     <Compile Include="Source\Fragment\FragmentType.cs" />
     <Compile Include="Source\Log\Log.cs" />
