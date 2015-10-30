@@ -334,7 +334,7 @@ namespace Udpit {
     /// <summary>
     ///   Selected file.
     /// </summary>
-    private string _file;
+    private string _file = "";
 
   }
 
