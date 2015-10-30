@@ -42,15 +42,6 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Updates listening buttons when not listening.
-    /// </summary>
-    private void UpdateListening(object sender, EventArgs e) {
-      // move to the GUI thread
-      _receiveListenButton.Invoke(new MethodInvoker(() => _receiveListenButton.Enabled = true));
-      _receiveStopButton.Invoke(new MethodInvoker(() => _receiveStopButton.Enabled = false));
-    }
-
-    /// <summary>
     ///   Cancels modifying options.
     /// </summary>
     private void Cancel(object sender, EventArgs e) {
@@ -67,9 +58,16 @@ namespace Udpit {
     /// </summary>
     private void CancelSending(object sender, EventArgs e) {
       // reset input box
+      _sendInputBox.Enabled = true;
       _sendInputBox.Text = "";
 
-      // TODO: Reset input file
+      // remove input file
+      _file = "";
+      _sendFileName.Text = "<none>";
+
+      // reset file buttons
+      _sendFileButton.Enabled = true;
+      _sendFileRemoveButton.Enabled = false;
     }
 
     /// <summary>
@@ -132,6 +130,27 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Removes the selected file.
+    /// </summary>
+    private void RemoveFile(object sender, EventArgs e) {
+      // reset file
+      _file = "";
+
+      // enable input
+      _sendInputBox.Enabled = true;
+
+      // flip buttons
+      _sendFileButton.Enabled = true;
+      _sendFileRemoveButton.Enabled = false;
+
+      // update label
+      _sendFileName.Text = "<none>";
+
+      // reset send buttons
+      SendTextChanged(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     ///   Restarts the application.
     /// </summary>
     private void Restart(object sender, EventArgs e) {
@@ -169,6 +188,34 @@ namespace Udpit {
 
       // log
       Log.Singleton.LogMessage("Options changed");
+    }
+
+    /// <summary>
+    ///   Selects a file to send.
+    /// </summary>
+    private void SelectFile(object sender, EventArgs e) {
+      // show an open file dialog
+      var dialog = new OpenFileDialog();
+      var result = dialog.ShowDialog(this);
+
+      if (result == DialogResult.OK) {
+        // get the file
+        _file = dialog.FileName;
+
+        // disable input
+        _sendInputBox.Enabled = false;
+
+        // flip buttons
+        _sendFileButton.Enabled = false;
+        _sendFileRemoveButton.Enabled = true;
+
+        // update label
+        _sendFileName.Text = _file.Substring(_file.LastIndexOf('\\') + 1);
+
+        // enable send buttons
+        _sendButton.Enabled = true;
+        _sendCancelButton.Enabled = true;
+      }
     }
 
     /// <summary>
@@ -241,6 +288,15 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Updates listening buttons when not listening.
+    /// </summary>
+    private void UpdateListening(object sender, EventArgs e) {
+      // move to the GUI thread
+      _receiveListenButton.Invoke(new MethodInvoker(() => _receiveListenButton.Enabled = true));
+      _receiveStopButton.Invoke(new MethodInvoker(() => _receiveStopButton.Enabled = false));
+    }
+
+    /// <summary>
     ///   Logs messages.
     /// </summary>
     private void WriteToLog(string message, bool error) {
@@ -268,6 +324,11 @@ namespace Udpit {
       // end line
       _logBox.AppendText("\n");
     }
+
+    /// <summary>
+    ///   Selected file.
+    /// </summary>
+    private string _file;
 
   }
 

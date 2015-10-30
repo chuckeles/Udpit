@@ -267,6 +267,7 @@
       this._sendFileButton.TabIndex = 2;
       this._sendFileButton.Text = "Select";
       this._sendFileButton.UseVisualStyleBackColor = true;
+      this._sendFileButton.Click += new System.EventHandler(this.SelectFile);
       // 
       // _sendFileRemoveButton
       // 
@@ -279,6 +280,7 @@
       this._sendFileRemoveButton.TabIndex = 3;
       this._sendFileRemoveButton.Text = "Remove";
       this._sendFileRemoveButton.UseVisualStyleBackColor = true;
+      this._sendFileRemoveButton.Click += new System.EventHandler(this.RemoveFile);
       // 
       // _sendFileLabel
       // 
@@ -299,7 +301,7 @@
       this._sendFileName.Name = "_sendFileName";
       this._sendFileName.Size = new System.Drawing.Size(123, 13);
       this._sendFileName.TabIndex = 1;
-      this._sendFileName.Text = "file.txt";
+      this._sendFileName.Text = "<none>";
       this._sendFileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       // 
       // _sendActionsGroup
