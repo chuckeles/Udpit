@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
 
 namespace Udpit {
 
@@ -166,7 +165,7 @@ namespace Udpit {
           lock (endMessage) {
             if (endMessage.Text.Equals(""))
               endMessage.ReconstructText();
-            
+
             Log.Singleton.LogMessage(
               $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> to <{endMessage.RemoteName}> with a text <'{endMessage.Text}'>");
           }

@@ -117,8 +117,11 @@ namespace Udpit {
       // compare corrupt
       var corruptsEqual = _sendingErrorCheckBox.Checked == Options.SendCorrupt;
 
+      // compare miss
+      var losesEqual = _sendingLoseChackbox.Checked == Options.LoseFragments;
+
       // update buttons
-      if (namesEqual && portsEqual && addrEqual && remotePortsEqual && sizesEqual && corruptsEqual) {
+      if (namesEqual && portsEqual && addrEqual && remotePortsEqual && sizesEqual && corruptsEqual && losesEqual) {
         _optionsSaveButton.Enabled = false;
         _optionsCancelButton.Enabled = false;
       }
@@ -153,6 +156,9 @@ namespace Udpit {
 
       // save corrupt
       Options.SendCorrupt = _sendingErrorCheckBox.Checked;
+
+      // save lose
+      Options.LoseFragments = _sendingLoseChackbox.Checked;
 
       // reset inputs
       SetOptionInputs();
@@ -217,6 +223,9 @@ namespace Udpit {
 
       // set corrupt
       _sendingErrorCheckBox.Checked = Options.SendCorrupt;
+
+      // set lose
+      _sendingLoseChackbox.Checked = Options.LoseFragments;
     }
 
     /// <summary>

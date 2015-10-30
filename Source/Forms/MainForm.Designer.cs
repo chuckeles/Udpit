@@ -54,6 +54,8 @@
       this._optionsContainer = new System.Windows.Forms.TableLayoutPanel();
       this._sendingGroup = new System.Windows.Forms.GroupBox();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+      this._sendingLoseChackbox = new System.Windows.Forms.CheckBox();
+      this._sendingLoseLabel = new System.Windows.Forms.Label();
       this._sendingPortLabel = new System.Windows.Forms.Label();
       this._sendingAddressLabel = new System.Windows.Forms.Label();
       this._sendingAddressBox = new System.Windows.Forms.TextBox();
@@ -458,6 +460,8 @@
       this.tableLayoutPanel1.ColumnCount = 2;
       this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
       this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+      this.tableLayoutPanel1.Controls.Add(this._sendingLoseChackbox, 1, 4);
+      this.tableLayoutPanel1.Controls.Add(this._sendingLoseLabel, 0, 4);
       this.tableLayoutPanel1.Controls.Add(this._sendingPortLabel, 0, 1);
       this.tableLayoutPanel1.Controls.Add(this._sendingAddressLabel, 0, 0);
       this.tableLayoutPanel1.Controls.Add(this._sendingAddressBox, 1, 0);
@@ -469,14 +473,37 @@
       this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
       this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-      this.tableLayoutPanel1.RowCount = 5;
+      this.tableLayoutPanel1.RowCount = 6;
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
       this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
       this.tableLayoutPanel1.Size = new System.Drawing.Size(264, 130);
       this.tableLayoutPanel1.TabIndex = 0;
+      // 
+      // _sendingLoseChackbox
+      // 
+      this._sendingLoseChackbox.AutoSize = true;
+      this._sendingLoseChackbox.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._sendingLoseChackbox.Location = new System.Drawing.Point(82, 101);
+      this._sendingLoseChackbox.Name = "_sendingLoseChackbox";
+      this._sendingLoseChackbox.Size = new System.Drawing.Size(179, 14);
+      this._sendingLoseChackbox.TabIndex = 9;
+      this._sendingLoseChackbox.UseVisualStyleBackColor = true;
+      this._sendingLoseChackbox.CheckedChanged += new System.EventHandler(this.OptionChanged);
+      // 
+      // _sendingLoseLabel
+      // 
+      this._sendingLoseLabel.AutoSize = true;
+      this._sendingLoseLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._sendingLoseLabel.Location = new System.Drawing.Point(3, 98);
+      this._sendingLoseLabel.Name = "_sendingLoseLabel";
+      this._sendingLoseLabel.Size = new System.Drawing.Size(73, 20);
+      this._sendingLoseLabel.TabIndex = 8;
+      this._sendingLoseLabel.Text = "Lose";
+      this._sendingLoseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
       // _sendingPortLabel
       // 
@@ -826,5 +853,7 @@
     private System.Windows.Forms.NumericUpDown _sendingSizeBox;
     private System.Windows.Forms.Label _sendingErrorLabel;
     private System.Windows.Forms.CheckBox _sendingErrorCheckBox;
+    private System.Windows.Forms.Label _sendingLoseLabel;
+    private System.Windows.Forms.CheckBox _sendingLoseChackbox;
   }
 }

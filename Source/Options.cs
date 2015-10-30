@@ -8,6 +8,11 @@ namespace Udpit {
   internal static class Options {
 
     /// <summary>
+    ///   Whether to purposefully lose some fragments.
+    /// </summary>
+    public static bool LoseFragments = false;
+
+    /// <summary>
     ///   Maximum size of one message part when sending.
     /// </summary>
     public static ushort MaxPartSize = 1000;
