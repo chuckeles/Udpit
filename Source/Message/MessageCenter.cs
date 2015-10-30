@@ -16,11 +16,23 @@ namespace Udpit {
     public event EventHandler<MessageStatus> StatusChanged;
 
     /// <summary>
+    /// Fired when the transmission progress changes.
+    /// </summary>
+    public event EventHandler<KeyValuePair<ushort, ushort>> ProgressChanged;
+
+    /// <summary>
     /// Fires the status changed event.
     /// </summary>
     public void FireChange(MessageStatus status) {
       StatusChanged?.Invoke(this, status);
-    } 
+    }
+
+    /// <summary>
+    /// Fires the status changed event.
+    /// </summary>
+    public void FireProgress(ushort progress, ushort partCount) {
+      ProgressChanged?.Invoke(this, new KeyValuePair<ushort, ushort>(progress, partCount));
+    }
 
     private MessageCenter() {
       // hook the transmitter's fragment received
@@ -136,6 +148,9 @@ namespace Udpit {
       // add the fragment
       lock (message) {
         message.PartList.Add(number, data);
+
+        // fire progress
+        FireProgress((ushort) message.PartList.Count, message.PartCount);
       }
     }
 
@@ -263,6 +278,8 @@ namespace Udpit {
               Log.Singleton.LogMessage(
                 $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> with a text <'{endMessage.Text}'>");
             }
+
+            FireProgress(1, 1);
           }
 
           // remove message
@@ -305,6 +322,8 @@ namespace Udpit {
               Log.Singleton.LogMessage(
                 $"Successfully sent a full message <{okayMessage.ID[0].ToString("00")}{okayMessage.ID[1].ToString("00")}> to <{okayMessage.RemoteName}> with a text <'{okayMessage.Text}'>");
             }
+
+            FireProgress(1, 1);
           }
 
           // remove message

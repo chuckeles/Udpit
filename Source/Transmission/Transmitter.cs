@@ -84,7 +84,15 @@ namespace Udpit {
             var fragment = Fragmenter.MakeDataFragment(message, pair.Key);
 
             // send it
-            sendTasks.Add(SendFragment(message, fragment, FragmentType.Data));
+            var task = SendFragment(message, fragment, FragmentType.Data);
+            sendTasks.Add(task);
+
+            // update progress
+            task.ContinueWith(t => {
+              lock (message) {
+                MessageCenter.Singleton.FireProgress(pair.Key, message.PartCount);
+              }
+            });
           }
         }
 
@@ -137,7 +145,15 @@ namespace Udpit {
             var fragment = Fragmenter.MakeDataFragment(message, missingNumber);
 
             // send it
-            sendTasks.Add(SendFragment(message, fragment, FragmentType.Data));
+            var task = SendFragment(message, fragment, FragmentType.Data);
+            sendTasks.Add(task);
+
+            // update progress
+            task.ContinueWith(t => {
+              lock (message) {
+                MessageCenter.Singleton.FireProgress(missingNumber, message.PartCount);
+              }
+            });
           }
         }
 
