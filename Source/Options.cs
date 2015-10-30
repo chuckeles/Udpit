@@ -35,7 +35,7 @@ namespace Udpit {
     /// <summary>
     ///   Number of retries when fails occur.
     /// </summary>
-    public const int Retries = 5;
+    public const int Retries = 10;
 
     /// <summary>
     ///   Whether to send corrupt fragments.
@@ -45,7 +45,7 @@ namespace Udpit {
     /// <summary>
     ///   Time in ms after which to time out operations.
     /// </summary>
-    public const int TimeoutTime = 1000;
+    public const int TimeoutTime = 500;
 
   }
 
