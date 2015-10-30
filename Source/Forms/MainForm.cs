@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -35,6 +36,9 @@ namespace Udpit {
       // hook up the state changed event
       MessageCenter.Singleton.StatusChanged += UpdateStatus;
 
+      // hook up the progress event
+      MessageCenter.Singleton.ProgressChanged += UpdateProgress;
+
       // log the start
       Log.Singleton.LogMessage("Udpit has started");
 
@@ -43,6 +47,16 @@ namespace Udpit {
 
       // set option inputs
       SetOptionInputs();
+    }
+
+    /// <summary>
+    /// Update shown progress.
+    /// </summary>
+    private void UpdateProgress(object sender, KeyValuePair<ushort, ushort> progress) {
+      _statusBar.Invoke(new MethodInvoker(() => {
+        _statusProgressBar.Maximum = progress.Value;
+        _statusProgressBar.Value = progress.Key;
+      }));
     }
 
     /// <summary>
