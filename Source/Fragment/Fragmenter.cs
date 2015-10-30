@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -10,6 +11,52 @@ namespace Udpit {
   ///   Contains static methods to work with fragments.
   /// </summary>
   internal static class Fragmenter {
+
+    /// <summary>
+    ///   Creates a message and all it's fragments. From a file.
+    /// </summary>
+    /// <param name="remoteEndPoint">Where to send the message</param>
+    /// <param name="file">File to send</param>
+    /// <param name="maxFragmentSize">Maximum size of one fragment in bytes</param>
+    public static Message CreateFileMessage(IPEndPoint remoteEndPoint, string file, ushort maxFragmentSize) {
+      // read file bytes
+      var fileBytes = File.ReadAllBytes(file);
+
+      // create a sorted list of fragments
+      var fragmentList = new SortedList<ushort, byte[]>();
+
+      // add all fragments
+      while (fileBytes.Length > 0) {
+        // get the fragment bytes
+        byte[] bytes;
+
+        // check the remaining size
+        if (fileBytes.Length > maxFragmentSize) {
+          // take maximum allowed bytes and make a fragment
+          bytes = fileBytes.Take(maxFragmentSize).ToArray();
+
+          // shift
+          fileBytes = fileBytes.Skip(maxFragmentSize).ToArray();
+        }
+        else {
+          // take whole fragment
+          bytes = fileBytes;
+          fileBytes = new byte[0];
+        }
+
+        // add the fragment to the list
+        fragmentList.Add((ushort)fragmentList.Count, bytes);
+      }
+
+      // create a message
+      var message = new Message((ushort)fragmentList.Count, fragmentList) {
+        RemoteEndPoint = remoteEndPoint,
+        FileName = file
+      };
+
+      // return the message
+      return message;
+    }
 
     /// <summary>
     ///   Creates a message and all it's fragments.
@@ -66,7 +113,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Get file name from a prepare file fragment.
+    ///   Get file name from a prepare file fragment.
     /// </summary>
     public static string GetFileName(byte[] fragment) {
       // get file name size
@@ -146,7 +193,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Gets remote name from a prepare file fragment.
+    ///   Gets remote name from a prepare file fragment.
     /// </summary>
     public static string GetPrepareFileName(byte[] fragment) {
       // get file name size

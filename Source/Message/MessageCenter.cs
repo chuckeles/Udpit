@@ -30,6 +30,28 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Sends a file.
+    /// </summary>
+    public void SendFileMessage(string file) {
+      // ask for a message
+      var message = Fragmenter.CreateFileMessage(Options.Remote, file, Options.MaxPartSize);
+
+      // add to the dictionary
+      lock (Messages) {
+        Messages.Add(BitConverter.ToUInt16(message.ID, 0), message);
+      }
+
+      // log the start
+      lock (message) {
+        Log.Singleton.LogMessage(
+          $"Sending message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> to <{Options.Remote}> with maximum part size of <{Options.MaxPartSize}B> from the file <{message.FileName}>");
+      }
+
+      // delegate to the transmitter
+      Transmitter.Singleton.SendPrepareFragment(message);
+    }
+
+    /// <summary>
     ///   Sends a message.
     /// </summary>
     public void SendMessage(string messageText) {
@@ -265,7 +287,27 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Creates a message based on prepare file fragment.
+    ///   Finds a message from a fragment.
+    /// </summary>
+    private Message GetMessage(byte[] fragment) {
+      // get id
+      var id = Fragmenter.GetID(fragment);
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // find message
+      lock (Messages) {
+        if (!Messages.ContainsKey(idKey))
+          return null;
+      }
+
+      // get message
+      lock (Messages) {
+        return Messages[idKey];
+      }
+    }
+
+    /// <summary>
+    ///   Creates a message based on prepare file fragment.
     /// </summary>
     private Message PrepareFileMessage(byte[] fragment, IPEndPoint remoteEndPoint) {
       // get message id
@@ -304,26 +346,6 @@ namespace Udpit {
 
       // return the message
       return message;
-    }
-
-    /// <summary>
-    ///   Finds a message from a fragment.
-    /// </summary>
-    private Message GetMessage(byte[] fragment) {
-      // get id
-      var id = Fragmenter.GetID(fragment);
-      var idKey = BitConverter.ToUInt16(id, 0);
-
-      // find message
-      lock (Messages) {
-        if (!Messages.ContainsKey(idKey))
-          return null;
-      }
-
-      // get message
-      lock (Messages) {
-        return Messages[idKey];
-      }
     }
 
     /// <summary>

@@ -222,10 +222,15 @@ namespace Udpit {
     ///   Sends the message from the user input.
     /// </summary>
     private void Send(object sender, EventArgs e) {
-      // TODO: Handle input file
-
-      // delegate to the message center
-      MessageCenter.Singleton.SendMessage(_sendInputBox.Text);
+      // check file
+      if (!_file.Equals("")) {
+        // delegate to the message center
+        MessageCenter.Singleton.SendFileMessage(_file);
+      }
+      else {
+        // delegate to the message center
+        MessageCenter.Singleton.SendMessage(_sendInputBox.Text);
+      }
 
       // reset input
       _sendInputBox.Text = "";
