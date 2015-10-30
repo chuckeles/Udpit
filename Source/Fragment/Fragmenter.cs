@@ -74,14 +74,6 @@ namespace Udpit {
     }
 
     /// <summary>
-    ///   Gets the number of a message part.
-    /// </summary>
-    public static ushort GetPartNumber(byte[] fragment) {
-      // same implementation
-      return GetFragmentCount(fragment);
-    }
-
-    /// <summary>
     ///   Gets the type of a fragment.
     /// </summary>
     public static FragmentType GetFragmentType(byte[] fragment) {
@@ -95,6 +87,14 @@ namespace Udpit {
     public static byte[] GetID(byte[] fragment) {
       // id is the second and third byte
       return fragment.Skip(1).Take(2).ToArray();
+    }
+
+    /// <summary>
+    ///   Gets the number of a message part.
+    /// </summary>
+    public static ushort GetPartNumber(byte[] fragment) {
+      // same implementation
+      return GetFragmentCount(fragment);
     }
 
     /// <summary>
@@ -154,6 +154,28 @@ namespace Udpit {
 
       // add the id
       data.AddRange(message.ID);
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
+    ///   Makes a missing fragment.
+    /// </summary>
+    public static byte[] MakeMissingFragment(Message message, List<ushort> missingList) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte) FragmentType.Missing);
+
+      // add the id
+      data.AddRange(message.ID);
+
+      // add missing fragments
+      foreach (var missingFragment in missingList) {
+        data.AddRange(BitConverter.GetBytes(missingFragment));
+      }
 
       // return data
       return data.ToArray();

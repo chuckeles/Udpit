@@ -107,6 +107,26 @@ namespace Udpit {
     }
 
     /// <summary>
+    ///   Sends a missing fragment for a message.
+    /// </summary>
+    public void SendMissingFragment(Message message, List<ushort> missingList) {
+      // create a task
+      Task.Run(() => {
+        // ask for a missing fragment
+        byte[] fragment;
+        lock (message) {
+          fragment = Fragmenter.MakeMissingFragment(message, missingList);
+        }
+
+        // send the fragment
+        SendFragment(message, fragment, FragmentType.Missing)
+
+          // listen
+          .ContinueWith(task => Listen(false));
+      });
+    }
+
+    /// <summary>
     ///   Sends ending okay fragment.
     /// </summary>
     public void SendOkayFragment(Message message) {
@@ -135,7 +155,7 @@ namespace Udpit {
     /// <summary>
     ///   Sends a prepared fragment for a message.
     /// </summary>
-    public void SendPreparedFragment(Message message, int retries = 0) {
+    public void SendPreparedFragment(Message message) {
       // create a task
       Task.Run(() => {
         // ask for a prepared fragment
@@ -148,28 +168,7 @@ namespace Udpit {
         SendFragment(message, fragment, FragmentType.Prepared)
 
           // listen
-          .ContinueWith(task => Listen())
-
-          // handle timeout
-          .ContinueWith(task => {
-            // check the result
-            if (!task.Result.Result) {
-              // timeout, check retries
-              if (retries < Options.Retries)
-                SendPreparedFragment(message, retries + 1);
-
-              else {
-                // message timed out
-                lock (message) {
-                  MessageCenter.Singleton.Messages.Remove(BitConverter.ToUInt16(message.ID, 0));
-
-                  // log
-                  Log.Singleton.LogError(
-                    $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
-                }
-              }
-            }
-          });
+          .ContinueWith(task => Listen(false));
       });
     }
 

@@ -156,7 +156,26 @@ namespace Udpit {
           if (endMessage == null)
             break;
 
-          // TODO: Check missing fragments
+          // check missing fragments
+          var missing = new List<ushort>();
+          lock (endMessage) {
+            if (endMessage.PartList.Count < endMessage.PartCount) {
+              // missing fragments, oh god!
+              for (ushort i = 0; i < endMessage.PartCount; ++i) {
+                if (!endMessage.PartList.ContainsKey(i))
+                  missing.Add(i);
+              }
+            }
+          }
+
+          // if missing, request them
+          if (missing.Count > 0) {
+            // log
+            Log.Singleton.LogMessage($"Message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> is <missing> some parts");
+
+            // send missing fragment
+            Transmitter.Singleton.SendMissingFragment(endMessage, missing);
+          }
 
           // send okay fragment
           Transmitter.Singleton.SendOkayFragment(endMessage);
