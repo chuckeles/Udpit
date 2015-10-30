@@ -146,7 +146,7 @@ namespace Udpit {
           AddPart(fragment);
 
           // listen again
-          Transmitter.Singleton.Listen();
+          Transmitter.Singleton.Listen(false);
 
           break;
 
