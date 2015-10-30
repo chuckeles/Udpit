@@ -38,7 +38,12 @@
     /// <summary>
     ///   Request missing fragments.
     /// </summary>
-    Missing = 6
+    Missing = 6,
+
+    /// <summary>
+    ///   Initialize handshake with a file.
+    /// </summary>
+    PrepareFile = 7
 
   }
 

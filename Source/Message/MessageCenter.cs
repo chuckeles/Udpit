@@ -131,6 +131,21 @@ namespace Udpit {
 
           break;
 
+        case FragmentType.PrepareFile:
+          // make a local copy
+          var prepareFileMessage = PrepareFileMessage(fragment, remoteEndPoint);
+
+          // log the fact
+          lock (prepareFileMessage) {
+            Log.Singleton.LogMessage(
+              $"Created a message <{prepareFileMessage.ID[0].ToString("00")}{prepareFileMessage.ID[1].ToString("00")}> from a file <{prepareFileMessage.FileName}>");
+          }
+
+          // respond
+          Transmitter.Singleton.SendPreparedFragment(prepareFileMessage);
+
+          break;
+
         case FragmentType.Prepared:
           // set remote name
           var preparedMessage = SetRemoteName(fragment);
@@ -247,6 +262,48 @@ namespace Udpit {
 
           break;
       }
+    }
+
+    /// <summary>
+    /// Creates a message based on prepare file fragment.
+    /// </summary>
+    private Message PrepareFileMessage(byte[] fragment, IPEndPoint remoteEndPoint) {
+      // get message id
+      var id = Fragmenter.GetID(fragment);
+
+      // convert id
+      var idKey = BitConverter.ToUInt16(id, 0);
+
+      // check if we already have one like that
+      lock (Messages) {
+        if (Messages.ContainsKey(idKey))
+          return Messages[idKey];
+      }
+
+      // get fragment count
+      var count = Fragmenter.GetFragmentCount(fragment);
+
+      // get file name
+      var fileName = Fragmenter.GetFileName(fragment);
+
+      // get remote name
+      var name = Fragmenter.GetPrepareFileName(fragment);
+
+      // create a message
+      var message = new Message(count, id) {
+        RemoteName = name,
+        RemoteEndPoint = remoteEndPoint,
+        Status = MessageStatus.Handshaking,
+        FileName = fileName
+      };
+
+      // add it to the dictionary
+      lock (Messages) {
+        Messages.Add(idKey, message);
+      }
+
+      // return the message
+      return message;
     }
 
     /// <summary>

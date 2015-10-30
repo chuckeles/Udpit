@@ -65,6 +65,17 @@ namespace Udpit {
       return fragment.Skip(5).ToArray();
     }
 
+    public static string GetFileName(byte[] fragment) {
+      // get file name size
+      var size = BitConverter.ToUInt16(fragment.Skip(3).Take(2).ToArray(), 0);
+
+      // get bytes
+      var bytes = fragment.Skip(5).Take(size).ToArray();
+
+      // convert and return
+      return Encoding.ASCII.GetString(bytes);
+    }
+
     /// <summary>
     ///   Gets the number of data fragments from a prepare fragment.
     /// </summary>
@@ -90,7 +101,7 @@ namespace Udpit {
     }
 
     /// <summary>
-    /// Gets the list of missing fragments from a missing fragment.
+    ///   Gets the list of missing fragments from a missing fragment.
     /// </summary>
     public static List<ushort> GetMissingFragments(byte[] fragment) {
       // start at fourth byte
@@ -126,6 +137,17 @@ namespace Udpit {
     public static string GetPreparedName(byte[] fragment) {
       // the name starts at the fourth byte
       var bytes = fragment.Skip(3).ToArray();
+
+      // convert and return
+      return Encoding.ASCII.GetString(bytes);
+    }
+
+    public static string GetPrepareFileName(byte[] fragment) {
+      // get file name size
+      var size = BitConverter.ToUInt16(fragment.Skip(3).Take(2).ToArray(), 0);
+
+      // get bytes
+      var bytes = fragment.Skip(5).Skip(size).ToArray();
 
       // convert and return
       return Encoding.ASCII.GetString(bytes);

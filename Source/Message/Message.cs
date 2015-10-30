@@ -77,6 +77,11 @@ namespace Udpit {
     public SortedList<ushort, byte[]> PartList { get; } = new SortedList<ushort, byte[]>();
 
     /// <summary>
+    /// Filename for sending files.
+    /// </summary>
+    public string FileName { get; set; } = "";
+
+    /// <summary>
     ///   Remote's IP and port.
     /// </summary>
     public IPEndPoint RemoteEndPoint { get; set; }
