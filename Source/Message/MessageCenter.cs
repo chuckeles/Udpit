@@ -176,6 +176,9 @@ namespace Udpit {
 
             // send missing fragment
             Transmitter.Singleton.SendMissingFragment(endMessage, missing);
+
+            // done
+            break;
           }
 
           // send okay fragment
@@ -187,7 +190,7 @@ namespace Udpit {
               endMessage.ReconstructText();
 
             Log.Singleton.LogMessage(
-              $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> to <{endMessage.RemoteName}> with a text <'{endMessage.Text}'>");
+              $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> with a text <'{endMessage.Text}'>");
           }
 
           // remove message
