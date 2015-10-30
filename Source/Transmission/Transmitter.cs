@@ -278,6 +278,8 @@ namespace Udpit {
                   // log
                   Log.Singleton.LogError(
                     $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+
+                  MessageCenter.Singleton.FireChange(MessageStatus.TimedOut);
                 }
               }
             }
@@ -332,6 +334,8 @@ namespace Udpit {
                   // log
                   Log.Singleton.LogError(
                     $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+
+                  MessageCenter.Singleton.FireChange(MessageStatus.TimedOut);
                 }
               }
             }
@@ -485,6 +489,8 @@ namespace Udpit {
                   // log
                   Log.Singleton.LogError(
                     $"Message <{message.ID[0].ToString("00")}{message.ID[1].ToString("00")}> timed out");
+
+                  MessageCenter.Singleton.FireChange(MessageStatus.TimedOut);
                 }
               }
             }

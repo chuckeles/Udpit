@@ -32,6 +32,9 @@ namespace Udpit {
       // hook up the listening event
       Transmitter.Singleton.StoppedListening += UpdateListening;
 
+      // hook up the state changed event
+      MessageCenter.Singleton.StatusChanged += UpdateStatus;
+
       // log the start
       Log.Singleton.LogMessage("Udpit has started");
 
@@ -40,6 +43,13 @@ namespace Udpit {
 
       // set option inputs
       SetOptionInputs();
+    }
+
+    /// <summary>
+    /// Update shown status.
+    /// </summary>
+    private void UpdateStatus(object sender, MessageStatus status) {
+      _statusBar.Invoke(new MethodInvoker(() => _statusLabel.Text = status.ToString()));
     }
 
     /// <summary>

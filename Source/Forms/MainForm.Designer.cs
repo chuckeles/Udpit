@@ -28,6 +28,8 @@
       this._restartButton = new System.Windows.Forms.ToolStripMenuItem();
       this._exitButton = new System.Windows.Forms.ToolStripMenuItem();
       this._statusBar = new System.Windows.Forms.StatusStrip();
+      this._statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+      this._statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
       this._tabContainer = new System.Windows.Forms.TabControl();
       this._tabLog = new System.Windows.Forms.TabPage();
       this._logBox = new System.Windows.Forms.RichTextBox();
@@ -74,8 +76,6 @@
       this._optionsActionsContainer = new System.Windows.Forms.TableLayoutPanel();
       this._optionsSaveButton = new System.Windows.Forms.Button();
       this._optionsCancelButton = new System.Windows.Forms.Button();
-      this._statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-      this._statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
       this._mainMenu.SuspendLayout();
       this._statusBar.SuspendLayout();
       this._tabContainer.SuspendLayout();
@@ -126,7 +126,7 @@
       // 
       this._restartButton.Name = "_restartButton";
       this._restartButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-      this._restartButton.Size = new System.Drawing.Size(152, 22);
+      this._restartButton.Size = new System.Drawing.Size(151, 22);
       this._restartButton.Text = "Restart";
       this._restartButton.Click += new System.EventHandler(this.Restart);
       // 
@@ -134,7 +134,7 @@
       // 
       this._exitButton.Name = "_exitButton";
       this._exitButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-      this._exitButton.Size = new System.Drawing.Size(152, 22);
+      this._exitButton.Size = new System.Drawing.Size(151, 22);
       this._exitButton.Text = "Exit";
       this._exitButton.Click += new System.EventHandler(this.Exit);
       // 
@@ -149,6 +149,18 @@
       this._statusBar.Size = new System.Drawing.Size(284, 22);
       this._statusBar.TabIndex = 2;
       this._statusBar.Text = "Status Bar";
+      // 
+      // _statusProgressBar
+      // 
+      this._statusProgressBar.Name = "_statusProgressBar";
+      this._statusProgressBar.Size = new System.Drawing.Size(180, 16);
+      this._statusProgressBar.Step = 1;
+      // 
+      // _statusLabel
+      // 
+      this._statusLabel.Name = "_statusLabel";
+      this._statusLabel.Size = new System.Drawing.Size(39, 17);
+      this._statusLabel.Text = "Ready";
       // 
       // _tabContainer
       // 
@@ -761,18 +773,6 @@
       this._optionsCancelButton.Text = "Cancel";
       this._optionsCancelButton.UseVisualStyleBackColor = true;
       this._optionsCancelButton.Click += new System.EventHandler(this.Cancel);
-      // 
-      // _statusLabel
-      // 
-      this._statusLabel.Name = "_statusLabel";
-      this._statusLabel.Size = new System.Drawing.Size(39, 17);
-      this._statusLabel.Text = "Ready";
-      // 
-      // _statusProgressBar
-      // 
-      this._statusProgressBar.Name = "_statusProgressBar";
-      this._statusProgressBar.Size = new System.Drawing.Size(200, 16);
-      this._statusProgressBar.Step = 1;
       // 
       // MainForm
       // 
