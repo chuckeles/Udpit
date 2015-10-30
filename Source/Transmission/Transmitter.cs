@@ -498,6 +498,9 @@ namespace Udpit {
           return;
         }
 
+        // append CRC checksum
+        CRC.GenerateChecksum(ref fragment);
+
         // need to lock to prevent multiple tasks trying to send simultaneously
         lock (_clientMutex) {
           // check if we want to lose some fragments

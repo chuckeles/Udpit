@@ -129,7 +129,14 @@ namespace Udpit {
     ///   Handles an incoming fragment.
     /// </summary>
     private void FragmentCame(byte[] fragment, IPEndPoint remoteEndPoint) {
-      // TODO: CRC, check for errors
+      // check for errors
+      if (!CRC.CheckFragment(ref fragment)) {
+        // error
+        Log.Singleton.LogMessage("Received a corrupted fragment");
+
+        // exit
+        return;
+      }
 
       // get type
       var type = Fragmenter.GetFragmentType(fragment);
