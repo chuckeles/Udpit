@@ -507,8 +507,8 @@ namespace Udpit {
           if (Options.LoseFragments) {
             // get a random value
             var random = new Random();
-            if (random.Next() % 100 < 20) {
-              // 20% of fragments will be lost
+            if ((ushort) random.Next() % 100 < 30) {
+              // 30% of fragments will be lost
 
               // log that
               Log.Singleton.LogMessage($"Purposefully losing a fragment of type <{type}>");
@@ -522,8 +522,8 @@ namespace Udpit {
           if (Options.SendCorrupt) {
             // get a random value
             var random = new Random();
-            if (random.Next() % 100 < 20) {
-              // 20% of fragments will be corrupted
+            if ((ushort) random.Next() % 100 < 40) {
+              // 40% of fragments will be corrupted
 
               // log that
               Log.Singleton.LogMessage($"Purposefully corrupting a fragment of type <{type}>");

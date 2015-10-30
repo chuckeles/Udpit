@@ -134,6 +134,9 @@ namespace Udpit {
         // error
         Log.Singleton.LogMessage("Received a corrupted fragment");
 
+        // listen again
+        Transmitter.Singleton.Listen(false);
+
         // exit
         return;
       }
