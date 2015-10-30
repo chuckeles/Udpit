@@ -429,9 +429,6 @@ namespace Udpit {
               for (int i = 0, imax = Math.Abs(random.Next() + 2) % 16; i < imax; ++i) {
                 fragment[random.Next() % fragment.Length] = (byte) random.Next();
               }
-
-              // exit
-              return;
             }
           }
 
