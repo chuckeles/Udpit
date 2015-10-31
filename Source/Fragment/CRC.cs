@@ -4,9 +4,19 @@ using System.Linq;
 namespace Udpit {
 
   /// <summary>
-  ///   The CRC thing to check and generate checksums for fragments.
+  ///   The CRC thing to check and generate checksums for fragments. Uses CRC-16.
   /// </summary>
   public static class CRC {
+
+    /// <summary>
+    /// CRC-16-IBM polynomial.
+    /// </summary>
+    private const ushort Polynomial = 0x8005;
+
+    /// <summary>
+    /// Testing polynomial.
+    /// </summary>
+    private const byte SimplePolynomial = 0xD5;
 
     /// <summary>
     ///   Generates a checksum and appends it to a fragment.
@@ -34,31 +44,28 @@ namespace Udpit {
     /// <summary>
     ///   Generates a checksum.
     /// </summary>
-    private static ushort GetChecksum(byte[] fragment) {
-      // TODO: Figure this out and write your own
-      ushort Polynominal = 0x1021;
-      ushort InitValue = 0x0;
+    private static byte GetChecksum(byte[] fragment) {
+      // TODO: Use CRC-16, ushort
 
-      ushort i, j, index = 0;
-      ushort CRC = InitValue;
-      ushort Remainder, tmp, short_c;
-      for (i = 0; i < fragment.Length; i++) {
-        short_c = (ushort)(0x00ff & (ushort)fragment[index]);
-        tmp = (ushort)((CRC >> 8) ^ short_c);
-        Remainder = (ushort)(tmp << 8);
-        for (j = 0; j < 8; j++) {
+      // the remainder
+      byte remainder = 0;
 
-          if ((Remainder & 0x8000) != 0) {
-            Remainder = (ushort)((Remainder << 1) ^ Polynominal);
-          }
-          else {
-            Remainder = (ushort)(Remainder << 1);
-          }
+      // iterate bytes
+      foreach (var fragmentByte in fragment) {
+        // bring the byte to the remainder
+        remainder ^= fragmentByte; // TODO: fragmentByte << 8
+
+        // perform division, a bit at a time
+        for (short bit = 8; bit > 0; --bit) {
+          if ((remainder & (1 << 7)) > 0) // TODO: Use 1 << 15
+            remainder = (byte) ((remainder << 1) ^ SimplePolynomial);
+          else
+            remainder = (byte) (remainder << 1);
         }
-        CRC = (ushort)((CRC << 8) ^ Remainder);
-        index++;
       }
-      return CRC;
+      
+      // final remainder is the checksum
+      return remainder;
     }
 
   }
