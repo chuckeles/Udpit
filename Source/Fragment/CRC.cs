@@ -9,16 +9,6 @@ namespace Udpit {
   public static class CRC {
 
     /// <summary>
-    /// CRC-16-IBM polynomial.
-    /// </summary>
-    private const ushort Polynomial = 0x8005;
-
-    /// <summary>
-    /// Testing polynomial.
-    /// </summary>
-    private const byte SimplePolynomial = 0xD5;
-
-    /// <summary>
     ///   Generates a checksum and appends it to a fragment.
     /// </summary>
     public static void GenerateChecksum(ref byte[] fragment) {
@@ -44,29 +34,43 @@ namespace Udpit {
     /// <summary>
     ///   Generates a checksum.
     /// </summary>
-    private static byte GetChecksum(byte[] fragment) {
-      // TODO: Use CRC-16, ushort
-
+    /// <remarks>
+    ///   http://www.barrgroup.com/Embedded-Systems/How-To/CRC-Calculation-C-Code
+    /// </remarks>
+    private static ushort GetChecksum(byte[] fragment) {
       // the remainder
-      byte remainder = 0;
+      ushort remainder = 0;
 
       // iterate bytes
       foreach (var fragmentByte in fragment) {
         // bring the byte to the remainder
-        remainder ^= fragmentByte; // TODO: fragmentByte << 8
+        remainder ^= (ushort) (fragmentByte << 8);
 
         // perform division, a bit at a time
         for (short bit = 8; bit > 0; --bit) {
-          if ((remainder & (1 << 7)) > 0) // TODO: Use 1 << 15
-            remainder = (byte) ((remainder << 1) ^ SimplePolynomial);
+          if ((remainder & TopBit) != 0)
+            remainder = (ushort) ((remainder << 1) ^ Polynomial);
           else
-            remainder = (byte) (remainder << 1);
+            remainder = (ushort) (remainder << 1);
         }
       }
-      
+
       // final remainder is the checksum
       return remainder;
     }
+
+    /// <summary>
+    ///   CRC-16-IBM polynomial.
+    /// </summary>
+    /// <remarks>
+    ///   https://en.wikipedia.org/wiki/Polynomial_representations_of_cyclic_redundancy_checks
+    /// </remarks>
+    private const ushort Polynomial = 0x8005;
+
+    /// <summary>
+    ///   Top bit used in the algorithm.
+    /// </summary>
+    private const int TopBit = 1 << 15;
 
   }
 
