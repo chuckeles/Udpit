@@ -103,6 +103,12 @@ namespace Udpit {
     public string Text { get; set; } = "";
 
     /// <summary>
+    ///   Number of previously sent / received data fragment.
+    ///   Used for keep-alive fragments.
+    /// </summary>
+    public ushort DataCounter = 0;
+
+    /// <summary>
     ///   The current status of the message.
     /// </summary>
     public MessageStatus Status = MessageStatus.Created;

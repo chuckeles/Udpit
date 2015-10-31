@@ -151,6 +151,9 @@ namespace Udpit {
 
         // fire progress
         FireProgress((ushort) message.PartList.Count, message.PartCount);
+
+        // increment data counter
+        message.DataCounter++;
       }
     }
 

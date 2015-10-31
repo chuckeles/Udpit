@@ -87,10 +87,13 @@ namespace Udpit {
             var task = SendFragment(message, fragment, FragmentType.Data);
             sendTasks.Add(task);
 
-            // update progress
             task.ContinueWith(t => {
               lock (message) {
+                // update progress
                 MessageCenter.Singleton.FireProgress(pair.Key, message.PartCount);
+
+                // increment data counter
+                message.DataCounter++;
               }
             });
           }
@@ -148,10 +151,13 @@ namespace Udpit {
             var task = SendFragment(message, fragment, FragmentType.Data);
             sendTasks.Add(task);
 
-            // update progress
             task.ContinueWith(t => {
               lock (message) {
+                // update progress
                 MessageCenter.Singleton.FireProgress(missingNumber, message.PartCount);
+
+                // increment data counter
+                message.DataCounter++;
               }
             });
           }
