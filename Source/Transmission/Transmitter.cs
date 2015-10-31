@@ -14,7 +14,7 @@ namespace Udpit {
     /// <summary>
     ///   Delegate for the fragment received event.
     /// </summary>
-    public delegate void FragmentReceivedDelegate(byte[] fragment, IPEndPoint remoteEndPoint);
+    public delegate void FragmentReceivedDelegate(byte[] fragment, IPEndPoint remoteEndPoint, ref bool corrupted, bool timeout);
 
     /// <summary>
     ///   Fired when the socket is listening and a fragment is received.
@@ -442,7 +442,12 @@ namespace Udpit {
 
             // got some fragment, oh my god!
             received = true;
-            FragmentReceived?.Invoke(bytes, remoteEndPoint);
+            bool corrupted = false;
+            FragmentReceived?.Invoke(bytes, remoteEndPoint, ref corrupted, timeout);
+
+            // check corruption
+            if (corrupted)
+              received = false;
           }
         }
         catch (ObjectDisposedException) {

@@ -11,28 +11,14 @@ namespace Udpit {
   internal class MessageCenter {
 
     /// <summary>
-    /// Fired when a message status changes.
-    /// </summary>
-    public event EventHandler<MessageStatus> StatusChanged;
-
-    /// <summary>
-    /// Fired when the transmission progress changes.
+    ///   Fired when the transmission progress changes.
     /// </summary>
     public event EventHandler<KeyValuePair<ushort, ushort>> ProgressChanged;
 
     /// <summary>
-    /// Fires the status changed event.
+    ///   Fired when a message status changes.
     /// </summary>
-    public void FireChange(MessageStatus status) {
-      StatusChanged?.Invoke(this, status);
-    }
-
-    /// <summary>
-    /// Fires the status changed event.
-    /// </summary>
-    public void FireProgress(ushort progress, ushort partCount) {
-      ProgressChanged?.Invoke(this, new KeyValuePair<ushort, ushort>(progress, partCount));
-    }
+    public event EventHandler<MessageStatus> StatusChanged;
 
     private MessageCenter() {
       // hook the transmitter's fragment received
@@ -52,6 +38,20 @@ namespace Udpit {
 
       // return it
       return Singleton;
+    }
+
+    /// <summary>
+    ///   Fires the status changed event.
+    /// </summary>
+    public void FireChange(MessageStatus status) {
+      StatusChanged?.Invoke(this, status);
+    }
+
+    /// <summary>
+    ///   Fires the status changed event.
+    /// </summary>
+    public void FireProgress(ushort progress, ushort partCount) {
+      ProgressChanged?.Invoke(this, new KeyValuePair<ushort, ushort>(progress, partCount));
     }
 
     /// <summary>
@@ -160,14 +160,18 @@ namespace Udpit {
     /// <summary>
     ///   Handles an incoming fragment.
     /// </summary>
-    private void FragmentCame(byte[] fragment, IPEndPoint remoteEndPoint) {
+    private void FragmentCame(byte[] fragment, IPEndPoint remoteEndPoint, ref bool corrupted, bool timeout) {
       // check for errors
       if (!CRC.CheckFragment(ref fragment)) {
         // error
         Log.Singleton.LogMessage("Received a corrupted fragment");
 
-        // listen again
-        Transmitter.Singleton.Listen(false);
+        // set flag
+        corrupted = true;
+
+        // listen again if necessary
+        if (!timeout)
+          Transmitter.Singleton.Listen(false);
 
         // exit
         return;
@@ -272,7 +276,8 @@ namespace Udpit {
                 $"Successfully received a full message <{endMessage.ID[0].ToString("00")}{endMessage.ID[1].ToString("00")}> from <{endMessage.RemoteName}> to a file <'{endMessage.FileName}'>");
 
               // save to the file
-              File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), endMessage.FileName), endMessage.ReconstructFile());
+              File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), endMessage.FileName),
+                                 endMessage.ReconstructFile());
             }
             else {
               if (endMessage.Text.Equals(""))
