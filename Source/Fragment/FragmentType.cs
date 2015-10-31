@@ -18,7 +18,7 @@
     /// <summary>
     ///   Keep sending data.
     /// </summary>
-    Alive = 2,
+    KeepAlive = 2,
 
     /// <summary>
     ///   Sending data.

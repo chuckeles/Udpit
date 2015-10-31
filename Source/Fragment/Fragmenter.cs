@@ -248,7 +248,24 @@ namespace Udpit {
       var data = new List<byte>();
 
       // add the type
-      data.Add((byte) FragmentType.End);
+      data.Add((byte)FragmentType.End);
+
+      // add the id
+      data.AddRange(message.ID);
+
+      // return data
+      return data.ToArray();
+    }
+
+    /// <summary>
+    ///   Makes a keep-alive fragment.
+    /// </summary>
+    public static byte[] MakeKeepAliveFragment(Message message) {
+      // the resulting array of bytes
+      var data = new List<byte>();
+
+      // add the type
+      data.Add((byte)FragmentType.KeepAlive);
 
       // add the id
       data.AddRange(message.ID);
