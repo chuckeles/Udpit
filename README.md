@@ -4,6 +4,4 @@
 
 ## Information
 
-Udpit (UDP-it) is a simple chatting application using the UDP protocol. It can send and receive text messages and files. The project is a school assignment.
-
-For more information check out the [Wiki](https://github.com/chuckeles/Udpit/wiki).
+Udpit (UDP-it) is a simple chatting application using the UDP protocol. It can send and receive text messages and files. The project was a school assignment.
